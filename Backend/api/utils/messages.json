@@ -1,0 +1,68 @@
+{
+    "en": {
+        "DB_ERROR": "Database Error",
+        "PARAM_REQUIRED": "'PARAM' is requried.",
+        "INVALID_APP_VERSION": "Invalid App Verision",
+        "APP_VERSION_MISSING": "App verison missing. Please pass 'android_app_version' or 'ios_app_version'",
+        "UPGRADE_APP": "The newer version of the application is available, please upgrade your app to use the latest features.",
+        "INVALID_PARAM": "Invalid 'PARAM'.",
+        "USER_BLOCKED": "You can no longer to use this application.Application admin has blocked your account.Please contact to admin",
+        "INVALID_TOKEN": "Token is invalid",
+        "TOKEN_EXPIRED": "Token is expired",
+        "TOKEN_MALFORMED": "Token is malformed",
+        "INCORRECT_PASSWORD": "Password is incorrect",
+        "CHANGE_PASSWORD_SUCCESS":"Password changed successfully",
+        "FORGOT_PASSWORD_MAIL_SENT":"Mail sent to the entered email",
+
+        "USER_WITH_MOBILE_ALREADY_EXISTS": "User with this mobile number already exists.",
+        "USER_WITH_MOBILE_NOT_FOUND": "Could not find an account with this Mobile number",
+        "USER_WITH_EMAIL_ALREADY_EXISTS": "User with this email already exists.",
+        "USER_WITH_EMAIL_NOT_FOUND": "Could not find an account with this Email ID",
+        "SOCIAL_ID_IS_NEW": "Thic social id is new",
+        "USER_WITH_SOCIAL_ID_ALREADY_EXISTS": "User with this social account already exists.",
+        "USER_WITH_SOCIAL_ID_NOT_FOUND": "Could not find an account with this social account",
+        "SIGNUP_SUCCESS": "User registered successfully.",
+        "USER_WITH_ID_NOT_FOUND": "User with specified id not found.",
+        "SIGNIN_SUCCESS": "Sign In successfully",
+        "EDIT_PROFILE_SUCCESS": "Profile updated successfully.",
+        "OTP_SENT": "OTP sent successfully",
+        "WRONG_OTP": "OTP is wrong.",
+        "OTP_VERIFIED": "OTP verified successfully.",
+        "GET_PROFILE_SUCCESS": "Profile retrieved successfully",
+
+        "GET_ALL_USER_SUCCESS":"All users retrieved successfully",
+        "USER_BLOCK_SUCCESS":"User deactivated successfully",
+        "USER_UNBLOCK_SUCCESS":"User activated successfully",
+
+        "GET_ALL_CATEGORIES_SUCCESS": "All Categories retrieved successfully",
+        "CATEGORY_WITH_ID_NOT_FOUND":"Category with specified id not found",
+        "GET_SINGLE_CATEGORY_SUCCESS": "Single Category retrieved successfully",
+        "ADD_CATEGORY_SUCCESS": "Category added successfully",
+        "EDIT_CATEGORY_SUCCESS": "Category edited successfully",
+        "CATEGORY_BLOCK_SUCCESS":"Category deactivated successfully",
+        "CATEGORY_UNBLOCK_SUCCESS":"Category activated successfully",
+
+        "GET_ALL_SUB_CATEGORIES_SUCCESS": "All Sub categories retrieved successfully",
+        "SUB_CATEGORY_WITH_ID_NOT_FOUND":"Sub category with specified id not found",
+        "GET_SINGLE_SUB_CATEGORY_SUCCESS": "Single Sub category retrieved successfully",
+        "ADD_SUB_CATEGORY_SUCCESS": "Sub category added successfully",
+        "EDIT_SUB_CATEGORY_SUCCESS": "Sub category edited successfully",
+        "SUB_CATEGORY_BLOCK_SUCCESS":"Sub category deactivated successfully",
+        "SUB_CATEGORY_UNBLOCK_SUCCESS":"Sub category activated successfully",
+
+        "GET_ALL_PRODUCTS_SUCCESS": "All Products retrieved successfully",
+        "PRODUCT_WITH_ID_NOT_FOUND": "Product with specified id not found",
+        "GET_SINGLE_PRODUCT_SUCCESS": "Single Product retrieved successfully",
+        "ADD_PRODUCT_SUCCESS": "Product added successfully",
+        "EDIT_PRODUCT_SUCCESS": "Product edited successfully",
+        "PRODUCT_BLOCK_SUCCESS": "Product deactivated successfully",
+        "PRODUCT_UNBLOCK_SUCCESS": "Product activated successfully",
+
+        "GET_ALL_SELLERS_SUCCESS": "All Sellers retrieved successfully",
+        "SELLER_WITH_ID_NOT_FOUND":"Seller with specified id not found",
+        "ADD_SELLER_SUCCESS": "Seller added successfully",
+        "SELLER_BLOCK_SUCCESS":"Seller deactivated successfully",
+        "SELLER_UNBLOCK_SUCCESS":"Seller activated successfully"
+        
+    }
+}
