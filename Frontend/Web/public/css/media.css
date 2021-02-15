@@ -1,0 +1,681 @@
+@media (max-width: 1599px) {
+	.signIn {
+		padding: 26px 0 20px;
+	}
+}
+@media (max-width: 1199px) {
+	.react-responsive-modal-modal {
+		width: 50% !important;
+	}
+	.section1 {
+	    padding: 60px 0px;
+	}
+	h2.mainHeading {
+	    font-size: 36px;
+	    line-height: 42px;
+	}
+	/* .section1 ul.attentionList {
+	    padding: 30px 0 0 32px;
+	} */
+	.section2 {
+	    padding: 50px 0 50px;
+	}
+	.section2 .workBox {
+	    width: 94%;
+	    height: auto;
+	    margin: 5% 5%;
+	}
+	.section3Content {
+	    max-width: 86%;
+	}
+	.section3 {
+	    padding: 70px 0 70px;
+	}
+	footer {
+	    padding: 70px 0 0;
+	}
+}
+
+@media (max-width: 991px) {	
+	.react-responsive-modal-modal {
+		width: 80% !important;
+	}
+	/* ul.snip.menu {
+		overflow: visible;
+	} */
+	.bannerContent h1 {
+	    font-size: 42px;
+	    line-height: 50px;
+	}
+	.bannerContent h3 {
+	    font-size: 26px;
+	    line-height: 30px;
+	}
+	.bannerSection {
+	    height: 496px;
+	}
+	.section2 .leftText {
+	    text-align: center;
+        padding: 0 0 20px;
+	}
+	.section2 .workBlockTwo {
+	    padding-top: 0;
+	}
+	.section3Content h3 {
+	    font-size: 32px;
+	    line-height: 46px;
+	    padding: 0 0 30px;
+	}
+	footer {
+	    padding: 40px 0 0;
+	}
+	.footerNoticeTenant {
+	    max-width: 92%;
+	    margin: 0 auto;
+	}
+	.footerContent {
+	    text-align: center;
+	}
+	ul.footerSocialIcon {
+	    padding: 22px 0 26px;
+	    justify-content: center;
+	}
+	.footerNoticeTenant h3 {
+	    padding-bottom: 16px;
+	}
+	.footerContent h4 {
+	    padding-bottom: 16px;
+	}
+	ul.others li {
+	    display: inline-block;
+	}
+	ul.others.contactUs {
+	    display: flex;
+	    flex-wrap: wrap;
+	    justify-content: center;
+	}
+	ul.others.contactUs li {
+		justify-content: center;	
+	}
+	ul.others.contactUs img {
+	    margin: 0 6px 0 0;
+	}
+	ul.others.contactUs li {
+	    position: relative;
+	    margin: 5px 12px;
+	}
+	ul.others {
+	    padding: 0;
+	}
+	.contactBlock {
+	    margin: 20px 0 0;
+	}
+	.footerContent {
+	    padding-bottom: 40px;
+	}
+	.processTable table {
+		width: 950px;
+	}
+	.processServiceTable.noticeTable .processTable {
+	    overflow-x: scroll;
+	}
+	.noticeTable table {
+	    width: 990px;
+	}
+	.noticeTable {
+	    overflow-x: scroll;
+	}
+	.profileSettingTab.mainTab li.nav-item a {
+	    font-size: 16px;
+    	line-height: 18px;
+	}
+	.profileSettingTab.mainTab li.nav-item {
+	    padding: 0px 12px;
+	}
+	.profileSettingTab.mainTab .nav-tabs {
+	    padding: 0 20px;
+	}
+	.numbering ul li span:before {
+	    width: 94px;
+	}
+	/*.btmSection .btnGroup {
+	    width: 100%;
+	    margin: 16px 0 0;
+	}*/
+	button.pre_btn.smallBtn {
+	    right: 120px;
+        bottom: 27px;
+	}
+	button.next_btn.smallBtn {
+	    right: 20px;
+	    bottom: 27px;
+	}
+	.tenantInfoTable table {
+	    min-width: 840px;
+	}
+	.tenantInfoTable {
+	    overflow-x: auto;
+	}
+/*	fieldset.last button.pre_btn.smallBtn {
+    	bottom: 220px;
+	    right: 20px;
+	}*/
+	.section2 .leftText p {
+	    font-size: 22px;
+	    line-height: 32px;
+	}
+	header nav li {
+	    margin: 0 14px;
+	}
+	.btmSection.downloadNotice p {
+	    padding: 20px 0 0 !important;
+	}
+}
+
+@media (max-width: 767px) {
+	.section1 ul.attentionList {
+		padding: 0px 0 16px 0px;
+	}
+	ol > li {
+		margin: 0;
+	}
+	.dropdown-toggle::after {
+		position: absolute;
+		top: 25px;
+		right: 16px;
+	}
+	a.nav-link.dropdown-toggle {
+		padding-right: 20px;
+		padding-left: 20px;
+	}
+	ul.navbar-nav {
+		width: 100%;
+	}
+	.selectStateBox .custom-select {
+		width: 100%;
+		max-width: 294px;
+	}
+	a.logo img {
+	    width: 212px;
+	}	
+	header .logoContent {
+	    justify-content: space-between;
+	    padding: 14px 0px 14px 0px;
+	}
+	.bannerContent h1 {
+	    font-size: 32px;
+	    line-height: 36px;
+	}
+	.bannerContent h3 {
+	    font-size: 22px;
+	    line-height: 26px;
+	    padding: 20px 0 30px;
+	}
+	.selectStateBox {
+	    max-width: 500px;
+	}
+	button.noticeBtn {
+	    font-size: 18px;
+	    line-height: 20px;
+	}
+	.custom-select-wrapper {
+	    width: 286px;
+	}
+	.custom-select-trigger {
+		font-size: 18px;
+	}
+	.bannerSection {
+	    height: 452px;
+	}
+	.bannerContent {
+	    max-width: 90%;
+	}
+	.section1 {
+	    padding: 36px 0px;
+	}
+	h2.mainHeading {
+	    text-align: center;
+	}
+	.section1 .leftImg {
+	    padding: 0 0 20px;
+	}
+	.section2 .leftText p {
+	    font-size: 20px;
+	    line-height: 26px;
+	    padding: 10px 0 0;
+	}
+	.section3Content h3 {
+		font-family: SourceSansPro-Regular;
+	}
+	.copyright {
+	    padding: 24px 0;
+	    text-align: center;
+	}
+	ul.footerMenu {
+	    justify-content: center;
+	    padding: 14px 0 0;
+	}
+	.footerContent {
+	    padding-bottom: 26px;
+	}
+	body {
+	    padding-top: 86px;
+	}
+	.signInContent {
+	    max-width: 88%;
+        padding: 30px 20px 20px 20px;
+	}
+	.tenantInfoBlock .box {
+	    border-right: none;
+        padding: 12px 50px 12px 0;
+	}
+	.landlordInfoLeft {
+	    width: 100%;
+        margin: 0 0 20px;
+	}
+	.tenantInfo .landlordInfo {
+	    flex-wrap: wrap;
+	}
+	.landlordInfoRight .smallBtn {
+	    margin: 0 16px 0 0;
+	}
+	.tenantInfo .btmSection p.textLeft {
+	    width: 100%;
+    	margin: 0 0 16px;
+	}
+	.tenantInfo2.tenantInfo .btmSection p.textLeft {
+	    padding: 8px 10px 0 0px;
+	}
+	.tenantInfo span.notice {
+	    justify-content: flex-start;
+	    font-size: 14px;
+	    line-height: 20px;
+	    padding: 6px 0 0 0;
+	}
+	.tenantInfo2.tenantInfo .processServiceTable .btmSection .btnGroup {
+	    margin: 0 0 10px;
+	}
+	.profileSetting .landlordInfo {
+		flex-wrap: wrap;
+	}
+	.landlordInfoLeft {
+	    width: 100%;
+	    padding: 0 0 16px;
+	}
+	.profileSettingTab.mainTab li.nav-item {
+	    width: 100%;
+	}
+	.profileSettingTab.mainTab .nav-tabs .nav-link.active:before {
+	    content: '';
+	    width: 100%;
+	    height: 1px;
+	    background: #2EC5E0;
+	    position: absolute;
+	    bottom: 0px;
+	    right: 0px;
+	    left: 0px;
+	    border-radius: 50px;
+	}
+	.profileSettingTab.mainTab .nav-tabs .nav-link:before {
+	    content: '';
+	    width: 100%;
+	    height: 1px;
+	    background: #E4E8EB;
+	    position: absolute;
+	    bottom: 0px;
+	    right: 0px;
+	    left: 0px;
+	    border-radius: 50px;
+	}
+	.chngPwdContent {
+	    padding: 46px 30px;
+	}
+	.addPermiseModal .modal-body {
+	    padding: 40px 32px;
+	}
+	.numbering ul li label {
+	    line-height: 16px;
+	}
+	.numbering ul {
+	    width: 700px;
+	}
+	.numbering {
+	    overflow-x: scroll;
+	}
+	.noticeHeader h2 span {
+	    width: 100%;
+	    float: left;
+	}
+	header .snip li.activeMenu a:before {
+	    content: none;
+	}
+	.addBox .option {
+	    width: 100%;
+	}
+	.addBox {
+	    flex-wrap: wrap;
+	}
+	.addBox.unitOption .option {
+	    margin: 6px 0;
+	}
+	.addBox .option label {
+	    overflow: hidden;
+        width: 100%;
+		margin: 0 0 16px;
+	}
+	.smallBtn {
+	    font-size: 16px;
+	    line-height: 20px;
+	    padding: 8px 20px 10px 20px;
+	}
+	.btmSection {
+	    padding: 26px 20px;
+	}
+	.fieldset.width {
+		width: 100%;
+		margin: 0 26px 0 0;
+	}
+	.addAddress .fieldset.width {
+		margin: 10px 0px;
+	}
+	.two .fieldset.width.full {
+		width: 100%;
+	}
+	.two {
+		flex-wrap: wrap;
+	}
+	.numberTenant .fieldset {
+	    margin: 14px 0;
+	}
+	.reviewSignContent .reviewSignText p {
+	    font-size: 18px;
+	    line-height: 34px;
+	    margin: 0 0 20px;
+	}
+	.reviewSignContent .nameSign {
+	    padding: 0;
+	}
+	.reviewSignContent span.sign {
+	    padding: 20px 0 0 6px;
+	}
+	.downloadHead {
+	    text-align: center;
+	}
+	.downloadSend h2.subHeading {
+	    text-align: center;
+	}
+	.modal {
+	    padding-right: 0px !important;
+	}
+	.downloadSend {
+	    padding: 22px 20px 10px 20px;
+	}
+	.landlordAdd {
+	    padding: 8px 0 20px;
+	}	
+	button.next_btn.smallBtn {
+	    right: auto;
+	    bottom: 27px;
+	    left: 142px;
+	}
+	button.pre_btn.smallBtn {
+	    right: auto;
+	    bottom: 27px;
+	    left: 20px;
+	}
+	.btmSection p {
+	    font-size: 15px;
+	    line-height: 20px;
+	    padding: 0 2px 0 0;
+	}
+	.tenantInfoTable {
+	    padding: 0 0 40px;
+	}
+	.TenantInfo.noticeInform {
+	    margin: 0 0 12px;
+	}
+	fieldset.last button.pre_btn.smallBtn {
+	    right: 150px;
+	}
+	.totalCost h3 {
+	    margin: 0 4px 0 0;
+	}
+
+}
+
+@media (max-width: 575px) {
+	ol {
+		padding: 0 0 0 22px;
+	}
+	.react-responsive-modal-modal {
+		width: 94% !important;
+	}
+	.selectStateBox .custom-select {
+		max-width: 100%;
+	}
+	a.logo img {
+	    width: 196px;
+	}
+	.bannerContent h1 {
+	    font-family: SourceSansPro-SemiBold;
+	}
+	.bannerContent h3 {
+	    font-size: 20px;
+	    line-height: 24px;
+	}
+	.selectStateBox {
+	    flex-wrap: wrap;
+	}
+	.custom-select-wrapper {
+	    width: 100%;
+	}
+	button.noticeBtn {
+	    width: 100%;
+	    padding: 14px 4px;
+	    margin: 16px 0 0;
+	}
+	h2.mainHeading {
+	    font-size: 26px;
+	    line-height: 30px;
+	}
+	.section1 ul.attentionList li {
+	    font-size: 16px;
+	    line-height: 24px;
+	    /* margin-bottom: 16px; */
+	}
+	.workBlock {
+	    flex-wrap: wrap;
+	    padding: 16px 0 0;
+	}
+	.section2 .workBox {
+	    width: 100%;
+	    margin: 0 0 20px 0;
+        text-align: center;
+	}
+	.section2 {
+	    padding: 30px 0 30px;
+	}
+	.section2 .leftText p {
+	    font-size: 18px;
+	    line-height: 24px;
+	}
+	.section3Content h3 {
+	    font-size: 26px;
+	    line-height: 36px;
+	}
+	.section3 {
+	    padding: 42px 0 46px;
+	}
+	.copyright p {
+	    font-size: 15px;
+	}
+	.footerMenu li a {
+	    font-size: 15px;
+	}
+	.formField {
+	    max-width: 100%;
+	}
+	.signIn .btnGroup {
+    	padding: 0 0 20px;
+	    flex-wrap: wrap;
+	}
+	.signIn .btnGroup button {
+	    margin: 0 0 14px;
+	    width: 100%;
+	}
+	.signUp .addBox {
+	    flex-wrap: wrap;
+	}
+	.signUp form {
+	    max-width: 100%;
+	}
+	.signUp .unitOption .option {
+	    margin: 0 0 10px;
+        overflow: hidden;
+        width: auto;
+	}
+	.profileSetup form h1 {
+	    padding-bottom: 16px;
+	}
+	.twoField .fieldset {
+	    width: 100%;
+	}
+	.twoField {
+	    flex-wrap: wrap;
+	}
+	.signIn.profileSetup .btnGroup {
+	    padding: 14px 0 5px;
+	}
+	.subTab li.nav-item {
+	    width: 100%;
+	    padding: 0!important;
+	}
+	.mainTab .subTab .nav-tabs .nav-link.active:before {
+	    content: '';
+	    width: 100%;
+	    height: 1px;
+	    background: #2EC5E0;
+	    position: absolute;
+	    bottom: 0px;
+	    right: 0px;
+	    left: 0px;
+	    border-radius: 50px;
+	}
+	.mainTab .subTab .nav-tabs .nav-link:before {
+	    content: '';
+	    width: 100%;
+	    height: 1px;
+	    background: #E4E8EB;
+	    position: absolute;
+	    bottom: 0px;
+	    right: 0px;
+	    left: 0px;
+	    border-radius: 50px;
+	}
+	.profileSettingTab .noticeHeader {
+	    flex-wrap: wrap;
+	}
+	.noticeHeader h2 {
+	    font-size: 24px;
+	    line-height: 26px;
+	    width: 100%;	    
+	}
+	.entitiesBlock {
+	    width: 100%;
+	}
+	.profileSetting .entitiesContent {
+	    padding: 30px 0px 30px 0px;
+	}
+	.manageAdd .entitiesBlock {
+	    margin: 8px 0;
+	}
+	.profileSettingTab .noticeHeader .smallBtn {
+	    margin: 20px 0 0;
+	}
+	.addPermiseModal .modal-dialog {
+	    max-width: 92%;
+	    margin: 40px auto;
+	}
+	.addPermiseModal h2 {
+	    font-size: 30px;
+	    line-height: 34px;
+	    padding: 0 0 20px;
+	}
+	.noticeHeader {
+	    flex-wrap: wrap;
+	}
+	.noticeHeader .cityDropdown {
+	    margin: 14px 0 0 0;
+	}
+	.addBox label {
+	    grid-template-columns: 6px auto 6px;
+	}
+	.btmSection {
+	    padding: 26px 20px 90px 20px;
+	}
+	button.pre_btn.smallBtn {
+	    right: auto;
+	    left: 25px;
+	    width: 40%;
+	}
+	button.next_btn.smallBtn {
+        width: 40%;
+    	right: 20px;
+    	left: auto;
+	}
+	fieldset.last button.pre_btn.smallBtn {
+	    width: auto;
+        left: auto;
+	}
+	fieldset.last .btmSection {
+	    padding: 26px 20px 26px 20px;
+	}
+	h2.subHeading {
+	    font-size: 22px;
+	    line-height: 32px;
+	}
+	.numberTenant h5 {
+	    padding: 0 0 10px;
+	    width: 100%;
+	}
+	.btmSection {
+	    justify-content: flex-start;
+	}
+	.totalCost {
+	    width: 100%;
+	    margin: 0 0 24px;
+	}
+	.totalCost h3 {
+	    margin: 0 12px 0 0;
+	}
+	fieldset.last button.pre_btn.smallBtn {
+	    right: 20px;
+	}
+}
+
+@media (max-width: 520px) {
+	.profileSetting .signature {
+	    padding: 0 0 10px;
+	    width: 100%;
+	}
+	.landlordInfoLeft {
+	    padding: 0;
+	}
+}
+
+@media (max-width: 480px) {
+	button.payBtn {
+	    font-size: 14px;
+    	line-height: 18px;
+	}
+	.mainTab li.nav-item {
+	    padding: 0px 13px;
+	}
+	.radio-buttons.unitOption span {
+		font-size: 13px;
+	}
+}
+
+
+
+

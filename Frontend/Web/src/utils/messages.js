@@ -1,0 +1,37 @@
+const messages = {
+    ASK_TO_LOGOUT: "Are you sure you want to log out?",
+    SESSION_EXPIRED: "Session expired, please login again!",
+    NETWORK_CONNECTION_LOST: "The network connection is lost!",
+    ASk_TO_RELOAGIN: "Please re-login!",
+    SESSION_EXPIRED_MSG: "Your session has expired",
+    ASK_TO_DELETE_SALON: "Are you sure you want to delete this salon?",
+    ASK_TO_DELETE_SERVICE_CATEGORY: "Are you sure you want to delete this service category?",
+    ASK_TO_DELETE_SERVICE: "Are you sure you want to delete this service?",
+    ASK_TO_DELETE_BARBER: "Are you sure you want to delete this barber?",
+    ASK_TO_DELETE_IMAGE: "Are you sure you want to delete this image?",
+    ASK_TO_DELETE_VIDEO: "Are you sure you want to delete this video?",
+    ASK_TO_DELETE_CUSTOMER: "Are you sure you want to delete this customer?",
+    INVALID_IMAGE: "Please select a valid image!",
+    INVALID_VIDEO: "Please select a valid video!",
+    ASK_TO_CANCEL_UPCOMING_APPOINTMENT: "Are you sure you want to cancel this appointment?",
+    NO_OFFER_AVAILABLE: "No offers available",
+    NO_SERVICE_AVAILABLE: "No services has been added, please add service by clicking 'Add' button",
+    NO_BARBER_AVAILABLE: "No barber has been added, please add barber from my staff section",
+    NO_GALLERY_ADDED: "No images or videos added, please add images and video related to your salon and services so customer can able to see it",
+    DATE_VALIDATION: "Start date should be less than end date ",
+    NO_UPCOMING_APPOINTMENT_AVAILABLE: "No Upcoming appointments available!",
+    NO_COMPLETED_APPOINTMENT_AVAILABLE: "No Completed appointments available!",
+    NO_CANCELLED_APPOINTMENT_AVAILABLE: "No Cancelled appointments available!",
+    AGREE_TO_TERMS: 'Please accept our Terms and Conditions',
+    SELECT_SALON_OPENING_TIME: "Please Select Opening Time!",
+    SELECT_SALON_CLOSING_TIME: "Please Select Closing Time!",
+    SELECT_SALON_BREAK_END_TIME: "Please select break end time",
+    SELECT_SALON_BREAK_START_TIME: "Please select break start time",
+    SELECT_BUSINESS_HOURS_FIRST: "Please first add business hours",
+    NO_OFFERS: "No offers available for your salon, if you want to add your offer please contact admin by clicking here ",
+    SELECTED_OFFER: "Your selected offer price will be affected at payment time at salon shop",
+    ASK_TO_DELETE: "Are you sure you want to delete?"
+
+};
+
+export default messages;
