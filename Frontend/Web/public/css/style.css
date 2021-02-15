@@ -1,87 +1,108 @@
 /*----------------Attache Font Family-------------*/
+
 @font-face {
     font-family: SourceSansPro-Regular;
-    src: url('../fonts/SourceSansPro-Regular.ttf'); 
+    src: url('../fonts/SourceSansPro-Regular.ttf');
 }
+
 @font-face {
     font-family: SourceSansPro-Light;
-    src: url('../fonts/SourceSansPro-Light.ttf'); 
+    src: url('../fonts/SourceSansPro-Light.ttf');
 }
+
 @font-face {
     font-family: SourceSansPro-Bold;
-    src: url('../fonts/SourceSansPro-Bold.ttf'); 
+    src: url('../fonts/SourceSansPro-Bold.ttf');
 }
+
 @font-face {
     font-family: SourceSansPro-SemiBold;
-    src: url('../fonts/SourceSansPro-SemiBold.ttf'); 
+    src: url('../fonts/SourceSansPro-SemiBold.ttf');
 }
+
 @font-face {
     font-family: segoe-ui;
-    src: url('../fonts/segoe-ui.ttf'); 
+    src: url('../fonts/segoe-ui.ttf');
 }
+
 @font-face {
     font-family: ZapfinoLinotypeOne;
-    src: url('../fonts/ZapfinoLinotypeOne.ttf'); 
+    src: url('../fonts/ZapfinoLinotypeOne.ttf');
 }
 
 /*--------------------Common CSS------------------*/
+
 body {
-	margin: 0px;
-	padding: 0px;
-	font-family: SourceSansPro-Regular;
+    margin: 0px;
+    padding: 0px;
+    font-family: SourceSansPro-Regular;
     position: relative;
     padding-top: 90px;
 }
+
 body::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, .2);
     border-radius: 12px
 }
+
 body::-webkit-scrollbar {
     width: 10px
 }
+
 body::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
     background-color: #fff
 }
+
 h1, h2, h3, h4, h5, h5, p {
-	margin: 0px;
-	padding: 0px;	
+    margin: 0px;
+    padding: 0px;
 }
+
 ul {
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
 }
+
 a, a:hover, a:focus {
-	text-decoration: none;
-	border: none;
-	outline: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
 }
+
 input, input:focus, button, button:focus {
-	outline: none;
+    outline: none;
 }
+
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
+
 .container {
     width: 100%;
     max-width: 1520px;
     padding: 0 20px;
 }
+
 .textWhite {
-	color: #fff !important;
+    color: #fff !important;
 }
+
 .textBlack {
-	color: #000;
+    color: #000;
 }
+
 .textSky {
-    color: #2EC5E0;
+    color: #ff9d3e;
 }
+
 .bgSky {
-    background: #2EC5E0;
+    background: #ff9d3e;
 }
 
 /*--------------Banner Section CSS--------------*/
+
 .bannerBgGrey {
     width: 76%;
     background: #F4F4F8;
@@ -90,25 +111,28 @@ input, input:focus, button, button:focus {
 }
 
 /*-------------------Header CSS----------------*/
+
 .stickyHeader header {
     position: fixed;
     animation: smoothScroll 1s forwards;
-    
 }
+
 .stickyHeader header .headerTop {
     display: none;
 }
+
 header {
     position: absolute;
     top: 0;
     right: 0;
     width: 100%;
     z-index: 99;
-    background: #fff;    
-    -webkit-transition: all 0.3s ease;  
+    background: #fff;
+    -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     box-shadow: 0 2px 12px #e8e8e8;
 }
+
 @keyframes smoothScroll {
     0% {
         transform: translateY(-70px);
@@ -117,66 +141,79 @@ header {
         transform: translateY(0px);
     }
 }
+
 header .headerTop {
     padding: 0 0 3px;
 }
+
 header ul.socialIcon li {
     margin: 0 15px;
 }
+
 header ul.socialIcon li:last-child {
     margin-right: 0px;
 }
+
 header ul.socialIcon {
     justify-content: flex-end;
 }
+
 header .logoContent {
     justify-content: space-between;
     padding: 10px 0px 10px 0px;
     position: relative;
 }
-header.header2 .logoContent {
-    padding: 10px 0 10px 62px;
-}
+
 header nav li a {
     color: #000;
     font-size: 18px;
     line-height: 22px;
 }
+
 header nav li {
     margin: 0 22px;
 }
+
 header nav li:last-child {
     margin-right: 0px;
 }
+
 header li.signInUpBtn {
-    background: #2EC5E0;
+    background: #ff9d3e;
     padding: 7px 14px;
     border-radius: 4px;
     color: #fff;
     margin-left: 22px;
 }
+
 header li.signInUpBtn a {
     color: #fff;
     padding: 0;
 }
+
 header li.signInUpBtn a:hover {
     color: #fff;
 }
+
 header .snip li.signInUpBtn a:before {
     content: none;
 }
+
 header .snip a {
-    color: #000;
+    color: #ff9d3e;
     position: relative;
     transition: all 0.3s ease;
 }
+
 header .snip a:hover {
-    color: #2EC5E0;
+    color: #ff9d3e;
 }
+
 /*header .snip a:hover:before {
     opacity: 1;
     visibility: visible;
 }*/
+
 header .snip li.activeMenu a:before {
     position: absolute;
     content: '';
@@ -184,14 +221,16 @@ header .snip li.activeMenu a:before {
     height: 3px;
     z-index: 9;
     bottom: -21px;
-    background: #2ec5e0;
+    background: #ff9d3e;
     transition: all 0.3s ease;
     opacity: 1;
     visibility: visible;
 }
+
 header nav li.activeMenu a {
-    color: #2EC5E0;
+    color: #ff9d3e;
 }
+
 header .snip a:before {
     position: absolute;
     content: '';
@@ -199,15 +238,17 @@ header .snip a:before {
     height: 3px;
     z-index: 9;
     bottom: -21px;
-    background: #2ec5e0;
+    background: #ff9d3e;
     transition: all 0.3s ease;
     opacity: 0;
     visibility: hidden;
 }
+
 header .snip a:hover:before {
     opacity: 1;
     visibility: visible;
 }
+
 .bannerSection {
     background: url(../images/banner-img.jpg);
     height: 576px;
@@ -215,11 +256,13 @@ header .snip a:hover:before {
     background-size: cover;
     background-position: center;
 }
+
 .bannerContent h1 {
     font-size: 55px;
     line-height: 60px;
     font-family: SourceSansPro-Bold;
 }
+
 .bannerContent {
     top: 50%;
     left: 50%;
@@ -228,11 +271,13 @@ header .snip a:hover:before {
     max-width: 870px;
     text-align: center;
 }
+
 .bannerContent h3 {
     font-size: 36px;
     line-height: 40px;
     padding: 22px 0 42px;
 }
+
 .selectStateBox {
     background: rgba(0, 0, 0, 0.25);
     padding: 10px;
@@ -242,6 +287,7 @@ header .snip a:hover:before {
 }
 
 /** Custom Select **/
+
 .custom-select-wrapper {
     position: relative;
     display: inline-block;
@@ -249,9 +295,11 @@ header .snip a:hover:before {
     width: 376px;
     text-align: left;
 }
+
 .custom-select-wrapper select {
     display: none;
 }
+
 .custom-select {
     position: relative;
     display: inline-block;
@@ -264,6 +312,7 @@ header .snip a:hover:before {
     color: #7E818B;
     transition: all 0.3s ease;
 }
+
 .custom-select:before {
     content: '';
     position: absolute;
@@ -274,8 +323,8 @@ header .snip a:hover:before {
     padding: 6px;
     display: inline-block;
     transform: rotate(45deg);
-    
 }
+
 .custom-select-trigger {
     position: relative;
     display: block;
@@ -288,22 +337,26 @@ header .snip a:hover:before {
     height: 48px;
     color: #7E818B;
 }
+
 .custom-select.opened .custom-select-trigger:after {
     margin-top: 3px;
     transform: rotate(-135deg) translateY(-50%);
 }
+
 .custom-options {
     position: absolute;
     display: block;
-    top: 100%; left: 0; right: 0;
+    top: 100%;
+    left: 0;
+    right: 0;
     min-width: 100%;
     margin: 15px 0;
     border: 1px solid #dfe5e8;
     border-radius: 4px;
     box-sizing: border-box;
-    box-shadow: 0 2px 1px rgba(0,0,0,.07);
+    box-shadow: 0 2px 1px rgba(0, 0, 0, .07);
     background: #fff;
-    transition: all .4s ease-in-out;    
+    transition: all .4s ease-in-out;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -311,17 +364,21 @@ header .snip a:hover:before {
     height: 168px;
     overflow-y: scroll;
 }
+
 .custom-options::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, .2);
     border-radius: 12px
 }
+
 .custom-options::-webkit-scrollbar {
     width: 10px
 }
+
 .custom-options::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
     background-color: #fff
 }
+
 .custom-select.opened .custom-options {
     opacity: 1;
     visibility: visible;
@@ -329,12 +386,15 @@ header .snip a:hover:before {
     transform: translateY(0);
     z-index: 9;
 }
+
 .custom-options:before {
     position: absolute;
     display: block;
     content: '';
-    bottom: 100%; right: 25px;
-    width: 7px; height: 7px;
+    bottom: 100%;
+    right: 25px;
+    width: 7px;
+    height: 7px;
     margin-bottom: -4px;
     border-top: 1px solid #dfe5e8;
     border-left: 1px solid #dfe5e8;
@@ -342,9 +402,11 @@ header .snip a:hover:before {
     transform: rotate(45deg);
     transition: all .4s ease-in-out;
 }
+
 .option-hover:before {
     background: #f9f9f9;
 }
+
 .custom-option {
     position: relative;
     display: block;
@@ -357,53 +419,65 @@ header .snip a:hover:before {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
+
 .custom-option:first-of-type {
     border-radius: 4px 4px 0 0;
 }
+
 .custom-option:last-of-type {
     border-bottom: 0;
     border-radius: 0 0 4px 4px;
 }
+
 .custom-option:hover, .custom-option.selection {
-    background: #2ec5e0;
+    background: #ff9d3e;
     color: #fff;
 }
+
 button.noticeBtn {
     width: 176px;
     border: none;
     border-radius: 4px;
-    background: #2EC5E0;
+    background: #ff9d3e;
     color: #fff;
     font-size: 20px;
     line-height: 22px;
     transition: all 0.3s ease;
 }
+
 button.noticeBtn:hover {
     background: #24b2cc;
 }
+
 h2.mainHeading {
     font-size: 36px;
     line-height: 65px;
     font-family: SourceSansPro-SemiBold;
 }
+
 .section1 {
     padding: 50px 0px 102px 0px;
 }
+
 .section1 .leftImg img {
     width: 100%;
 }
-.section1  ul.attentionList {
+
+.section1 ul.attentionList {
     padding: 0 0 0 20px;
 }
+
 .section1 ul.attentionList li {
     position: relative;
     font-size: 18px;
     line-height: 26px;
     margin-bottom: 16px;
 }
+
 .section1 ul.attentionList li:last-child {
     margin-bottom: 0px;
 }
+
 .section1 ul.attentionList li:before {
     content: '';
     position: absolute;
@@ -414,6 +488,7 @@ h2.mainHeading {
     width: 16px;
     background-repeat: no-repeat;
 }
+
 .section1 ul.attentionList {
     padding: 0px 0 16px 32px;
 }
@@ -425,10 +500,12 @@ h2.mainHeading {
     background-position: center;
     background-size: cover;
 }
+
 .section2 .leftText p {
     font-size: 25px;
     line-height: 35px;
 }
+
 .section2 .workBox {
     width: 310px;
     height: 340px;
@@ -436,18 +513,21 @@ h2.mainHeading {
     box-shadow: 0px 5px 20px #0000000D;
     border-radius: 6px;
     padding: 20px;
-    margin: 22px 11px;    
+    margin: 22px 11px;
 }
+
 .section2 .workBox h3 {
     font-size: 24px;
     line-height: 31px;
     padding: 24px 0 20px;
     font-family: SourceSansPro-SemiBold;
 }
+
 .section2 .workBox p {
     font-size: 16px;
     line-height: 24px;
 }
+
 .section2 .workBlockTwo {
     padding-top: 32px;
 }
@@ -459,29 +539,33 @@ h2.mainHeading {
     background-position: center;
     background-size: cover;
 }
+
 .section3Content h3 {
     font-size: 36px;
     line-height: 56px;
-    font-family: SourceSansPro-SemiBold;   
+    font-family: SourceSansPro-SemiBold;
     padding: 0 0 42px;
 }
+
 .section3Content {
     width: 100%;
     max-width: 970px;
     margin: 0 auto;
 }
+
 button.Btn {
     padding: 16px 46px;
-    background: #2EC5E0;
+    background: #ff9d3e;
     border-radius: 5px;
     color: #fff;
     font-size: 20px;
     line-height: 25px;
-    font-family: SourceSansPro-SemiBold;   
-    transition: all 0.3s ease;    
+    font-family: SourceSansPro-SemiBold;
+    transition: all 0.3s ease;
     border: none;
     letter-spacing: 0.3px;
 }
+
 button.Btn:hover, button.Btn:focus {
     box-shadow: none;
     border: none;
@@ -492,26 +576,31 @@ footer {
     background: #11171D;
     padding: 122px 0 0;
 }
+
 .footerNoticeTenant h3 {
     font-size: 39px;
     line-height: 49px;
     font-family: SourceSansPro-Bold;
     padding-bottom: 34px;
 }
+
 .footerContent {
     padding-bottom: 72px;
     border-bottom: 2px solid #41454A;
 }
+
 .footerNoticeTenant p {
     font-size: 14px;
     line-height: 21px;
     color: #CCCCCC;
     letter-spacing: 0.3px;
 }
+
 .footerNoticeTenant {
     width: 100%;
     max-width: 366px;
 }
+
 .footerSocialIcon li a {
     width: 40px;
     height: 40px;
@@ -522,21 +611,27 @@ footer {
     align-items: center;
     transition: all 0.3s ease;
 }
+
 .footerSocialIcon li a:hover {
-    background: #2EC5E0;
+    background: #ff9d3e;
 }
+
 .footerSocialIcon li a:hover svg {
     color: #fff;
 }
+
 ul.footerSocialIcon {
     padding: 32px 0 0;
 }
+
 ul.footerSocialIcon li {
     margin: 0 8px;
 }
+
 ul.footerSocialIcon li:first-child {
     margin-left: 0px;
 }
+
 .footerContent h4 {
     font-size: 24px;
     line-height: 30px;
@@ -544,19 +639,23 @@ ul.footerSocialIcon li:first-child {
     padding-bottom: 34px;
     padding-top: 12px;
 }
+
 ul.others a {
     color: #CCCCCC;
     font-size: 16px;
     line-height: 20px;
     transition: all 0.3s ease;
 }
+
 ul.others li {
     position: relative;
-    margin: 0 0 10px;    
+    margin: 0 0 10px;
 }
+
 ul.others a:hover {
-    color: #2EC5E0;
+    color: #ff9d3e;
 }
+
 ul.others li:before {
     content: '';
     position: absolute;
@@ -568,94 +667,116 @@ ul.others li:before {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 ul.others.contactUs li a:hover {
     color: #CCCCCC;
 }
+
 ul.others {
     padding: 0 0 0 20px;
 }
+
 ul.others.contactUs li:before {
     content: none;
 }
+
 ul.others.contactUs img {
     width: 14px;
     margin: 0 20px 0 0;
 }
+
 ul.others.contactUs {
     padding: 0;
 }
+
 .footerSocialIcon li a svg {
     color: #11171d;
 }
+
 .copyright p {
     font-size: 16px;
     line-height: 20px;
     color: #fff;
 }
+
 .footerMenu li a {
     font-size: 16px;
     line-height: 20px;
     color: #fff;
     transition: all 0.3s ease;
 }
+
 .footerMenu li a:hover {
-    color: #2EC5E0;
+    color: #ff9d3e;
 }
+
 .copyright {
     padding: 32px 0;
 }
+
 .footerMenu li {
     margin: 0 20px;
 }
+
 .footerMenu li:last-child {
     margin-right: 0px;
 }
+
 .header .menu-btn {
     display: none;
 }
+
 label.menu-icon {
     display: none;
 }
+
 ul.footerMenu {
     justify-content: flex-end;
 }
 
 /*------------------Notice Page CSS-----------------*/
+
 .noticesSection {
     background: #f7f7f7;
     padding: 30px 0 80px;
-    overflow-x: hidden;    
+    overflow-x: hidden;
     min-height: calc(100vh - 110px);
-
 }
-.noticesSection fieldset{
-    display:none;
+
+.noticesSection fieldset {
+    display: none;
     width: 100%;
     position: relative;
 }
-.noticesSection #first{
-    display:block;
+
+.noticesSection #first {
+    display: block;
     width: 100%;
-}    
+}
+
 .noticeMain {
     background: #FFFFFF;
     box-shadow: 0px 2px 6px #E4E8EB29;
     border: 1px solid #E4E8EB;
     border-radius: 5px;
 }
+
 .noticeHeader {
     padding: 14px 14px 14px 26px;
     border-bottom: 1px solid #E4E8EB;
 }
+
 .noticeHeader h2 {
     font-size: 25px;
     line-height: 27px;
     font-family: SourceSansPro-SemiBold;
     color: #424852;
 }
+
 .noticeHeader h2 span {
     font-size: 16px;
 }
+
 .cityDropdown .custom-select {
     background: #fff;
     border: 1px solid #CAD0D7;
@@ -663,28 +784,33 @@ ul.footerMenu {
     width: 250px;
     height: 44px;
 }
+
 .cityDropdown .custom-select-wrapper {
-    width: auto;    
+    width: auto;
 }
+
 .cityDropdown .custom-select-trigger {
     font-size: 16px;
     height: 44px;
     color: #000;
 }
+
 .cityDropdown .custom-option {
     font-size: 16px;
     color: #000;
 }
+
 .cityDropdown .custom-select:before {
     right: 12px;
     border: solid #424852;
     border-width: 0px 2px 2px 0px;
     padding: 5px;
 }
-.cityDropdown .custom-option:hover,
-.cityDropdown .custom-option.selection {
+
+.cityDropdown .custom-option:hover, .cityDropdown .custom-option.selection {
     color: #fff;
 }
+
 .noticeTable table th {
     background: #F7FBFD;
     font-size: 14px;
@@ -693,24 +819,29 @@ ul.footerMenu {
     font-family: SourceSansPro-SemiBold;
     padding: 14px 26px;
 }
+
 .noticeTable table td {
     font-size: 14px;
     line-height: 18px;
     padding: 14px 26px;
     color: #000;
 }
+
 .noticeTable table td.pending {
     color: #E69700;
 }
+
 .noticeTable table tr:nth-child(odd) {
     background: #F8F8F8;
 }
+
 .noticeTable table {
     width: 100%;
 }
+
 .noticeTable button.BtnSmall {
     border: none;
-    background: #2EC5E0;
+    background: #ff9d3e;
     color: #fff;
     font-size: 12px;
     line-height: 12px;
@@ -721,15 +852,19 @@ ul.footerMenu {
     height: 24px;
     transition: all 0.3s ease;
 }
+
 .noticeTable button.BtnSmall:hover {
     background: #16aeca;
 }
+
 .noticeTable .last button {
     margin: 0 8px;
 }
+
 .noticeTable .last button:last-child {
     margin-right: 0px;
 }
+
 .numbering {
     background: #FFFFFF;
     box-shadow: 0px 2px 6px #E4E8EB;
@@ -737,6 +872,7 @@ ul.footerMenu {
     margin: 0 0 20px;
     padding: 26px 14px;
 }
+
 .numbering ul li span {
     background: #E4E8EB;
     width: 40px;
@@ -750,14 +886,17 @@ ul.footerMenu {
     line-height: 24px;
     position: relative;
 }
+
 .numbering ul li.select span {
-    background: #2ec5e0;
+    background: #ff9d3e;
     color: #fff;
     font-family: segoe-ui;
 }
-.numbering ul li.select label {    
-    color: #2ec5e0;
+
+.numbering ul li.select label {
+    color: #ff9d3e;
 }
+
 .numbering ul li label {
     font-size: 14px;
     line-height: 18px;
@@ -766,16 +905,20 @@ ul.footerMenu {
     width: 100%;
     margin: 12px 0 0;
 }
+
 .numbering ul li {
     margin: 0 2px;
     width: 202px;
 }
+
 .numbering ul li:first-child {
     margin-left: 0px;
 }
+
 .numbering ul li:last-child {
     margin-right: 0px;
 }
+
 .numbering ul li span:before {
     position: absolute;
     content: '';
@@ -784,41 +927,51 @@ ul.footerMenu {
     background: #E4E8EB;
     left: 40px;
 }
+
 .numbering ul {
     justify-content: center;
 }
+
 .numbering ul li:last-child span:before {
     content: none;
 }
+
 .numbering ul li.selectBorder span:before {
-    background: #2ec5e0;
+    background: #ff9d3e;
 }
+
 h2.subHeading {
     font-size: 25px;
     line-height: 32px;
     color: #424852;
     font-family: SourceSansPro-SemiBold;
 }
+
 .landlordInfo {
     padding: 28px 20px;
 }
+
 .landlordInfo h2.subHeading {
     padding: 0 0 7px;
 }
+
 .landlordInfo p {
     font-size: 16px;
     line-height: 20px;
     color: #7D828B;
 }
+
 .fieldset label {
     font-size: 16px;
     line-height: 20px;
     color: #7D828B;
     width: 100%;
 }
+
 .landlordInfo .formField {
     padding: 40px 0 40px 0;
 }
+
 .formField {
     border-bottom: 1px solid #E4E8EB;
     padding-bottom: 36px;
@@ -826,6 +979,7 @@ h2.subHeading {
     max-width: 98%;
     margin: 0 auto;
 }
+
 .fieldset input {
     height: 42px;
     background: #FFFFFF;
@@ -839,45 +993,56 @@ h2.subHeading {
     width: 100%;
     transition: all 0.3s ease;
 }
-.fieldset input:hover,
-.fieldset input:focus {
+
+.fieldset input:hover, .fieldset input:focus {
     border: 1px solid #bcbdbf;
 }
+
 .fieldset input::placeholder {
     color: #bbb;
 }
+
 .fieldset.width {
     width: 31.3%;
     margin: 0 26px 0 0;
 }
+
 .fieldset.width:last-child {
     margin: 0;
 }
+
 .landlordAdd {
     padding: 8px 0 46px;
 }
+
 .addBox {
     display: flex;
 }
+
 .addBlock {
     padding: 30px 0 0;
 }
+
 .addBlock:first-child {
     margin-left: 0px;
 }
+
 .addBlock:last-child {
     margin-right: 0px;
 }
+
 .addBox [type="radio"] {
     z-index: -1;
     position: absolute;
     opacity: 0;
 }
-.addBox [type="radio"]:checked ~ label {
-    border-color: #2EC5E0;
+
+.addBox [type="radio"]:checked~label {
+    border-color: #ff9d3e;
     background-color: #fff;
 }
-.addBox [type="radio"]:checked ~ label > span:after {
+
+.addBox [type="radio"]:checked~label>span:after {
     content: "";
     position: absolute;
     top: 50%;
@@ -889,6 +1054,7 @@ h2.subHeading {
     border-radius: 10px;
     background-color: #fff;
 }
+
 .addBox label {
     position: relative;
     display: grid;
@@ -903,16 +1069,19 @@ h2.subHeading {
     transition: all 300ms ease-in;
     cursor: pointer;
 }
+
 .addBox label:hover {
     border-color: #4062F6;
     background-color: rgba(97, 154, 234, 0.16);
 }
+
 .addBox label:before, .addBox label:after {
     position: absolute;
     left: 29px;
     border-radius: 50%;
     content: '';
 }
+
 .addBox label:before {
     margin: -2rem;
     border: solid 2rem #545461;
@@ -921,7 +1090,8 @@ h2.subHeading {
     -webkit-transform: scale(0);
     transform: scale(0);
 }
-.addBox label > span {
+
+.addBox label>span {
     position: relative;
     display: -webkit-inline-box;
     display: inline-flex;
@@ -931,15 +1101,18 @@ h2.subHeading {
     border: 5px solid #C1C1C1;
     top: 5px;
 }
-.addBox [type="radio"]:checked ~ label span {
-    border: 5px solid #2EC5E0;
+
+.addBox [type="radio"]:checked~label span {
+    border: 5px solid #ff9d3e;
 }
+
 .addBox .card--sm {
     position: absolute;
     right: -76px;
     -webkit-transform: scale(0.24);
     transform: scale(0.24);
 }
+
 .addBox .option label {
     background: #F9F9F9;
     padding: 20px;
@@ -948,23 +1121,26 @@ h2.subHeading {
     font-size: 18px;
     line-height: 24px;
 }
+
 button.newAddressBtn {
     font-size: 16px;
     line-height: 22px;
-    color: #2ec5e0;
+    color: #ff9d3e;
     font-family: SourceSansPro-SemiBold;
     letter-spacing: 0.3px;
     background: transparent;
-    border: 1px solid #2ec5e0;
+    border: 1px solid #ff9d3e;
     padding: 8px 12px 8px 12px;
     border-radius: 5px;
     margin: 22px 0 0 10px;
 }
+
 button.newAddressBtn img {
     margin: 0 0 0 12px;
     position: relative;
     top: -1px;
 }
+
 .btmSection {
     position: relative;
     background: #F7FBFD;
@@ -973,22 +1149,26 @@ button.newAddressBtn img {
     padding: 26px 30px;
     justify-content: flex-end;
 }
+
 .btmSection p em {
     color: red;
     margin: 0 2px 0 0;
     font-style: normal;
 }
+
 .btmSection p {
     font-size: 18px;
     line-height: 22px;
     padding: 0 12px 0 0;
 }
-.btnGroup button {    
+
+.btnGroup button {
     transition: all 0.3s ease;
     margin: 0 5px;
 }
+
 .smallBtn {
-    background: #2EC5E0;
+    background: #ff9d3e;
     border: none;
     color: #fff;
     font-size: 18px;
@@ -997,15 +1177,19 @@ button.newAddressBtn img {
     border-radius: 4px;
     transition: all 0.3s ease;
 }
+
 a.smallBtn {
     color: #fff;
 }
+
 a.smallBtn:hover, a.smallBtn:focus {
     color: #fff;
 }
+
 .smallBtn:hover {
     background: #24b2cc;
 }
+
 button.pre_btn.smallBtn {
     position: absolute;
     bottom: 26px;
@@ -1014,12 +1198,15 @@ button.pre_btn.smallBtn {
     background: #11171D;
     transition: all 0.3s ease;
 }
+
 button.pre_btn.smallBtn:hover {
     background: #2e343a;
 }
+
 button.next_btn.smallBtn:hover {
     background: #2e343a;
 }
+
 button.next_btn.smallBtn {
     position: absolute;
     bottom: 26px;
@@ -1028,22 +1215,28 @@ button.next_btn.smallBtn {
     background: #11171D;
     transition: all 0.3s ease;
 }
+
 .two .fieldset.width.full {
     width: 66%;
 }
+
 .addAddress .fieldset.width {
     margin: 0 26px 30px 0;
 }
+
 #newAddBlock, #newAddBlock2 {
     display: none;
 }
+
 .addAddress .formField {
     border: none;
     padding-bottom: 0px;
 }
+
 .addAddress {
     transition: all 0.3s ease;
 }
+
 h2.topHeading {
     font-size: 25px;
     line-height: 32px;
@@ -1051,15 +1244,18 @@ h2.topHeading {
     font-family: SourceSansPro-SemiBold;
     padding: 8px 0 0px;
 }
+
 .premisesInfo .landlordAdd {
     padding: 20px 0 46px;
 }
+
 .unitNumberBlock {
     width: 98%;
     border-top: 1px solid #E4E8EB;
     margin: 50px auto 0;
     padding: 16px 0 0;
 }
+
 .addBox.unitOption .option label {
     padding: 0;
     border: none;
@@ -1067,24 +1263,29 @@ h2.topHeading {
     grid-template-columns: 6px auto 6px;
     margin: 0;
 }
+
 .addBox.unitOption label {
     width: auto;
 }
+
 .addBox.unitOption .option label {
     font-size: 16px;
     line-height: 22px;
     color: #7D828B;
     background: #fff;
 }
+
 .addBox.unitOption .option label em {
     font-style: normal;
     font-size: 12px;
 }
+
 .unitNumberBlock .formField {
     padding: 20px 0 0px 0;
     max-width: 100%;
     border: none;
 }
+
 button.next_btn.smallBtn:before {
     position: absolute;
     content: '';
@@ -1095,6 +1296,7 @@ button.next_btn.smallBtn:before {
     top: 13px;
     right: 12px;
 }
+
 button.pre_btn.smallBtn:before {
     position: absolute;
     content: '';
@@ -1105,22 +1307,28 @@ button.pre_btn.smallBtn:before {
     top: 13px;
     left: 14px;
 }
+
 .landlordInfo .numberDropDown .formField {
     padding: 0 0 0 0;
 }
-.cityDropdown.numberDropDown .custom-select-trigger {    
+
+.cityDropdown.numberDropDown .custom-select-trigger {
     height: 42px;
     line-height: 40px;
 }
+
 .cityDropdown.numberDropDown .custom-select:before {
     top: 11px;
 }
+
 .TenantInfo .landlordAdd {
     padding: 10px 0 30px;
 }
+
 .TenantInfo .head {
     padding: 32px 30px 40px;
 }
+
 .numberTenant h5 {
     font-size: 16px;
     line-height: 18px;
@@ -1128,9 +1336,11 @@ button.pre_btn.smallBtn:before {
     padding: 0 16px 0 0;
     text-transform: capitalize;
 }
+
 .numberTenant {
     padding: 12px 0 0 0;
 }
+
 .tenantInfoTable tr th {
     font-size: 16px;
     line-height: 20px;
@@ -1139,6 +1349,7 @@ button.pre_btn.smallBtn:before {
     background: #F7F7F7;
     padding: 12px 20px;
 }
+
 .tenantInfoTable tr td {
     font-size: 16px;
     line-height: 20px;
@@ -1146,29 +1357,37 @@ button.pre_btn.smallBtn:before {
     font-family: SourceSansPro-SemiBold;
     padding: 12px 20px;
 }
+
 .tenantInfoTable table {
     width: 100%;
 }
+
 .tenantInfoTable table .fieldset input {
     font-size: 16px;
     line-height: 20px;
     font-family: SourceSansPro-Regular;
 }
+
 .tenantInfoTable table .fieldset input::placeholder {
-    font-family: SourceSansPro-Regular;   
+    font-family: SourceSansPro-Regular;
 }
+
 .tenantInfoTable table .fieldset.width {
     width: auto;
 }
+
 .noticeInform .fieldset.width {
     width: 250px;
 }
+
 .reviewSign .head {
     padding: 32px 30px 20px;
 }
+
 .reviewSignContent {
     padding: 0 44px 30px;
 }
+
 .reviewSignContent address {
     margin: 0;
     font-size: 18px;
@@ -1177,36 +1396,45 @@ button.pre_btn.smallBtn:before {
     width: 100%;
     max-width: 190px;
 }
+
 .reviewSignContent address label {
     color: #7D828B;
     margin: 0;
 }
+
 .reviewSignContent address span.name {
     width: 100%;
     display: block;
 }
+
 .reviewSignContent address label.add {
     width: 100%;
 }
+
 .reviewSignContent address label.add {
     width: 100%;
 }
+
 .reviewSignContent .reviewSignText p {
     font-size: 20px;
     line-height: 32px;
     color: #000000;
     margin: 0 0 26px;
 }
+
 .reviewSignContent .reviewSignText {
     padding: 26px 0 0 0;
 }
+
 .reviewSignContent .nameSign .fieldset.width {
     width: 250px;
     margin: 10px 0 0;
 }
+
 .reviewSignContent .nameSign {
     padding: 0 0 0 10px;
 }
+
 .reviewSignContent span.sign {
     font-size: 46px;
     line-height: 48px;
@@ -1215,29 +1443,36 @@ button.pre_btn.smallBtn:before {
     padding: 20px 0 0 20px;
     display: block;
 }
+
 .downloadSend {
     padding: 22px 20px 50px 20px;
 }
+
 .downloadSend .head {
     padding: 0;
 }
+
 .downloadSendContent {
     padding: 30px 0 30px 20px;
 }
+
 .downloadSendContent p {
     font-size: 16px;
     line-height: 30px;
     color: #000;
 }
+
 .downloadTable h5 {
     font-size: 16px;
     line-height: 30px;
     color: #000;
     padding: 0 0 20px;
 }
+
 .downloadTable {
     padding: 26px 0 0 0;
 }
+
 .downloadTable td {
     font-size: 16px;
     line-height: 20px;
@@ -1245,6 +1480,7 @@ button.pre_btn.smallBtn:before {
     color: #000;
     font-family: SourceSansPro-SemiBold;
 }
+
 .downloadTable td.totalAmt {
     border-top: 1px solid #E4E8EB;
     padding-top: 10px;
@@ -1252,10 +1488,12 @@ button.pre_btn.smallBtn:before {
     display: inline-block;
     width: 100%;
 }
+
 .downloadTable table {
     width: 100%;
     max-width: 380px;
 }
+
 .downloadTable table td p {
     color: #424852;
     font-size: 14px;
@@ -1264,6 +1502,7 @@ button.pre_btn.smallBtn:before {
     border-bottom: 1px solid #E4E8EB;
     padding-bottom: 18px;
 }
+
 .downloadTable table td label {
     font-size: 16px;
     line-height: 20px;
@@ -1271,26 +1510,30 @@ button.pre_btn.smallBtn:before {
     font-family: SourceSansPro-SemiBold;
     margin-right: 5px;
 }
+
 /*.totalCost {
     background: #F7FBFD;
     border-radius: 0px 0px 5px 5px;
     padding: 18px 30px;
     margin: 0 0 8px;
 }*/
+
 .totalCost h3 {
     font-size: 24px;
-    line-height: 28px;    
+    line-height: 28px;
     font-family: SourceSansPro-SemiBold;
     margin: 0 24px 0 0;
 }
+
 .totalCost h3 label {
     margin: 0px;
     color: #7D828B;
     font-size: 16px;
     line-height: 20px;
-    font-family: SourceSansPro-Regular;   
+    font-family: SourceSansPro-Regular;
     margin: 0 10px 0 0;
 }
+
 button.payBtn {
     font-size: 16px;
     line-height: 20px;
@@ -1302,9 +1545,11 @@ button.payBtn {
     font-family: SourceSansPro-SemiBold;
     transition: all 0.3s ease;
 }
+
 button.payBtn:hover {
     background: #11b142;
 }
+
 .orBlock:before {
     content: '';
     position: absolute;
@@ -1314,11 +1559,13 @@ button.payBtn:hover {
     height: 1px;
     background: #e6e6e6;
 }
+
 .orBlock {
     padding: 30px 0;
     background: #f7f7f7;
     margin: 0px;
 }
+
 .orBlock span {
     top: 20px;
     right: 0;
@@ -1333,79 +1580,87 @@ button.payBtn:hover {
     line-height: 16px;
     text-transform: uppercase;
 }
+
 .downloadNotice p {
     font-size: 16px;
 }
+
 .downloadNotice .btnGroup img {
     margin: 0 12px 0 0;
 }
+
 .addBox .option label .addText p {
     font-size: 18px;
     line-height: 24px;
     color: #212529;
     margin: 0 0 8px;
 }
+
 .downloadHead h6 {
     font-size: 16px;
     line-height: 20px;
     font-family: SourceSansPro-SemiBold;
     color: #000;
 }
+
 .downloadHead p {
     font-size: 16px;
     line-height: 20px;
     color: #000;
 }
+
 .downloadHead {
     padding: 0 0 16px;
     border-bottom: 1px solid #E4E8EB;
     margin-bottom: 26px;
 }
+
 fieldset.last button.pre_btn.smallBtn {
     bottom: 28px;
     right: 180px;
     left: auto;
 }
-footer.footer2 {
-    padding: 0;
-}
-footer.footer2 .copyright {
-    padding: 14px 0;
-}
 
 /*----------------SignIn CSS---------------*/
+
 .signIn {
     background: #F7F7F7;
     padding: 50px 0 80px;
     min-height: calc(100vh - 142px);
 }
+
 .signInContent {
     width: 100%;
     max-width: 640px;
     box-shadow: 0px 2px 6px #E4E8EB29;
     border: 1px solid #E4E8EB;
     border-radius: 5px;
-    margin: 0 auto;
-    padding: 62px 20px 20px 20px;
+    margin: 20px auto;
+    padding: 20px;
     background: #fff;
 }
+
 h1.mainHeading {
     font-size: 36px;
     line-height: 40px;
     font-family: SourceSansPro-SemiBold;
     color: #424852;
 }
+
 .signIn form h1 {
     padding-bottom: 28px;
 }
+
 .signIn form {
     width: 100%;
     max-width: 370px;
     margin: 0 auto;
 }
+
 .fieldset {
     margin: 0 0 15px;
 }
+
 .signIn a.forgotPwd {
     font-size: 14px;
     line-height: 18px;
@@ -1413,23 +1668,28 @@ h1.mainHeading {
     transition: all 0.3s ease;
     margin: 24px 0 26px;
 }
+
 .signIn a.forgotPwd:hover {
-    color: #2ec5e0;
+    color: #ff9d3e;
 }
+
 .signIn .btnGroup button {
     margin: 0;
     width: 48%;
     padding: 8px 8px;
     font-size: 16px;
 }
+
 .signIn .btnGroup {
     padding: 0 0 44px;
 }
+
 .signIn button.smallBtn.nobg {
     background: transparent;
-    color: #2ec5e0;
+    color: #ff9d3e;
     border: 1px solid #24b2cc;
 }
+
 .signIn p.dontacc {
     font-size: 14px;
     line-height: 20px;
@@ -1438,25 +1698,30 @@ h1.mainHeading {
     padding: 16px 0 0 0;
     font-family: SourceSansPro-SemiBold;
 }
+
 .signIn p.dontacc a {
-    font-size: 16px; 
-    color: #2EC5E0;
+    font-size: 16px;
+    color: #ff9d3e;
     margin: 0 0px 0 10px;
     transition: all 0.3s ease-in;
     font-family: SourceSansPro-Regular;
 }
+
 .signIn p.dontacc a:hover {
     color: #12b5d2;
 }
+
 .signUp .addBox.unitOption .option label {
     font-size: 15px;
     line-height: 25px;
     color: #000;
     grid-template-columns: 3px auto 6px;
 }
+
 .signUp .addBox {
     padding: 0 0 24px;
 }
+
 .control {
     display: block;
     position: relative;
@@ -1468,49 +1733,58 @@ h1.mainHeading {
     color: #424852;
     transition: all 0.3s ease;
 }
+
 .control-group p {
     font-size: 16px;
     line-height: 22px;
     color: #424852;
     padding: 0 0 0 28px;
 }
+
 .control-group {
     margin: 0 0 26px;
 }
+
 .control input {
     position: absolute;
     z-index: -1;
     opacity: 0;
 }
+
 .control__indicator {
     position: absolute;
     top: 3px;
     left: 0;
     height: 18px;
     width: 18px;
-    border: 1px solid #2EC5E0;
+    border: 1px solid #ff9d3e;
     border-radius: 2px;
 }
+
 .control--checkbox .control__indicator:after {
     left: 5px;
     top: 1px;
     width: 6px;
     height: 11px;
-    border: solid #2ec5e0;
+    border: solid #ff9d3e;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
-.control input:checked ~ .control__indicator:after {
+
+.control input:checked~.control__indicator:after {
     display: block;
 }
+
 .control__indicator:after {
     content: '';
     position: absolute;
     display: none;
 }
+
 .twoField .fieldset {
     width: 48%;
 }
+
 .profileSetup form h6 {
     font-size: 16px;
     line-height: 20px;
@@ -1518,6 +1792,7 @@ h1.mainHeading {
     color: #000;
     margin: 12px 0 10px;
 }
+
 .signIn.profileSetup .btnGroup {
     padding: 14px 0 44px;
 }
@@ -1530,17 +1805,20 @@ h1.mainHeading {
     position: relative;
     overflow-x: hidden;
 }
+
 .dashboardHead {
     padding: 0 0 26px;
 }
+
 .dashboardHead h2 {
     color: #424852;
     font-size: 25px;
     line-height: 27px;
     font-family: SourceSansPro-SemiBold;
 }
+
 .dashboardHead .smallBtn {
-    background: #2EC5E0;
+    background: #ff9d3e;
     border: none;
     color: #fff;
     font-size: 16px;
@@ -1549,12 +1827,15 @@ h1.mainHeading {
     border-radius: 4px;
     transition: all 0.3s ease;
 }
+
 .dashboardHead .smallBtn:hover {
     background: #24b2cc;
 }
+
 span.arrow {
     position: relative;
 }
+
 span.arrow:before {
     content: '';
     position: absolute;
@@ -1566,6 +1847,7 @@ span.arrow:before {
     border-radius: 3px;
     cursor: pointer;
 }
+
 span.arrow:after {
     content: '';
     position: absolute;
@@ -1577,22 +1859,24 @@ span.arrow:after {
     border-radius: 3px;
     cursor: pointer;
 }
-.mainTab .nav-tabs .nav-item.show .nav-link,
-.mainTab .nav-tabs .nav-link.active {
-    color: #2EC5E0;
+
+.mainTab .nav-tabs .nav-item.show .nav-link, .mainTab .nav-tabs .nav-link.active {
+    color: #ff9d3e;
     background-color: transparent;
     border-color: transparent;
     border: none;
 }
-.mainTab .nav-tabs .nav-link:focus,
-.mainTab .nav-tabs .nav-link:hover {
+
+.mainTab .nav-tabs .nav-link:focus, .mainTab .nav-tabs .nav-link:hover {
     border-color: transparent;
     border: none;
 }
+
 .mainTab .nav-tabs {
     border-bottom: 1px solid #E4E8EB;
     padding: 0 26px;
 }
+
 .mainTab li.nav-item a {
     font-size: 18px;
     line-height: 22px;
@@ -1600,29 +1884,35 @@ span.arrow:after {
     padding: 18px 0px;
     position: relative;
 }
+
 .mainTab li.nav-item:first-child {
     padding-left: 0;
 }
+
 .mainTab .nav-tabs .nav-link {
     border: none;
 }
+
 .mainTab .nav-tabs .nav-link.active {
     position: relative;
 }
+
 .mainTab .nav-tabs .nav-link.active:before {
     content: '';
     width: 100%;
     height: 3px;
-    background: #2EC5E0;
+    background: #ff9d3e;
     position: absolute;
     bottom: 0px;
     right: 0px;
     left: 0px;
     border-radius: 50px;
 }
-.mainTab li.nav-item  {
+
+.mainTab li.nav-item {
     padding: 0px 20px;
 }
+
 span.badge {
     position: absolute;
     width: 17px;
@@ -1640,15 +1930,11 @@ span.badge {
     right: -18px;
 }
 
-
-
-
-
-
 .user_dropdown {
     padding: 0;
     position: relative;
 }
+
 .user_dropdown a span {
     padding: 0 24px 0 0;
     position: relative;
@@ -1664,6 +1950,7 @@ span.badge {
     transform: rotate(45deg);
     top: 3px;
 }
+
 a.userdropdownClick {
     position: relative;
     height: 100%;
@@ -1673,6 +1960,7 @@ a.userdropdownClick {
     align-items: center;
     transition: all 0.3s ease;
 }
+
 ul.user_menu.pullDown {
     position: absolute;
     top: 44px;
@@ -1684,6 +1972,7 @@ ul.user_menu.pullDown {
     border: 1px solid #E6E6E6;
     border-radius: 4px;
 }
+
 ul.user_menu a {
     width: 100%;
     font-size: 14px;
@@ -1695,18 +1984,22 @@ ul.user_menu a {
     transition: all 0.3s ease;
     font-family: SourceSansPro-SemiBold;
 }
+
 ul.user_menu a:hover {
     color: #000;
 }
+
 ul.user_menu a label {
     padding: 0 0 0 16px;
     margin: 0;
     position: relative;
     cursor: pointer;
 }
+
 ul.user_menu li {
     margin: 0px;
 }
+
 ul.user_menu a label:before {
     content: '';
     position: absolute;
@@ -1717,51 +2010,65 @@ ul.user_menu a label:before {
     top: 7px;
     left: 3px;
 }
+
 ul.user_menu a:hover label:before {
-    background: #2EC5E0;
+    background: #ff9d3e;
 }
+
 ul.user_menu .active a label:before {
-    background: #2EC5E0;
+    background: #ff9d3e;
 }
+
 header .snip .user_dropdown a:before {
     content: none;
 }
+
 a.userdropdownClick:hover {
     color: #000 !important;
 }
+
 /*--------------Tenant Info page CSS--------------*/
+
 .tenantInfo .noticeMain {
     padding: 20px;
     width: 100%;
     max-width: 80%;
     margin: 0 auto;
 }
+
 .tenantInfo .head {
     border-bottom: 1px solid #E4E8EB;
     padding: 16px 0 14px;
 }
+
 .tenantInfoBlock {
     padding: 20px 0 26px;
 }
+
 .userBox span, .contactBox span {
     font-size: 16px;
     line-height: 20px;
     color: #000;
     padding: 0 0px 0 10px;
 }
+
 .tenantInfoBlock .userBox {
     padding: 0 0 3px 0;
 }
+
 .tenantInfoBlock .box {
     padding: 8px 40px 8px 20px;
     border-right: 1px solid #E4E8EB;
 }
+
 .tenantInfoBlock .box:first-child {
     padding-left: 0px;
 }
+
 .tenantInfoBlock .box:last-child {
     border: none;
 }
+
 .premiseAdd h5 {
     font-size: 16px;
     line-height: 20px;
@@ -1770,44 +2077,54 @@ a.userdropdownClick:hover {
     text-transform: uppercase;
     padding: 0 0 8px;
 }
+
 .premiseAdd .add p {
     font-size: 18px;
     line-height: 22px;
     color: #000;
     padding: 0 0 0 10px;
 }
+
 .premiseAdd {
     padding: 0 0 26px;
     border-bottom: 1px solid #E4E8EB;
 }
+
 .tenantInfo .landlordInfo {
     padding: 6px 0 22px;
     border-bottom: 1px solid #E4E8EB;
 }
+
 .landlordInfo .detail span {
     padding: 0 0 0 14px;
 }
+
 .landlordInfo .detail {
     padding: 3px 0;
 }
+
 .tenantInfo .landlordInfo .head {
     border: none;
     padding: 16px 0px 8px;
 }
+
 span.address {
     font-size: 18px;
     padding: 0 0 0 10px !important;
 }
+
 .landlordInfoRight .smallBtn {
     font-size: 16px;
     padding: 4px 30px;
     margin: 0 0 0 16px;
     line-height: 24px;
 }
+
 .landlordInfoRight {
     display: flex;
     align-items: flex-end;
 }
+
 .tenantInfo .btmSection {
     position: relative;
     background: transparent;
@@ -1815,6 +2132,7 @@ span.address {
     border-radius: 0px 0px 5px 5px;
     padding: 20px 0px;
 }
+
 .tenantInfo span.notice {
     width: 100%;
     display: flex;
@@ -1824,14 +2142,16 @@ span.address {
     color: #424852;
     padding: 3px 0 0 0;
 }
+
 .tenantInfo .btmSection p.textLeft {
     font-size: 16px;
     line-height: 20px;
     color: #424852;
 }
+
 .tenantInfo .btmSection p.textLeft label {
-    font-family: SourceSansPro-SemiBold; 
-    color: #000;  
+    font-family: SourceSansPro-SemiBold;
+    color: #000;
 }
 
 .tenantInfo2 .processService {
@@ -1843,32 +2163,39 @@ span.address {
 }
 
 td.inProgress {
-    color: #2EC5E0 !important;
+    color: #ff9d3e !important;
 }
+
 .tenantInfo2 .noticeTable table th {
     font-size: 16px;
     line-height: 20px;
 }
+
 .tenantInfo2 .noticeTable table td {
     font-size: 16px;
     line-height: 20px;
 }
+
 .tenantInfo2.tenantInfo .processServiceTable .btmSection {
     padding: 20px 20px;
     border-top: 1px solid #E4E8EB;
 }
+
 .tenantInfo2.tenantInfo .btmSection p.textLeft {
     font-size: 16px;
     line-height: 20px;
     color: #424852;
     padding: 8px 0 0 16px;
 }
+
 .tenantInfo2 .noticeTable table tr:nth-child(even) {
     background: #F8F8F8;
 }
+
 .tenantInfo2 .noticeTable table tr:nth-child(odd) {
     background: #fff;
 }
+
 .tenantInfo2.tenantInfo .processService .head {
     padding: 20px 20px;
 }
@@ -1876,6 +2203,7 @@ td.inProgress {
 .profileSetting .noticeMain {
     margin: 24px 0 0;
 }
+
 .profileSetting .landlordInfo {
     padding: 20px 20px;
     box-shadow: 0px 2px 6px #E4E8EB29;
@@ -1883,6 +2211,7 @@ td.inProgress {
     border-radius: 5px;
     margin: 26px 0 0;
 }
+
 .profileSetting .signRight .smallBtn {
     font-size: 16px;
     padding: 4px 30px;
@@ -1894,6 +2223,7 @@ td.inProgress {
     line-height: 20px;
     color: #C1C1C1;
 }
+
 .profileSetting .signature label {
     font-size: 46px;
     line-height: 48px;
@@ -1903,9 +2233,11 @@ td.inProgress {
     display: block;
     margin: 0px;
 }
+
 .profileSetting .signature {
     padding: 0 82px 0 0;
 }
+
 .profileSettingTab {
     background: #FFFFFF;
     box-shadow: 0px 2px 6px #E4E8EB29;
@@ -1914,14 +2246,17 @@ td.inProgress {
     margin: 16px 0 0;
     padding-bottom: 40px;
 }
+
 .profileSettingTab .noticeHeader .smallBtn {
     font-size: 16px;
     padding: 4px 14px;
     line-height: 24px;
 }
+
 .profileSetting .entitiesContent {
     padding: 20px 0px 0px 0px;
 }
+
 .profileSettingTab .noticeHeader {
     padding: 18px 14px 18px 26px;
 }
@@ -1932,64 +2267,79 @@ td.inProgress {
     padding: 12px 16px;
     width: 320px;
 }
+
 .entityHead h5 {
     font-size: 16px;
     line-height: 18px;
     font-family: SourceSansPro-Bold;
     color: #000;
 }
+
 .entityHead li {
     margin: 0 0 0 15px;
 }
+
 .entityDetail span.phone {
     font-size: 16px;
     line-height: 20px;
     color: #000;
 }
+
 .entityDetail p {
     font-size: 18px;
-    line-height: 22px;    
+    line-height: 22px;
     padding: 8px 0 0;
 }
+
 .entityDetail {
     /* padding: 14px 0 0; */
     width: 100%;
     max-width: 60%;
 }
+
 .entityborder {
     border-top: 5px solid #F7F7F7;
 }
+
 .entityBlockMain {
     padding: 0 26px;
 }
+
 .manageAddHead span {
     font-size: 16px;
     line-height: 18px;
     color: #000;
     padding: 0 0 0 16px;
 }
+
 .manageAddHead {
     padding: 26px 0 20px;
     border-bottom: 1px solid #E4E8EB;
 }
+
 .profileSetting .manageAdd .entitiesContent {
     padding: 22px 0px 0px 0px;
 }
+
 .manageAdd .entitiesBlock {
     margin: 0 15px;
 }
+
 .manageAdd .entitiesBlock:first-child {
     margin-left: 0px;
 }
+
 .manageAdd .entitiesBlock:last-child {
     margin-right: 0px;
 }
+
 .manageAdd .addPremiseBtn span {
     padding: 0 10px 0 0;
     font-size: 14px;
     line-height: 16px;
-    color: #2EC5E0;
+    color: #ff9d3e;
 }
+
 .manageAdd .addPremiseBtn {
     cursor: pointer;
 }
@@ -2001,6 +2351,7 @@ td.inProgress {
     box-shadow: 0px 2px 6px #E4E8EB29;
     border-radius: 5px;*/
 }
+
 .addPermiseModal h2 {
     font-size: 36px;
     line-height: 40px;
@@ -2008,64 +2359,80 @@ td.inProgress {
     font-family: SourceSansPro-SemiBold;
     padding: 0 0 32px;
 }
+
 .addPermiseModal .modal-body {
     padding: 60px;
     position: relative;
 }
+
 .selectOption .custom-select-wrapper {
     width: 100%;
 }
+
 .selectOption .formField {
     max-width: 100%;
 }
+
 .selectOption .custom-select {
     height: 42px;
     background: #fff;
 }
+
 .selectOption .custom-select-trigger {
     font-size: 18px;
     line-height: 40px;
     height: 42px;
 }
+
 .selectOption .custom-select:before {
     top: 9px;
     right: 16px;
 }
+
 button.smallBtn.width {
     width: 170px;
 }
+
 .addPermiseModal .btnGroup {
     margin-top: 26px;
 }
+
 .addPermiseModal button.close {
     position: absolute;
     top: 12px;
     right: 15px;
     opacity: 1;
 }
+
 .chngPwdContent {
     padding: 60px 30px;
     width: 100%;
     max-width: 392px;
     margin: 0 auto;
 }
+
 .chngPwdContent .btnGroup {
     margin: 36px 0 0 0;
 }
+
 .tenantInfoTable {
     padding: 0 0 80px;
 }
+
 em.mandatory {
     color: red;
     font-style: normal;
     margin: 0 0 0 2px;
 }
+
 .TenantInfo.noticeInform {
     margin: 0 0 46px;
 }
+
 .btmSection.downloadNotice {
     justify-content: flex-start;
 }
+
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
     margin: 0;
     padding: 10px 16px;
@@ -2076,16 +2443,20 @@ em.mandatory {
     border-radius: 0;
     border-bottom: 1px solid #dfe5e8 !important;
 }
+
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
     color: #fff !important;
-    background: #2ec5e0 !important;
+    background: #ff9d3e !important;
 }
+
 .p-dropdown-panel .p-dropdown-items {
     padding: 0 !important;
 }
+
 .dropdown-demo .card {
     border: none;
 }
+
 .p-dropdown {
     display: inline-flex;
     cursor: pointer;
@@ -2097,8 +2468,10 @@ em.mandatory {
     text-align: left;
     width: 100%;
 }
+
 .selectStateBox .custom-select {
-    width: 370px;;
+    width: 370px;
+    ;
 }
 
 .p-dropdown-clear-icon {
@@ -2129,7 +2502,7 @@ em.mandatory {
     visibility: hidden;
 }
 
-input.p-dropdown-label  {
+input.p-dropdown-label {
     cursor: default;
 }
 
@@ -2176,14 +2549,16 @@ input.p-dropdown-label  {
 .p-fluid .p-dropdown {
     display: flex;
 }
+
 .p-fluid .p-dropdown .p-dropdown-label {
     width: 1%;
 }
+
 .selectStateBox input[type="number"] {
     -moz-appearance: textfield;
 }
-.selectStateBox input[type="number"]::-webkit-outer-spin-button,
-.selectStateBox input[type="number"]::-webkit-inner-spin-button {
+
+.selectStateBox input[type="number"]::-webkit-outer-spin-button, .selectStateBox input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -2208,30 +2583,37 @@ input.p-dropdown-label  {
     font-size: 12px;
     letter-spacing: .3px;
 }
+
 .customer-badge.status-qualified {
     background-color: #C8E6C9;
     color: #256029;
 }
+
 .customer-badge.status-unqualified {
     background-color: #FFCDD2;
     color: #C63737;
 }
+
 .customer-badge.status-negotiation {
     background-color: #FEEDAF;
     color: #8A5340;
 }
+
 .customer-badge.status-new {
     background-color: #B3E5FC;
     color: #23547B;
 }
+
 .customer-badge.status-renewal {
     background-color: #ECCFFF;
     color: #694382;
 }
+
 .customer-badge.status-proposal {
     background-color: #FFD8B2;
     color: #805B36;
 }
+
 .product-badge {
     border-radius: 2px;
     padding: .25em .5rem;
@@ -2240,18 +2622,22 @@ input.p-dropdown-label  {
     font-size: 12px;
     letter-spacing: .3px;
 }
+
 .product-badge.status-instock {
     background: #C8E6C9;
     color: #256029;
 }
+
 .product-badge.status-outofstock {
     background: #FFCDD2;
     color: #C63737;
 }
+
 .product-badge.status-lowstock {
     background: #FEEDAF;
     color: #8A5340;
 }
+
 .order-badge {
     border-radius: 2px;
     padding: .25em .5rem;
@@ -2260,64 +2646,77 @@ input.p-dropdown-label  {
     font-size: 12px;
     letter-spacing: .3px;
 }
+
 .order-badge.order-delivered {
     background: #C8E6C9;
     color: #256029;
 }
+
 .order-badge.order-cancelled {
     background: #FFCDD2;
     color: #C63737;
 }
+
 .order-badge.order-pending {
     background: #FEEDAF;
     color: #8A5340;
 }
+
 .order-badge.order-returned {
     background: #ECCFFF;
     color: #694382;
 }
+
 .image-text {
     vertical-align: middle;
     margin-left: .5rem;
 }
+
 .p-multiselect-representative-option {
     display: inline-block;
     vertical-align: middle;
 }
+
 .p-multiselect-representative-option img {
     vertical-align: middle;
     width: 24px;
 }
+
 .p-multiselect-representative-option span {
     margin-top: .125rem;
 }
+
 .p-hidden-accessible {
     display: none;
 }
+
 .p-column-filter {
     width: 100%;
 }
+
 .p-dropdown .p-dropdown-label.p-placeholder {
     color: #7E818B;
     border: none;
     font-size: 18px;
     width: 370px;
 }
+
 .selectStateBox .p-inputtext {
     padding: 8px 12px;
 }
-
 
 .dashboardContent {
     width: 100%;
     transition: all 0.3s ease;
     padding: 0 0 46px;
 }
+
 .dashboardSectionMain {
     /* width: calc(100% - 284px); */
     padding-left: 290px;
     transition: all 0.3s ease;
 }
+
 .dashboardLeft {
     width: 320px;
     background: #2E353D;
@@ -2331,6 +2730,7 @@ input.p-dropdown-label  {
     padding-top: 90px;
     transition: all 0.3s ease;
 }
+
 .toggleIcon span {
     width: 25px;
     height: 3px;
@@ -2339,6 +2739,7 @@ input.p-dropdown-label  {
     margin: 6px 0;
     border-radius: 6px;
 }
+
 button.toggleIcon {
     border: none;
     background: none;
@@ -2346,9 +2747,11 @@ button.toggleIcon {
     position: absolute;
     left: 0;
 }
+
 .stickyHeader .dashboardLeft {
     padding-top: 62px;
 }
+
 .slideToggle .dashboardSectionMain {
     padding-left: 0;
     transition: all 0.3s ease;
@@ -2356,9 +2759,11 @@ button.toggleIcon {
     width: 100%;
     max-width: 80%;
 }
+
 .slideToggle .dashboardLeft {
     left: -380px;
 }
+
 .dashboardLeft ul.leftMenu li a {
     font-size: 18px;
     line-height: 24px;
@@ -2370,49 +2775,43 @@ button.toggleIcon {
 }
 
 .dashboardLeft ul.leftMenu li a:hover {
-    color: #2EC5E0;
+    color: #ff9d3e;
     background: #1F242B;
 }
+
 .dashboardLeft ul.leftMenu li a.active {
-    color: #2EC5E0;
-    background: #1F242B;   
+    color: #ff9d3e;
+    background: #1F242B;
 }
-.dashboardMain footer.footer2 {
-    padding: 0;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    left: 0;
-    right: 0;
-    padding-left: 320px;
-    transition: all 0.3s ease;
-}
-.dashboardMain.slideToggle footer.footer2 {
-    padding-left: 0px;
-}
+
 .pdfBox h4 {
     font-size: 16px;
     line-height: 20px;
     color: #000;
     margin: 0 20px 0 12px;
 }
+
 .downloadpdfFiles {
     background: #F7F7F7;
     padding: 16px 14px;
     border-radius: 6px;
 }
+
 .pdfBox {
     box-shadow: 0 2px 10px #e0e0e0;
     border-radius: 6px;
     padding: 10px 8px;
     margin: 0 14px 0 0;
 }
+
 .pdfBox:last-child {
     margin-right: 0px;
 }
+
 img.downloadIcon {
     cursor: pointer;
 }
+
 .notification .noteText {
     position: absolute;
     font-size: 12px;
@@ -2429,6 +2828,7 @@ img.downloadIcon {
     transition: all 0.3s ease;
     cursor: pointer;
 }
+
 .notification .noteText:before {
     content: '';
     position: absolute;
@@ -2437,13 +2837,16 @@ img.downloadIcon {
     border-left: 7px solid transparent;
     bottom: -7px;
 }
+
 .notification {
     position: relative;
 }
+
 .notification:hover .noteText {
     opacity: 1;
     visibility: visible;
 }
+
 .notification .noteText p {
     text-align: left;
 }
@@ -2456,6 +2859,7 @@ img.downloadIcon {
     background: #11171D;
     transition: all 0.3s ease;
 } */
+
 button.btn.prevBtn {
     position: absolute;
     bottom: 26px;
@@ -2468,6 +2872,7 @@ button.btn.prevBtn {
     transition: all 0.3s ease;
     height: 40px;
 }
+
 button.btn.prevBtn:before {
     position: absolute;
     content: '';
@@ -2478,6 +2883,7 @@ button.btn.prevBtn:before {
     top: 13px;
     left: 14px;
 }
+
 button.btn.nextBtn {
     position: absolute;
     bottom: 26px;
@@ -2488,6 +2894,7 @@ button.btn.nextBtn {
     transition: all 0.3s ease;
     height: 40px;
 }
+
 button.btn.nextBtn:before {
     position: absolute;
     content: '';
@@ -2498,26 +2905,29 @@ button.btn.nextBtn:before {
     top: 13px;
     right: 12px;
 }
+
 .btn-primary.nextBtn:not(:disabled):not(.disabled):active {
     background-color: #545b62;
     border-color: #545b62;
     box-shadow: none;
 }
+
 form.stepForm {
     position: relative;
 }
-button.btn.prevBtn:focus, button.btn.nextBtn:focus {    
-    box-shadow: none;
-}
-.btn-secondary.prevBtn:not(:disabled):not(.disabled):active:focus,
-.btn-secondary.nextBtn:not(:disabled):not(.disabled):active:focus {    
+
+button.btn.prevBtn:focus, button.btn.nextBtn:focus {
     box-shadow: none;
 }
 
+.btn-secondary.prevBtn:not(:disabled):not(.disabled):active:focus, .btn-secondary.nextBtn:not(:disabled):not(.disabled):active:focus {
+    box-shadow: none;
+}
 
 ul.leftMenu.nav.nav-pills li {
     width: 100%;
 }
+
 .btmSection.downloadNotice h3 {
     font-size: 26px;
     line-height: 32px;
@@ -2527,12 +2937,14 @@ ul.leftMenu.nav.nav-pills li {
     color: #424852;
     letter-spacing: 0px;
 }
-.tenantInfoService  .downloadpdfFiles {
+
+.tenantInfoService .downloadpdfFiles {
     background: #F7F7F7;
     padding: 16px 14px;
     border-radius: 6px;
     margin: 22px 0 0;
 }
+
 .downloadpdfFiles.downloadpdfSer {
     margin: 12px 0 0;
 }
@@ -2542,86 +2954,106 @@ ul.leftMenu.nav.nav-pills li {
     line-height: 32px;
     text-transform: uppercase;
 }
+
 .proSer {
     border-bottom: 1px solid #E4E8EB;
     padding: 14px 20px 17px;
 }
+
 .proSer h4 {
     font-size: 23px;
     color: #424852;
     font-family: SourceSansPro-SemiBold;
     line-height: 28px;
 }
-.tenantInfo.tenantInfoService  .noticeMain {
+
+.tenantInfo.tenantInfoService .noticeMain {
     padding: 20px 0;
 }
+
 .noticeInfoSecion {
     padding: 0 20px;
 }
+
 .processServiceTable.noticeTable {
     padding: 26px 20px;
 }
+
 .tenantInfoService .processService .head {
     padding: 16px 20px 14px;
 }
+
 .processServiceTable table th, .processServiceTable table td {
     border: 1px solid #E4E8EB;
     font-size: 16px;
     line-height: 20px;
 }
+
 .processServiceTable table tr th {
-    background: transparent;    
+    background: transparent;
     text-transform: uppercase;
     text-align: center;
 }
+
 .processServiceTable table tr:nth-child(odd) {
     background: transparent;
 }
+
 .processServiceTable td.complete {
     color: #218E13;
 }
+
 .processServiceTable td.complete img {
     width: 18px;
     margin: 0 8px 0 0px;
     position: relative;
     top: -1px;
 }
+
 .processServiceTable td.inProgress {
     color: #E69700 !important;
 }
+
 .processServiceTable td.inProgress img {
     margin: 0 8px 0 0;
     position: relative;
     top: -1px;
     width: 18px;
 }
+
 .processServiceTable td.pending {
-    color: #2EC5E0 !important;
+    color: #ff9d3e !important;
 }
+
 .processServiceTable td.pending img {
     margin: 0 8px 0 0;
     position: relative;
     top: -1px;
     width: 18px;
 }
+
 .processTable.certifiedTable {
     padding: 20px 0;
 }
+
 .properties .headLeft p {
     color: #424852;
     font-size: 18px;
     line-height: 26px;
     padding: 5px 0 0;
 }
+
 .properties h2.mainHeading {
     font-size: 25px;
     line-height: 32px;
     color: #424852;
     padding: 0 0 20px;
 }
+
 .dashboardMain.properties {
     padding-top: 20px;
 }
+
 .unitDropdown label {
     font-size: 16px;
     color: #7D828B;
@@ -2643,7 +3075,7 @@ ul.leftMenu.nav.nav-pills li {
     background-color: #0000006e;
     justify-content: center;
     top: 0;
-  }
+}
 
 .dropdown-menu.show {
     top: 10px !important;
@@ -2651,9 +3083,11 @@ ul.leftMenu.nav.nav-pills li {
     left: auto !important;
     padding: 0px;
 }
+
 header .snip .dropdown-menu.show a:hover {
-    color: #2EC5E0;
+    color: #ff9d3e;
 }
+
 header .snip .dropdown-menu.show a:hover:before {
     content: none;
 }
@@ -2661,43 +3095,52 @@ header .snip .dropdown-menu.show a:hover:before {
 header .snip .dropdown-menu.show a {
     padding: 8px 14px;
     border-bottom: 1px solid #e0e0e0;
-    font-size: 16px;    
+    font-size: 16px;
 }
 
 a.dropdown-toggle:hover:before {
     content: none;
 }
+
 .react-responsive-modal-modal {
     margin: 6% 0 !important;
 }
+
 /* .react-responsive-modal-container {
     display: flex;
     align-items: center;
     justify-content: center;
 } */
+
 .radio-buttons.unitOption {
     display: flex;
     justify-content: space-between;
     margin: 0 0 14px;
 }
+
 .radio-buttons.unitOption span {
     font-size: 15px;
     line-height: 18px;
     padding: 0 0 0 5px;
 }
+
 .radio-buttons.unitOption label input {
     position: relative;
     top: 2px;
 }
+
 .radio-buttons.unitOption label {
     cursor: pointer;
 }
+
 .css-g1d714-ValueContainer {
     height: 42px;
 }
+
 .css-g1d714-ValueContainer input {
     height: 100%;
 }
+
 .entitiesBlock ul li a img {
     cursor: pointer;
 }
@@ -2716,4 +3159,67 @@ a.dropdown-toggle:hover:before {
     border-bottom: 1px solid #dedede;
     padding-bottom: 10px;
     margin-bottom: 10px;
+}
+
+.login-text {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.login-btn-container {
+    padding: 10px;
+    text-align: center;
+}
+
+.facebook-login-btn {
+    background: #4267b2;
+    font-weight: 500;
+    border-radius: 5px;
+    color: white;
+    height: 40px;
+    text-align: center;
+    width: 250px;
+}
+
+.facebook-login-btn:hover {
+    color: rgb(216, 216, 216);
+}
+
+.google-login-btn {
+    border-radius: 5px;
+    height: 40px;
+    width: 250px;
+}
+
+.search-input-container {
+    position: relative;
+    margin: 0 auto;
+}
+
+.search-input {
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    height: 70px;
+    font-size: 40px;
+    border: 2px solid #ff9d3e!important;
+    box-shadow: none!important;
+}
+
+.search-input-icon-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 12px 20px;
+    background-color: #ff9d3e;
+    font-size: 30px;
+    color: #FFF;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    cursor: pointer;
+}
+
+.search-input-icon-container:hover {
+    color: #d07b27;
 }

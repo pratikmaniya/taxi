@@ -4,7 +4,6 @@ import history from './history';
 import * as crypto from 'crypto-js';
 import axios from 'axios';
 import alertify from 'alertifyjs';
-import moment from 'moment';
 import routes from '../Routes';
 import store from './store';
 import { STORAGE_KEYS, LANGUAGE, APP_NAME } from './constants';
@@ -451,32 +450,6 @@ export const fullFormatDate = (date) => {
     return (`${day}-${month}-${year}`)
     // console.log(`${day}-${month}-${year}`)
     // console.log(`${day}👠${month}👢${year}`)
-}
-
-export const timeToTimeStamp = (time) => {
-    console.log("time is", new Date());
-
-    var splitDate2 = time && time.split(':');
-    var m2 = moment(new Date()).set({ 'hour': splitDate2 && splitDate2[0], 'minute': splitDate2 && splitDate2[1] })
-    console.log("first m2", new Date());
-
-    var timeStamp = m2._d.getTime()
-    console.log("a0000", m2._d.getTime());
-    return timeStamp
-}
-
-export const timeToTimeStampForGivenDate = (time, date) => {
-    console.log("time issss", new Date(date).toDateString());
-    console.log(moment('4/17/2018 10:00 AM', 'mm/dd/yyyy hh:mm a').format('x'));
-    var splitDate2 = time && time.split(':');
-    console.log("splitDate2", splitDate2);
-
-    var m2 = moment(new Date(date).toDateString()).set({ 'hour': splitDate2 && splitDate2[0], 'minute': splitDate2 && splitDate2[1] })
-    console.log("m2 is", m2);
-
-    var timeStamp = m2._d.getTime()
-    console.log("a111", m2._d.getTime());
-    return timeStamp
 }
 
 export const monthToSend = (month) => {
