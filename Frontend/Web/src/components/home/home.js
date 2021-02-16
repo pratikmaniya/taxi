@@ -9,6 +9,7 @@ import StarRatings from 'react-star-ratings';
 import queryString from 'query-string'
 
 import { searchTaxi } from '../../store/actions';
+import { displayLog } from "../../utils/functions";
 
 class Home extends Component {
     state = {
@@ -66,6 +67,8 @@ class Home extends Component {
                     rating: this.props.searchTaxiRes.data.rating
                 }
             })
+        } else {
+            displayLog(0, this.props.searchTaxiRes.message)
         }
     }
     render() {
