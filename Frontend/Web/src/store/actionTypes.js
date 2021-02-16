@@ -1,0 +1,6 @@
+export const START_LOADER = 'START_LOADER';
+export const STOP_LOADER = 'STOP_LOADER';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const SEARCH_TAXI_SUCCESS = 'SEARCH_TAXI_SUCCESS';
+
+

@@ -6,22 +6,14 @@ import {
     CardTitle, Row, Col, Container, Input
 } from 'reactstrap';
 import StarRatings from 'react-star-ratings';
+import queryString from 'query-string'
 
-import { getStateReq } from '../../store/actions/customers';
+import { searchTaxi } from '../../store/actions';
 
 class Home extends Component {
     state = {
-        taxiDetails: {
-            first_name: 'John',
-            last_name: 'Doe',
-            plate_no: 'ABC 1234',
-            brand_name: 'Audi',
-            brand_model: 'A8',
-            colour: 'Black',
-            license_image_front: 'https://redbus2us.com/wp-content/uploads/2010/05/Requirements-to-get-driving-license-for-H4-Visa-holders-No-SSN.jpg',
-            vehicle_image: 'https://taxiguru.in/wp-content/themes/taxiv2/img/taxi-img.png',
-            rating: 4
-        },
+        search_text: '',
+        taxiDetails: {},
         reviews: [
             {
                 name: 'Mohan Singh',
@@ -35,12 +27,53 @@ class Home extends Component {
             }
         ]
     }
+    async componentDidMount() {
+        const params = queryString.parse(this.props.location.search)
+        console.log()
+        if (params.search) {
+            await this.setState({ search_text: params.search })
+            this.searchHandler()
+        }
+    }
+    enterPressed = (event) => {
+        if (event.keyCode === 13 || event.which === 13) {
+            this.searchHandler()
+        }
+    }
+    inputChangeHandler = (event) => {
+        this.setState({ [event.target.name]: event.target.value })
+    }
+    searchHandler = async () => {
+        this.props.history.push({
+            pathname: '/',
+            search: `?search=${this.state.search_text}`
+        })
+        const reqData = {
+            search: this.state.search_text.trim()
+        }
+        await this.props.searchTaxi(reqData)
+        if (this.props.searchTaxiRes && this.props.searchTaxiRes.code === 1) {
+            this.setState({
+                taxiDetails: {
+                    first_name: this.props.searchTaxiRes.data.first_name,
+                    last_name: this.props.searchTaxiRes.data.last_name,
+                    plate_no: this.props.searchTaxiRes.data.plate_no,
+                    brand_name: this.props.searchTaxiRes.data.brand_name,
+                    brand_model: this.props.searchTaxiRes.data.brand_model,
+                    colour: this.props.searchTaxiRes.data.colour,
+                    license_image_front: this.props.searchTaxiRes.data.license_image_front,
+                    vehicle_image: this.props.searchTaxiRes.data.vehicle_image,
+                    rating: this.props.searchTaxiRes.data.rating
+                }
+            })
+        }
+    }
     render() {
         return (
             <Container>
                 <div className="search-input-container">
-                    <Input type='text' className="search-input" placeholder="search taxi by plate number" />
-                    <span className='search-input-icon-container'>
+                    <Input type='text' className="search-input" placeholder="Search taxi by plate number" name='search_text' value={this.state.search_text} onKeyPress={this.enterPressed} onChange={this.inputChangeHandler} />
+                    <span className='search-input-icon-container' onClick={this.searchHandler}>
                         <span className="fa fa-search search-input-icon"></span>
                     </span>
                 </div>
@@ -50,8 +83,8 @@ class Home extends Component {
                         <div className="taxi-card">
                             <Row>
                                 <Col md='4' sm='12' style={{ textAlign: "center", borderRight: '1px solid #3e77f763', padding: '0 30px' }}>
-                                    <img height="180px" width='300px' style={{ objectFit: 'contain', boxShadow: 'rgb(0 0 0 / 12%) 0px 0px 7px 1px', margin: '10px 0', padding: '5px' }} src={this.state.taxiDetails.vehicle_image} alt="Card image cap" />
-                                    <img height="180px" width='300px' style={{ objectFit: 'contain', boxShadow: 'rgb(0 0 0 / 12%) 0px 0px 7px 1px', margin: '10px 0', padding: '5px' }} src={this.state.taxiDetails.license_image_front} alt="Card image cap" />
+                                    <img height="180px" width='300px' style={{ objectFit: 'contain', boxShadow: 'rgb(0 0 0 / 12%) 0px 0px 7px 1px', margin: '10px 0', padding: '5px' }} alt="license" src={this.state.taxiDetails.license_image_front} />
+                                    <img height="180px" width='300px' style={{ objectFit: 'contain', boxShadow: 'rgb(0 0 0 / 12%) 0px 0px 7px 1px', margin: '10px 0', padding: '5px' }} alt="vehicle" src={this.state.taxiDetails.vehicle_image} />
                                 </Col>
                                 <Col md='8' sm='12'>
                                     <CardBody>
@@ -71,8 +104,8 @@ class Home extends Component {
                                         <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Colour: </span>{this.state.taxiDetails.colour}</CardText>
                                         <div style={{ padding: '5px 0' }}>
                                             {
-                                                this.state.reviews.map(review => {
-                                                    return <div style={{ boxShadow: 'rgb(0 0 0 / 12%) 0px 0px 4px 1px', margin: '15px 0', padding: '10px 20px' }}>
+                                                this.state.reviews.map((review, index) => {
+                                                    return <div key={index} style={{ boxShadow: 'rgb(0 0 0 / 12%) 0px 0px 4px 1px', margin: '15px 0', padding: '10px 20px' }}>
                                                         <div style={{ margin: '0 0 5px 0' }}>
                                                             <StarRatings
                                                                 className='mb-2'
@@ -104,13 +137,13 @@ class Home extends Component {
 
 const mapStateToProps = state => {
     return {
-        getStateSuccessRes: state.customers.getStateSuccessRes
+        searchTaxiRes: state.reducer.searchTaxiRes
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getStateReq: (reqData) => dispatch(getStateReq(reqData))
+        searchTaxi: (reqData) => dispatch(searchTaxi(reqData))
     }
 }
 

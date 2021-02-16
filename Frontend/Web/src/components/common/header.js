@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { NavLink } from 'react-router-dom';
 
 import * as common from '../../utils/functions';
-import { STORAGE_KEYS, LANGUAGE, APP_NAME } from '../../utils/constants';
+import config from '../../utils/config';
 import routes from '../../Routes';
 import logo from "../../images/logo.png"
 
@@ -18,7 +18,7 @@ function Header() {
                             <ul className="d-flex align-items-center snip menu">
                                 <li><NavLink to={routes.FAQ}>Home</NavLink></li>
                                 <li><NavLink to={routes.ABOUTUS}>Register Your Taxi</NavLink></li>
-                                {localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN) ?
+                                {localStorage.getItem(config.STORAGE_KEYS.AUTH_TOKEN) ?
                                     <li><a style={{ cursor: 'pointer' }} onClick={() => common.logout()}>Log Out,{localStorage.getItem('name')}</a></li>
                                     :
                                     <li className="signInUpBtn">

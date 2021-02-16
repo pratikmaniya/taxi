@@ -1,41 +1,7 @@
-/*----------------Attache Font Family-------------*/
-
-@font-face {
-    font-family: SourceSansPro-Regular;
-    src: url('../fonts/SourceSansPro-Regular.ttf');
-}
-
-@font-face {
-    font-family: SourceSansPro-Light;
-    src: url('../fonts/SourceSansPro-Light.ttf');
-}
-
-@font-face {
-    font-family: SourceSansPro-Bold;
-    src: url('../fonts/SourceSansPro-Bold.ttf');
-}
-
-@font-face {
-    font-family: SourceSansPro-SemiBold;
-    src: url('../fonts/SourceSansPro-SemiBold.ttf');
-}
-
-@font-face {
-    font-family: segoe-ui;
-    src: url('../fonts/segoe-ui.ttf');
-}
-
-@font-face {
-    font-family: ZapfinoLinotypeOne;
-    src: url('../fonts/ZapfinoLinotypeOne.ttf');
-}
-
-/*--------------------Common CSS------------------*/
-
 body {
     margin: 0px;
     padding: 0px;
-    font-family: SourceSansPro-Regular;
+    font-family: 'Open Sans', sans-serif;
     position: relative;
     padding-top: 90px;
 }
@@ -3227,5 +3193,4 @@ a.dropdown-toggle:hover:before {
 .taxi-card{
     border: 1px solid #1a73e863;
     border-radius: 5px;
-    cursor: pointer;
 }

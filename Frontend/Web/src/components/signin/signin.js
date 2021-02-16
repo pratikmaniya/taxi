@@ -5,7 +5,7 @@ import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login';
 import MicrosoftLogin from "react-microsoft-login";
 
-import { login } from '../../store/actions/auth';
+import { login } from '../../store/actions';
 
 class Signin extends Component {
   facebookSuccess = (response) => {

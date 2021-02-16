@@ -1,6 +1,16 @@
+import * as Types from './actionTypes';
+
 const initialState = {
   loading: false,
-  redirect_to_login: false
+  redirect_to_login: false,
+  searchTaxiRes: {}
+}
+
+const searchTaxiSuccess = (state, action) => {
+  return {
+    ...state,
+    searchTaxiRes: action.res,
+  }
 }
 
 const reducer = (state = initialState, action) => {
@@ -25,6 +35,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
       }
+    case Types.SEARCH_TAXI_SUCCESS: return searchTaxiSuccess(state, action)
     default:
       return state
   }
