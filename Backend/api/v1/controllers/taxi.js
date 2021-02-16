@@ -1,8 +1,7 @@
-const taxiHelper = require('../helpers/taxiHelper')
 const taxiValidator = require('../validators/taxiValidator')
+const taxiHelper = require('../helpers/taxiHelper')
 const responseHelper = require('../../utils/responseHelper')
 const S3helper = require('../../utils/S3helper')
-const taxiHelper = require('../helpers/taxiHelper')
 
 class Taxi {
     async getTaxis(req, res) {
