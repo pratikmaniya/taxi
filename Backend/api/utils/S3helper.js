@@ -1,5 +1,7 @@
-const config = require('./config')
 const AWS = require('aws-sdk')
+
+const config = require('./config')
+
 AWS.config.update({
     accessKeyId: config.awsAccesskey,
     secretAccessKey: config.awsSecretkey
@@ -24,7 +26,7 @@ class S3 {
                     reject({ code: 0, message: 'ERROR_UPLOADING_IMAGE' })
                 } else {
                     // console.log(result)
-                    resolve(`${config.s3uploadURL}/${fileName}`)
+                    resolve(`${fileName}`)
                 }
             })
         })

@@ -19,7 +19,8 @@ module.exports = (function () {
     awsSecretkey: "",
     s3bucketName: "",
     s3uploadURL: "",
-    resetPasswordURLPrefix:"http://localhost:3000/resetPassword"
+    resetPasswordURLPrefix:"http://localhost:3000/resetPassword",
+    limit: 10
   }
   if (process.env.NODE_ENV === "production") {
     

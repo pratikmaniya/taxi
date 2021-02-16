@@ -28,7 +28,6 @@ app.use('/web/', express.static('build-web'))
 app.get('/web/*', (req, res) => {
   res.sendFile(__dirname + '/build-web/index.html')
 })
-
 app.use('/admin-panel', express.static('build-admin'))
 app.get('/admin-panel/*', (req, res) => {
   res.sendFile(__dirname + '/build-admin/index.html')

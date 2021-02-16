@@ -1,7 +1,8 @@
-const db = require('../../utils/db')
 const bcrypt = require('bcryptjs');
 const promise = require('bluebird')
 const joi = require('joi')
+
+const db = require('../../utils/db')
 const joiValidator = require('../../utils/joiValidator')
 
 class AdminAuthValidator {

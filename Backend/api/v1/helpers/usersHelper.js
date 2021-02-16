@@ -1,4 +1,5 @@
 const promise = require('bluebird')
+
 const db = require('../../utils/db')
 
 class UsersHelper {
@@ -17,7 +18,7 @@ class UsersHelper {
             return promise.reject(error)
         }
     }
-    async updateUserFlag(user_id, flag) {
+    async updateUser(user_id, flag) {
         try {
             const where = ` id=${user_id} `,
                 data = {
@@ -28,10 +29,6 @@ class UsersHelper {
             if (result.affectedRows === 0) {
                 throw 'USER_WITH_ID_NOT_FOUND'
             } else {
-                if (!flag) {
-                    const where = `user_id=${user_id}`
-                    db.delete('user_auth_relation', where)
-                }
                 return true
             }
         } catch (error) {

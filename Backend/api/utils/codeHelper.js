@@ -22,25 +22,12 @@ class CodeHelper {
                     user_id: user_id,
                     user_type: user_type
                 }
-            if (user_type === 3) {
+            if (user_type === 2) {
                 expirationTime = 60 * 60
             }
             const token = jwt.sign(sign, config.JWTSecretKey, {
                 expiresIn: expirationTime
             })
-            return token
-        } catch (error) {
-            return promise.reject(error)
-        }
-    }
-    refreshToken(old_token, for_admin) {
-        try {
-            let token, decoded = jwt.decode(old_token)
-            if (decoded && decoded.user_id && decoded.email) {
-                token = this.getJwtToken(decoded.user_id, decoded.email, for_admin)
-            } else {
-                throw 'TOKEN_MALFORMED'
-            }
             return token
         } catch (error) {
             return promise.reject(error)

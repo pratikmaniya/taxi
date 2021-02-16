@@ -1,26 +1,27 @@
-const { Client } = require('pg')
-const config = require('./config')
 const promise = require('bluebird')
+const { Client } = require('pg')
+
+const config = require('./config')
 
 let connection
 
 class DB {
-  getConnection() {
+  async getConnection() {
     return new promise((resolve, reject) => {
       connection = new Client({
         host: config.db.host,
         user: config.db.user,
         password: config.db.password,
-        database: config.db.database
-      })
+        database: config.db.database,
+        query_timeout: 600000
 
+      });
       connection.connect((err) => {
         if (err) {
-          console.error('error connecting: ' + err)
+          console.error('error connecting: ' + err.stack)
           reject('Error while connectiong database !')
         }
-        // console.log(connection)
-        console.log(`connected to ${config.db.database} as id ${connection.threadId}`)
+        console.log(`connected to ${config.db.database} as id ${connection.processID}`)
         resolve('Database Connected !')
       })
     })
@@ -28,14 +29,17 @@ class DB {
 
   select(table, selectParams, condition) {
     return new promise((resolve, reject) => {
-      let query = `SELECT ${selectParams} FROM ${table} WHERE 1=1 ${condition ? `AND ${condition}` : ''}`
+      let query = `SELECT ${selectParams} FROM ${table}`
+      if (condition) {
+        query += ` WHERE ${condition}`
+      }
       console.log('\n\n', query, '\n\n')
-      connection.query(query, (error, results, fields) => {
+      connection.query(query, (error, results) => {
         if (error) {
           console.log(error)
           reject('DB_ERROR')
         } else {
-          resolve(results)
+          resolve(results.rows)
         }
       })
     })
@@ -43,13 +47,36 @@ class DB {
 
   insert(table, data) {
     return new promise((resolve, reject) => {
-      let query = `INSERT INTO ${table} SET ? `
-      connection.query(query, data, (error, results) => {
+      let query = `INSERT INTO ${table}(${Object.keys(data).join(',')}) VALUES(${Object.keys(data).map((d, index) => ('$' + (index + 1)))}) RETURNING *`,
+        values = Object.values(data).map(value => {
+          if (typeof value === 'string') {
+            return value.replace(/'/g, "\'")
+          } else {
+            return value
+          }
+        })
+      // console.log('\n\n',query); 
+      connection.query(query, values, (error, results) => {
         if (error) {
           console.log(error)
           reject('DB_ERROR')
         } else {
-          resolve(results)
+          resolve(results.rows[0])
+        }
+      })
+    })
+  }
+
+  insertBulk(table, data) {
+    return new promise((resolve, reject) => {
+      let values = data.map(element => `(${Object.values(element).map(e => `'${String(e).replace(/'/g, "\'")}'`)})`)
+      let query = `INSERT INTO ${table}(${Object.keys(data[0]).join(',')}) VALUES ${values.join(",")}`
+      connection.query(query, (error, results) => {
+        if (error) {
+          console.log(error)
+          reject('DB_ERROR')
+        } else {
+          resolve(results.rows[0])
         }
       })
     })
@@ -57,8 +84,8 @@ class DB {
 
   update(table, condition, data) {
     return new promise((resolve, reject) => {
-      let query = `UPDATE ${table} SET ? WHERE ${condition}`
-      connection.query(query, data, (error, results) => {
+      let query = `UPDATE ${table} SET ${Object.entries(data).map(entry => (entry[0] + '=' + "'" + String(entry[1]).replace(/'/g, "''") + "'"))} WHERE ${condition}`
+      connection.query(query, (error, results) => {
         if (error) {
           console.log(error)
           reject('DB_ERROR')
@@ -69,15 +96,18 @@ class DB {
     })
   }
 
-  upsert(table, data) {
+  upsert(table, data, conflict_key) {
     return new promise((resolve, reject) => {
-      let query = `INSERT INTO ${table} ( ${Object.keys(data).join(',')} ) VALUES ( ${Object.values(data).map(d => `'${d}'`).join(',')} ) ON DUPLICATE KEY UPDATE ${Object.entries(data).map(d => `${d[0]}='${d[1]}'`).join(',')} `
+      let query = `INSERT INTO ${table}(${Object.keys(data).join(',')}) VALUES( 
+                  ${Object.values(data).map(d => ("'" + String(d).replace(/'/g, "\'") + "'"))}) ON CONFLICT 
+                  (${conflict_key}) DO UPDATE SET 
+                  ${Object.entries(data).map(entry => (entry[0] + '=' + "'" + String(entry[1]).replace(/'/g, "\'") + "'"))}`
       connection.query(query, (error, results) => {
         if (error) {
           console.log(error)
           reject('DB_ERROR')
         } else {
-          resolve(results)
+          resolve(results.rows[0])
         }
       })
     })

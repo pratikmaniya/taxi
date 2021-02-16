@@ -1,6 +1,6 @@
-const db = require('../../utils/db')
 const promise = require('bluebird')
 const joi = require('joi')
+
 const joiValidator = require('../../utils/joiValidator')
 
 class UsersValidator {
@@ -16,7 +16,7 @@ class UsersValidator {
             return promise.reject(error)
         }
     }
-    async validateUpdateActiveStatusOfUserForm(body) {
+    async validateUpdateUserForm(body) {
         try {
             const schema = joi.object().keys({
                 user_id: joi.number().integer().required(),

@@ -13,12 +13,11 @@ class Users {
             responseHelper.error(res, error, req.headers.language)
         }
     }
-    async updateActiveStatusOfUser(req, res) {
+    async updateUser(req, res) {
         try {
-            await usersValidator.validateUpdateActiveStatusOfUserForm(req.body)
-            await usersHelper.updateUserFlag(req.body.user_id, req.body.flag)
-            const msg = req.body.flag ? 'USER_UNBLOCK_SUCCESS' : 'USER_BLOCK_SUCCESS'
-            responseHelper.success(res, msg, req.headers.language)
+            await usersValidator.validateUpdateUserForm(req.body)
+            await usersHelper.updateUser(req.body.user_id, req.body.flag)
+            responseHelper.success(res, 'EDIT_USER_SUCCESS', req.headers.language)
         } catch (error) {
             console.log(error)
             responseHelper.error(res, error, req.headers.language)
