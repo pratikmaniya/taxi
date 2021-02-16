@@ -26,7 +26,7 @@ class S3 {
                     reject({ code: 0, message: 'ERROR_UPLOADING_IMAGE' })
                 } else {
                     // console.log(result)
-                    resolve(`${fileName}`)
+                    resolve(`${config.s3bucketName}/${fileName}`)
                 }
             })
         })
