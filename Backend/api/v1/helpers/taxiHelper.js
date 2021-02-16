@@ -28,12 +28,12 @@ class TaxiHelper {
     }
     async selectTaxi(plate_no, user_type) {
         try {
-            let selectParams = ` * `,
-                where = ` REPLACE(LOWER(plate_no), ' ', '')=REPLACE(LOWER('${plate_no}'), ' ', '') `
-            if (user_type === 1) {
-                where += ` AND is_approved=true `
-            }
-            const taxis = await db.select('taxis', selectParams, where)
+            let selectParams = ` taxis.*, AVG(reviews.rating) AS rating `,
+                joins = ` LEFT JOIN reviews ON reviews.taxi_id=taxis.id `,
+                where = ` REPLACE(LOWER(plate_no), ' ', '')=REPLACE(LOWER('${plate_no}'), ' ', '') `,
+                pagination = ` GROUP BY taxis.id `
+            where += ` AND is_approved=true `
+            const taxis = await db.select('taxis' + joins, selectParams, where + pagination)
             if (taxis.length === 0) {
                 throw 'TAXI_WITH_ID_NOT_FOUND'
             } else {
