@@ -6,7 +6,7 @@ export const PER_PAGE = 10
 export const PAGE_RANGE = 5
 export const RICH_TEXT_BOX_OPTIONS = ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'embedded'/*, 'emoji'*/, 'image', 'remove', 'history']
 
-export const APP_NAME = 'Notice Tenant'
+export const APP_NAME = 'Taxi'
 
 export const NOTIFICATION_TEXT_LENGTH = 120
 

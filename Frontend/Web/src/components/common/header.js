@@ -19,16 +19,7 @@ function Header() {
                                 <li><NavLink to={routes.FAQ}>Home</NavLink></li>
                                 <li><NavLink to={routes.ABOUTUS}>Register Your Taxi</NavLink></li>
                                 {localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN) ?
-                                    <ul class="navbar-nav">
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                {localStorage.getItem('name')}
-                                            </a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                <a class="dropdown-item" href="javascript:void(0)" onClick={() => common.logout()}>Log Out</a>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    <li><a style={{ cursor: 'pointer' }} onClick={() => common.logout()}>Log Out,{localStorage.getItem('name')}</a></li>
                                     :
                                     <li className="signInUpBtn">
                                         <NavLink className="" to={routes.SIGNIN}>Sign In</NavLink>

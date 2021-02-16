@@ -94,11 +94,11 @@ input, input:focus, button, button:focus {
 }
 
 .textSky {
-    color: #ff9d3e;
+    color: #1a73e8;
 }
 
 .bgSky {
-    background: #ff9d3e;
+    background: #1a73e8;
 }
 
 /*--------------Banner Section CSS--------------*/
@@ -179,7 +179,7 @@ header nav li:last-child {
 }
 
 header li.signInUpBtn {
-    background: #ff9d3e;
+    background: #1a73e8;
     padding: 7px 14px;
     border-radius: 4px;
     color: #fff;
@@ -200,13 +200,13 @@ header .snip li.signInUpBtn a:before {
 }
 
 header .snip a {
-    color: #ff9d3e;
+    color: #1a73e8;
     position: relative;
     transition: all 0.3s ease;
 }
 
 header .snip a:hover {
-    color: #ff9d3e;
+    color: #1a73e8;
 }
 
 /*header .snip a:hover:before {
@@ -221,14 +221,14 @@ header .snip li.activeMenu a:before {
     height: 3px;
     z-index: 9;
     bottom: -21px;
-    background: #ff9d3e;
+    background: #1a73e8;
     transition: all 0.3s ease;
     opacity: 1;
     visibility: visible;
 }
 
 header nav li.activeMenu a {
-    color: #ff9d3e;
+    color: #1a73e8;
 }
 
 header .snip a:before {
@@ -238,7 +238,7 @@ header .snip a:before {
     height: 3px;
     z-index: 9;
     bottom: -21px;
-    background: #ff9d3e;
+    background: #1a73e8;
     transition: all 0.3s ease;
     opacity: 0;
     visibility: hidden;
@@ -430,7 +430,7 @@ header .snip a:hover:before {
 }
 
 .custom-option:hover, .custom-option.selection {
-    background: #ff9d3e;
+    background: #1a73e8;
     color: #fff;
 }
 
@@ -438,7 +438,7 @@ button.noticeBtn {
     width: 176px;
     border: none;
     border-radius: 4px;
-    background: #ff9d3e;
+    background: #1a73e8;
     color: #fff;
     font-size: 20px;
     line-height: 22px;
@@ -555,7 +555,7 @@ h2.mainHeading {
 
 button.Btn {
     padding: 16px 46px;
-    background: #ff9d3e;
+    background: #1a73e8;
     border-radius: 5px;
     color: #fff;
     font-size: 20px;
@@ -613,7 +613,7 @@ footer {
 }
 
 .footerSocialIcon li a:hover {
-    background: #ff9d3e;
+    background: #1a73e8;
 }
 
 .footerSocialIcon li a:hover svg {
@@ -653,7 +653,7 @@ ul.others li {
 }
 
 ul.others a:hover {
-    color: #ff9d3e;
+    color: #1a73e8;
 }
 
 ul.others li:before {
@@ -707,7 +707,7 @@ ul.others.contactUs {
 }
 
 .footerMenu li a:hover {
-    color: #ff9d3e;
+    color: #1a73e8;
 }
 
 .copyright {
@@ -841,7 +841,7 @@ ul.footerMenu {
 
 .noticeTable button.BtnSmall {
     border: none;
-    background: #ff9d3e;
+    background: #1a73e8;
     color: #fff;
     font-size: 12px;
     line-height: 12px;
@@ -888,13 +888,13 @@ ul.footerMenu {
 }
 
 .numbering ul li.select span {
-    background: #ff9d3e;
+    background: #1a73e8;
     color: #fff;
     font-family: segoe-ui;
 }
 
 .numbering ul li.select label {
-    color: #ff9d3e;
+    color: #1a73e8;
 }
 
 .numbering ul li label {
@@ -937,7 +937,7 @@ ul.footerMenu {
 }
 
 .numbering ul li.selectBorder span:before {
-    background: #ff9d3e;
+    background: #1a73e8;
 }
 
 h2.subHeading {
@@ -1038,7 +1038,7 @@ h2.subHeading {
 }
 
 .addBox [type="radio"]:checked~label {
-    border-color: #ff9d3e;
+    border-color: #1a73e8;
     background-color: #fff;
 }
 
@@ -1103,7 +1103,7 @@ h2.subHeading {
 }
 
 .addBox [type="radio"]:checked~label span {
-    border: 5px solid #ff9d3e;
+    border: 5px solid #1a73e8;
 }
 
 .addBox .card--sm {
@@ -1125,11 +1125,11 @@ h2.subHeading {
 button.newAddressBtn {
     font-size: 16px;
     line-height: 22px;
-    color: #ff9d3e;
+    color: #1a73e8;
     font-family: SourceSansPro-SemiBold;
     letter-spacing: 0.3px;
     background: transparent;
-    border: 1px solid #ff9d3e;
+    border: 1px solid #1a73e8;
     padding: 8px 12px 8px 12px;
     border-radius: 5px;
     margin: 22px 0 0 10px;
@@ -1168,7 +1168,7 @@ button.newAddressBtn img {
 }
 
 .smallBtn {
-    background: #ff9d3e;
+    background: #1a73e8;
     border: none;
     color: #fff;
     font-size: 18px;
@@ -1670,7 +1670,7 @@ h1.mainHeading {
 }
 
 .signIn a.forgotPwd:hover {
-    color: #ff9d3e;
+    color: #1a73e8;
 }
 
 .signIn .btnGroup button {
@@ -1686,7 +1686,7 @@ h1.mainHeading {
 
 .signIn button.smallBtn.nobg {
     background: transparent;
-    color: #ff9d3e;
+    color: #1a73e8;
     border: 1px solid #24b2cc;
 }
 
@@ -1701,7 +1701,7 @@ h1.mainHeading {
 
 .signIn p.dontacc a {
     font-size: 16px;
-    color: #ff9d3e;
+    color: #1a73e8;
     margin: 0 0px 0 10px;
     transition: all 0.3s ease-in;
     font-family: SourceSansPro-Regular;
@@ -1757,7 +1757,7 @@ h1.mainHeading {
     left: 0;
     height: 18px;
     width: 18px;
-    border: 1px solid #ff9d3e;
+    border: 1px solid #1a73e8;
     border-radius: 2px;
 }
 
@@ -1766,7 +1766,7 @@ h1.mainHeading {
     top: 1px;
     width: 6px;
     height: 11px;
-    border: solid #ff9d3e;
+    border: solid #1a73e8;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
@@ -1818,7 +1818,7 @@ h1.mainHeading {
 }
 
 .dashboardHead .smallBtn {
-    background: #ff9d3e;
+    background: #1a73e8;
     border: none;
     color: #fff;
     font-size: 16px;
@@ -1861,7 +1861,7 @@ span.arrow:after {
 }
 
 .mainTab .nav-tabs .nav-item.show .nav-link, .mainTab .nav-tabs .nav-link.active {
-    color: #ff9d3e;
+    color: #1a73e8;
     background-color: transparent;
     border-color: transparent;
     border: none;
@@ -1901,7 +1901,7 @@ span.arrow:after {
     content: '';
     width: 100%;
     height: 3px;
-    background: #ff9d3e;
+    background: #1a73e8;
     position: absolute;
     bottom: 0px;
     right: 0px;
@@ -2012,11 +2012,11 @@ ul.user_menu a label:before {
 }
 
 ul.user_menu a:hover label:before {
-    background: #ff9d3e;
+    background: #1a73e8;
 }
 
 ul.user_menu .active a label:before {
-    background: #ff9d3e;
+    background: #1a73e8;
 }
 
 header .snip .user_dropdown a:before {
@@ -2163,7 +2163,7 @@ span.address {
 }
 
 td.inProgress {
-    color: #ff9d3e !important;
+    color: #1a73e8 !important;
 }
 
 .tenantInfo2 .noticeTable table th {
@@ -2337,7 +2337,7 @@ td.inProgress {
     padding: 0 10px 0 0;
     font-size: 14px;
     line-height: 16px;
-    color: #ff9d3e;
+    color: #1a73e8;
 }
 
 .manageAdd .addPremiseBtn {
@@ -2446,7 +2446,7 @@ em.mandatory {
 
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
     color: #fff !important;
-    background: #ff9d3e !important;
+    background: #1a73e8 !important;
 }
 
 .p-dropdown-panel .p-dropdown-items {
@@ -2775,12 +2775,12 @@ button.toggleIcon {
 }
 
 .dashboardLeft ul.leftMenu li a:hover {
-    color: #ff9d3e;
+    color: #1a73e8;
     background: #1F242B;
 }
 
 .dashboardLeft ul.leftMenu li a.active {
-    color: #ff9d3e;
+    color: #1a73e8;
     background: #1F242B;
 }
 
@@ -3022,7 +3022,7 @@ ul.leftMenu.nav.nav-pills li {
 }
 
 .processServiceTable td.pending {
-    color: #ff9d3e !important;
+    color: #1a73e8 !important;
 }
 
 .processServiceTable td.pending img {
@@ -3085,7 +3085,7 @@ ul.leftMenu.nav.nav-pills li {
 }
 
 header .snip .dropdown-menu.show a:hover {
-    color: #ff9d3e;
+    color: #1a73e8;
 }
 
 header .snip .dropdown-menu.show a:hover:before {
@@ -3193,7 +3193,7 @@ a.dropdown-toggle:hover:before {
 
 .search-input-container {
     position: relative;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 .search-input {
@@ -3202,8 +3202,8 @@ a.dropdown-toggle:hover:before {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     height: 70px;
-    font-size: 40px;
-    border: 2px solid #ff9d3e!important;
+    font-size: 30px;
+    border: 2px solid #1a73e8!important;
     box-shadow: none!important;
 }
 
@@ -3212,7 +3212,7 @@ a.dropdown-toggle:hover:before {
     top: 0;
     right: 0;
     padding: 12px 20px;
-    background-color: #ff9d3e;
+    background-color: #1a73e8;
     font-size: 30px;
     color: #FFF;
     border-top-right-radius: 15px;
@@ -3221,5 +3221,11 @@ a.dropdown-toggle:hover:before {
 }
 
 .search-input-icon-container:hover {
-    color: #d07b27;
+    color: #a1b5e4;
+}
+
+.taxi-card{
+    border: 1px solid #1a73e863;
+    border-radius: 5px;
+    cursor: pointer;
 }

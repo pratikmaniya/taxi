@@ -15,7 +15,7 @@ class Footer extends Component {
                             <div className="row">
                                 <div className="col-lg-6">
                                     <div className="footerNoticeTenant">
-                                        <h3 className="textWhite">Notice Tenant</h3>
+                                        <h3 className="textWhite">Taxi</h3>
                                         <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                                         <ul className="footerSocialIcon d-flex">
                                             <li>
@@ -48,7 +48,7 @@ class Footer extends Component {
                         </div>
                         <div className="copyright">
                             <div className="row">
-                                <div className="col-md-7"><p>Copyrights © 2020 Notice Tenant. All rights reserved.</p></div>
+                                <div className="col-md-7"><p>Copyrights © 2020 Taxi. All rights reserved.</p></div>
                                 <div className="col-md-5">
                                     <ul className="footerMenu d-flex">
                                         <li><a href={process.env.PUBLIC_URL + "/privacy-policy"}>Privacy Policy</a></li>
