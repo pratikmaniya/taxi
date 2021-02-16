@@ -15,10 +15,10 @@ module.exports = (function () {
     logoLink: "",
     mailerEmail: "",
     mailerPassword: "",
-    awsAccesskey: "",
-    awsSecretkey: "",
-    s3bucketName: "",
-    s3uploadURL: "",
+    awsAccesskey: "AKIAXTG4E23EFUPKC67Z",
+    awsSecretkey: "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",
+    s3bucketName: "taxi-review",
+    s3uploadURL: "https://taxi-review.s3.amazonaws.com",
     resetPasswordURLPrefix:"http://localhost:3000/resetPassword",
     limit: 10
   }
