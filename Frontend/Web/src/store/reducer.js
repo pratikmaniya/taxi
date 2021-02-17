@@ -3,13 +3,29 @@ import * as Types from './actionTypes';
 const initialState = {
   loading: false,
   redirect_to_login: false,
-  searchTaxiRes: {}
+  searchTaxiRes: {},
+  getReviewRes:{},
+  registerTaxiRes: {},
 }
 
 const searchTaxiSuccess = (state, action) => {
   return {
     ...state,
     searchTaxiRes: action.res,
+  }
+}
+
+const getReviewsSuccess = (state, action) => {
+  return {
+    ...state,
+    getReviewRes: action.res,
+  }
+}
+
+const registerTaxiSuccess = (state, action) => {
+  return {
+    ...state,
+    registerTaxiRes: action.res,
   }
 }
 
@@ -36,6 +52,8 @@ const reducer = (state = initialState, action) => {
         loading: false,
       }
     case Types.SEARCH_TAXI_SUCCESS: return searchTaxiSuccess(state, action)
+    case Types.REGISTER_TAXI_SUCCESS: return registerTaxiSuccess(state, action)
+    case Types.GET_REVIEWS_SUCCESS: return getReviewsSuccess(state, action)
     default:
       return state
   }

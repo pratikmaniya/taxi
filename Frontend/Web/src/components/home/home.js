@@ -8,7 +8,7 @@ import {
 import StarRatings from 'react-star-ratings';
 import queryString from 'query-string'
 
-import { searchTaxi } from '../../store/actions';
+import { searchTaxi, getReviews } from '../../store/actions';
 import { displayLog } from "../../utils/functions";
 
 class Home extends Component {
@@ -54,7 +54,7 @@ class Home extends Component {
         }
         await this.props.searchTaxi(reqData)
         if (this.props.searchTaxiRes && this.props.searchTaxiRes.code === 1) {
-            this.setState({
+            await this.setState({
                 taxiDetails: {
                     first_name: this.props.searchTaxiRes.data.first_name,
                     last_name: this.props.searchTaxiRes.data.last_name,
@@ -67,8 +67,19 @@ class Home extends Component {
                     rating: this.props.searchTaxiRes.data.rating
                 }
             })
+            const reviewReqData = {
+                page_no: 1,
+                limit: 2
+            }
+            await this.props.getReviews(reviewReqData, this.props.searchTaxiRes.data.id)
+            if (this.props.getReviewRes && this.props.getReviewRes.code === 1) {
+                console.log(this.props.searchTaxiRes)
+                console.log(this.props.searchTaxiRes)
+                this.setState({ reviews: this.props.getReviewRes.data.reviews })
+            } else {
+                displayLog(0, this.props.getReviewRes.message)
+            }
         } else {
-            displayLog(0, this.props.searchTaxiRes.message)
         }
     }
     render() {
@@ -92,15 +103,21 @@ class Home extends Component {
                                 <Col md='8' sm='12'>
                                     <CardBody>
                                         <CardTitle style={{ fontSize: '28px' }}><span className="mb-2 text-muted">Plate Number: </span>{this.state.taxiDetails.plate_no}</CardTitle>
-                                        <StarRatings
-                                            className='mb-2'
-                                            rating={this.state.taxiDetails.rating}
-                                            starRatedColor="gold"
-                                            changeRating={this.changeRating}
-                                            numberOfStars={5}
-                                            starDimension="28px"
-                                            name='rating'
-                                        />
+                                        {
+                                            this.state.taxiDetails.rating
+                                                ?
+                                                <StarRatings
+                                                    className='mb-2'
+                                                    rating={this.state.taxiDetails.rating}
+                                                    starRatedColor="gold"
+                                                    changeRating={this.changeRating}
+                                                    numberOfStars={5}
+                                                    starDimension="28px"
+                                                    name='rating'
+                                                />
+                                                :
+                                                <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">No Ratings</span></CardText>
+                                        }
                                         <CardText style={{ fontSize: '18px', marginTop: '10px' }}><span className="mb-2 text-muted">Name: </span>{this.state.taxiDetails.first_name + ' ' + this.state.taxiDetails.last_name}</CardText>
                                         <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Brand: </span>{this.state.taxiDetails.brand_name}</CardText>
                                         <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Model: </span>{this.state.taxiDetails.brand_model}</CardText>
@@ -140,13 +157,15 @@ class Home extends Component {
 
 const mapStateToProps = state => {
     return {
-        searchTaxiRes: state.reducer.searchTaxiRes
+        searchTaxiRes: state.reducer.searchTaxiRes,
+        getReviewRes: state.reducer.getReviewRes
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        searchTaxi: (reqData) => dispatch(searchTaxi(reqData))
+        searchTaxi: (reqData) => dispatch(searchTaxi(reqData)),
+        getReviews: (reqData, id) => dispatch(getReviews(reqData, id))
     }
 }
 

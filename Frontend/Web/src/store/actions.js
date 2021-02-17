@@ -30,3 +30,25 @@ export const searchTaxi = (params) => {
         });
     }
 }
+
+export const getReviews = (params, taxi_id) => {
+    return async (dispatch) => {
+        let response = await common.apiCall('GET', `review/${taxi_id}`, Types.GET_REVIEWS_SUCCESS, {}, params)
+        console.log('Response::::', response)
+        dispatch({
+            type: Types.GET_REVIEWS_SUCCESS,
+            res: response
+        });
+    }
+}
+
+export const registerTaxi = (data) => {
+    return async (dispatch) => {
+        let response = await common.apiCall('PUT', 'taxi', Types.REGISTER_TAXI_SUCCESS, data)
+        console.log('Response::::', response)
+        dispatch({
+            type: Types.REGISTER_TAXI_SUCCESS,
+            res: response
+        });
+    }
+}

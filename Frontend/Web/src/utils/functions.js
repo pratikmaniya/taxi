@@ -3,7 +3,6 @@ import config from './config';
 import history from './history';
 import axios from 'axios';
 import alertify from 'alertifyjs';
-import routes from '../Routes';
 import store from './store';
 import * as Types from '../store/actionTypes';
 import messages from './messages';
@@ -51,32 +50,51 @@ export const buildSchema = (attributes) => {
     }
     return Joi.object().keys(joiKeys);
 }
-export const validateSchema = (error) => {
-    let msg;
-    let key = error.details[0].context.label || error.details[0].context.key;
-    if (error.details[0].type.includes('empty')) {
-        msg = key.replace(/_/g, ' ') + ' is required!';
-        msg = msg.charAt(0).toUpperCase() + msg.slice(1);
-    } else if (error.details[0].type.includes('string.min')) {
-        msg = key.replace(/_/g, ' ') + ' length must be at least ' + error.details[0].context.limit + ' characters long!';
-        msg = msg.charAt(0).toUpperCase() + msg.slice(1);
-    } else if (error.details[0].type.includes('string.max')) {
-        msg = key.replace(/_/g, ' ') + ' length must be less than or equal to ' + error.details[0].context.limit + ' characters long!';
-        msg = msg.charAt(0).toUpperCase() + msg.slice(1);
-    } else if (error.details[0].type.includes('number.min')) {
-        msg = key.replace(/_/g, ' ') + ' should be greater than or equal to ' + error.details[0].context.limit;
-        msg = msg.charAt(0).toUpperCase() + msg.slice(1);
-    } else if (error.details[0].type.includes('number.max')) {
-        msg = key.replace(/_/g, ' ') + ' should be less than or equal to ' + error.details[0].context.limit;
-        msg = msg.charAt(0).toUpperCase() + msg.slice(1);
-    } else if (error.details[0].type.includes('allowOnly')) {
-        msg = 'Password and confirm password must be same!';
-        msg = msg.charAt(0).toUpperCase() + msg.slice(1);
-    } else {
-        msg = 'Please enter a valid ' + key.replace(/_/g, ' ') + '!';
-    }
-    let result = { error: msg, errorField: error.details[0].context.key }
-    return result;
+export const validateSchema = (body, schema) => {
+    return new Promise((resolve, reject) => {
+        Joi.validate(body, schema, (error, value) => {
+            if (error) {
+                let msg;
+                let key = error.details[0].context.label || error.details[0].context.key;
+                if (error.details[0].type.includes('empty')) {
+                    msg = key.replace(/_/g, ' ') + ' is required!';
+                    msg = msg.charAt(0).toUpperCase() + msg.slice(1);
+                } else if (error.details[0].type.includes('number.less')) {
+                    msg = key.replace(/_/g, ' ') + ' must be less than ' + error.details[0].context.limit + '!';
+                    msg = msg.charAt(0).toUpperCase() + msg.slice(1);
+                } else if (error.details[0].type.includes('number.greater')) {
+                    msg = key.replace(/_/g, ' ') + ' must be greater than ' + error.details[0].context.limit + '!';
+                    msg = msg.charAt(0).toUpperCase() + msg.slice(1);
+                } else if (error.details[0].type.includes('string.min')) {
+                    msg = key.replace(/_/g, ' ') + ' length must be at least ' + error.details[0].context.limit + ' characters long!';
+                    msg = msg.charAt(0).toUpperCase() + msg.slice(1);
+                } else if (error.details[0].type.includes('string.max')) {
+                    msg = key.replace(/_/g, ' ') + ' length must be less than or equal to ' + error.details[0].context.limit + ' characters long!';
+                    msg = msg.charAt(0).toUpperCase() + msg.slice(1);
+                } else if (error.details[0].type.includes('number.min')) {
+                    msg = key.replace(/_/g, ' ') + 'should be greater than or equal to ' + error.details[0].context.limit;
+                    msg = msg.charAt(0).toUpperCase() + msg.slice(1);
+                } else if (error.details[0].type.includes('number.max')) {
+                    msg = key.replace(/_/g, ' ') + ' should be less than or equal to ' + error.details[0].context.limit;
+                    msg = msg.charAt(0).toUpperCase() + msg.slice(1);
+                } else if (error.details[0].type.includes('allowOnly')) {
+                    msg = 'Password and confirm password must be same!';
+                    msg = msg.charAt(0).toUpperCase() + msg.slice(1);
+                } else {
+                    msg = 'Please enter a valid ' + key.replace(/_/g, ' ') + '!';
+                }
+                resolve({
+                    status: true,
+                    message: msg
+                });
+            } else {
+                resolve({
+                    status: false,
+                    message: ''
+                });
+            }
+        })
+    })
 };
 export const setDeep = (obj, path, value, setrecursively = false) => {
     let level = 0;
@@ -160,7 +178,7 @@ export const logout = async () => {
     alertify.confirm(messages.ASK_TO_LOGOUT, async (status) => {
         if (status) {
             await localStorage.clear()
-            history.push(routes.HOME)
+            history.push(process.env.PUBLIC_URL + '/')
         }
     }).setHeader(config.APP_NAME).set('labels', { ok: 'OK', cancel: 'CANCEL' });
 }

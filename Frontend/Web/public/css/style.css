@@ -930,7 +930,7 @@ h2.subHeading {
 .fieldset label {
     font-size: 16px;
     line-height: 20px;
-    color: #7D828B;
+    color: #424242;
     width: 100%;
 }
 
@@ -958,6 +958,11 @@ h2.subHeading {
     padding: 0 16px;
     width: 100%;
     transition: all 0.3s ease;
+}
+
+.fieldset input[type=file] {
+    border: none!important;
+    padding: 0;
 }
 
 .fieldset input:hover, .fieldset input:focus {
@@ -3190,7 +3195,7 @@ a.dropdown-toggle:hover:before {
     color: #a1b5e4;
 }
 
-.taxi-card{
+.taxi-card {
     border: 1px solid #1a73e863;
     border-radius: 5px;
 }

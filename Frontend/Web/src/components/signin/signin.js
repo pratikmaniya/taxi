@@ -60,8 +60,8 @@ class Signin extends Component {
 
 const mapStateToProps = state => {
   return {
-    loginRes: state.auth.loginData,
-    loading: state.auth.loading
+    loginRes: state.reducer.loginData,
+    loading: state.reducer.loading
   }
 }
 
