@@ -28,7 +28,8 @@ class TaxiHelper {
     }
     async selectTaxi(plate_no, user_type) {
         try {
-            let selectParams = ` taxis.*, AVG(reviews.rating) AS rating `,
+            let selectParams = ` taxis.*, CONCAT('${config.s3uploadURL}/', taxis.license_image_front) AS license_image_front,
+                                CONCAT('${config.s3uploadURL}/', taxis.vehicle_image) AS vehicle_image, AVG(reviews.rating) AS rating `,
                 joins = ` LEFT JOIN reviews ON reviews.taxi_id=taxis.id `,
                 where = ` REPLACE(LOWER(plate_no), ' ', '')=REPLACE(LOWER('${plate_no}'), ' ', '') `,
                 pagination = ` GROUP BY taxis.id `
