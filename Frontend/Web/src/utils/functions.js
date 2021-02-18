@@ -5,7 +5,6 @@ import axios from 'axios';
 import alertify from 'alertifyjs';
 import store from './store';
 import * as Types from '../store/actionTypes';
-import messages from './messages';
 
 export const buildSchema = (attributes) => {
     const joiKeys = {};
@@ -168,12 +167,12 @@ export const apiCall = (method, url, actionType, reqData, params, headers) => {
     })
 }
 export const logout = async () => {
-    alertify.confirm(messages.ASK_TO_LOGOUT, async (status) => {
+    alertify.confirm("Are you sure you want to log out?", async (status) => {
         if (status) {
             await localStorage.clear()
             history.push(process.env.PUBLIC_URL + '/')
         }
-    }).setHeader(config.APP_NAME).set('labels', { ok: 'OK', cancel: 'CANCEL' });
+    }).setHeader('Taxi').set('labels', { ok: 'OK', cancel: 'CANCEL' });
 }
 export const displayLog = (code, message) => {
     // console.log('1111122222')

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import { registerTaxi } from '../../store/actions';
 import { validateSchema, displayLog } from '../../utils/functions';
+import config from "../../utils/config";
 
 class Register extends Component {
     state = {
@@ -40,8 +41,8 @@ class Register extends Component {
     }
     addBrand = async (form) => {
         let schema = Joi.object().keys({
-            phone_no: Joi.string().label("Phone Number").required(),
-            email: Joi.string().label("Email").required(),
+            phone_no: Joi.string().label("Phone Number").regex(config.MOBILE_REGEX).required(),
+            email: Joi.string().label("Email").regex(config.EMAIL_REGEX).required(),
             first_name: Joi.string().label("First Name").required(),
             last_name: Joi.string().label("Last Name").required(),
             plate_no: Joi.string().label("Vehicle Plate Number").required(),
@@ -62,7 +63,10 @@ class Register extends Component {
                 })
                 await this.props.registerTaxi(formData)
                 if (this.props.registerTaxiRes && this.props.registerTaxiRes.code === 1) {
+                    displayLog(1, this.props.registerTaxiRes.message)
                     this.props.history.push(process.env.PUBLIC_URL + `/`);
+                } else {
+                    displayLog(0, this.props.registerTaxiRes.message)
                 }
             } else {
                 displayLog(0, this.state.error.message)

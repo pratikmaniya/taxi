@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { CardText, CardBody, CardTitle, Row, Col, Container, Input, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import StarRatings from 'react-star-ratings';
 import queryString from 'query-string'
+import ReactTooltip from 'react-tooltip';
 
 import { searchTaxi, getReviews, addReview } from '../../store/actions';
 import { displayLog } from "../../utils/functions";
@@ -16,18 +17,9 @@ class Home extends Component {
             comment: ""
         },
         taxiDetails: {},
-        reviews: [
-            {
-                name: 'Mohan Singh',
-                rating: 4.5,
-                comment: 'Great Experience. The car was clean and driver was pleasent'
-            },
-            {
-                name: 'Thor',
-                rating: 4,
-                comment: 'Driver took his time driving and felt safe during the ride'
-            }
-        ],
+        reviews: [],
+        page_no: 1,
+        totalReviews: 0,
         openReviewModal: false
     }
     async componentDidMount() {
@@ -76,12 +68,11 @@ class Home extends Component {
     }
     getReviews = async () => {
         const reviewReqData = {
-            page_no: 1,
-            limit: 2
+            page_no: this.state.page_no
         }
         await this.props.getReviews(reviewReqData, this.props.searchTaxiRes.data.id)
         if (this.props.getReviewRes && this.props.getReviewRes.code === 1) {
-            this.setState({ reviews: this.props.getReviewRes.data.reviews })
+            this.setState({ reviews: [...this.state.reviews, ...this.props.getReviewRes.data.reviews], totalReviews: Number(this.props.getReviewRes.data.total_reviews) })
         } else {
             displayLog(0, this.props.getReviewRes.message)
         }
@@ -114,7 +105,13 @@ class Home extends Component {
             displayLog(0, this.props.addReviewRes.message)
         }
     }
+    loadMoreReview = async () => {
+        await this.setState({ page_no: this.state.page_no + 1 })
+        await this.getReviews()
+    }
     render() {
+        const loggedIn = this.props.loginRes.data && this.props.loginRes.data.auth_token,
+            displayLoadMore = this.state.totalReviews && this.state.totalReviews > this.state.reviews.length
         return (
             <Container>
                 <div className="search-input-container">
@@ -153,7 +150,8 @@ class Home extends Component {
                                         <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Brand: </span>{this.state.taxiDetails.brand_name}</CardText>
                                         <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Model: </span>{this.state.taxiDetails.brand_model}</CardText>
                                         <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Colour: </span>{this.state.taxiDetails.colour}</CardText>
-                                        <button style={{ margin: '10px 0' }} type="button" className="smallBtn" onClick={() => this.toggleReviewPopup(true)}>Give Review</button>
+                                        <button style={loggedIn ? { margin: '10px 0' } : { margin: '10px 0', opacity: 0.5 }} type="button" data-tip={loggedIn ? "" : "Please login to submit a review!"} className="smallBtn" onClick={loggedIn ? () => this.toggleReviewPopup(true) : null}>Give Review</button>
+                                        <ReactTooltip place="top" type="dark" effect="float" />
                                         <div style={{ padding: '5px 0' }}>
                                             {
                                                 this.state.reviews.map((review, index) => {
@@ -168,10 +166,19 @@ class Home extends Component {
                                                                 name='rating'
                                                             />
                                                         </div>
-                                                        <CardText style={{ fontSize: '14px', fontWeight: 'bold' }}><span className="mb-2 text-muted">{review.name}</span></CardText>
+                                                        <CardText style={{ fontSize: '14px', fontWeight: 'bold' }}><span className="mb-2 text-muted">{new Date(review.created_date).toDateString()}</span></CardText>
                                                         <CardText style={{ fontSize: '17px' }}>{review.comment}</CardText>
                                                     </div>
                                                 })
+                                            }
+                                            {
+                                                displayLoadMore
+                                                    ?
+                                                    <div className="text-center">
+                                                        <button style={{ margin: '10px 0' }} type="button" className="smallBtn" onClick={this.loadMoreReview}>Load more reviews</button>
+                                                    </div>
+                                                    :
+                                                    null
                                             }
                                         </div>
                                     </CardBody>
@@ -200,7 +207,7 @@ class Home extends Component {
                         <button className="btn btn-secondary" onClick={() => this.toggleReviewPopup(false)}>Cancel</button>
                     </ModalFooter>
                 </Modal>
-            </Container >
+            </Container>
         );
     }
 }
