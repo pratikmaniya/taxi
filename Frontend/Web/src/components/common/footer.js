@@ -14,7 +14,7 @@ class Footer extends Component {
                         <div className="footerContent">
                             <div className="row">
                                 <div className="col-lg-6">
-                                    <div className="footerNoticeTenant">
+                                    <div className="footerTaxi">
                                         <h3 className="textWhite">Taxi</h3>
                                         <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                                         <ul className="footerSocialIcon d-flex">
