@@ -20,7 +20,7 @@ class Signin extends Component {
   }
   facebookFailed = (response) => {
     console.log(response);
-    displayLog(0, "Something went wrong!")
+    // displayLog(0, "Something went wrong!")
   }
   googleSuccess = (response) => {
     console.log(response.profileObj.givenName, response.profileObj.familyName, response.profileObj.email);
@@ -33,7 +33,7 @@ class Signin extends Component {
   }
   googleFailed = (response) => {
     console.log(response);
-    displayLog(0, "Something went wrong!")
+    // displayLog(0, "Something went wrong!")
   }
   microdoftCallback = (response) => {
     console.log(response);
