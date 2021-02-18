@@ -2,7 +2,7 @@
   "name": "taxi",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://3.217.25.173/",
+  "homepage": "https://info.incoognito.com/web/",
   "dependencies": {
     "alertifyjs": "^1.13.1",
     "axios": "^0.21.1",

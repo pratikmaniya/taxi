@@ -1,5 +1,5 @@
 let config = {}
-config['AUTHORIZATION'] = '@#Slsjpoq$S1o08#MnbAiB%UVUV&Y*5EU@exS1o!08L9TSlsjpo#TEKOTO';
+config['AUTHORIZATION'] = '%!DyVNgw4x%MOBpwHgEeG&glJRsN3wlC4p4yMpHkmv^NW7BK%Z';
 console.log('Environment:::', process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {
     config = {

@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {
-    CardText, CardBody,
-    CardTitle, Row, Col, Container, Input
-} from 'reactstrap';
+import { CardText, CardBody, CardTitle, Row, Col, Container, Input, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import StarRatings from 'react-star-ratings';
 import queryString from 'query-string'
 
-import { searchTaxi, getReviews } from '../../store/actions';
+import { searchTaxi, getReviews, addReview } from '../../store/actions';
 import { displayLog } from "../../utils/functions";
+import header from "../common/header";
 
 class Home extends Component {
     state = {
         search_text: '',
+        ratingForm: {
+            rating: 0,
+            comment: ""
+        },
         taxiDetails: {},
         reviews: [
             {
@@ -26,7 +28,8 @@ class Home extends Component {
                 rating: 4,
                 comment: 'Driver took his time driving and felt safe during the ride'
             }
-        ]
+        ],
+        openReviewModal: false
     }
     async componentDidMount() {
         const params = queryString.parse(this.props.location.search)
@@ -46,7 +49,7 @@ class Home extends Component {
     }
     searchHandler = async () => {
         this.props.history.push({
-            pathname: '/',
+            pathname: process.env.PUBLIC_URL + '/',
             search: `?search=${this.state.search_text}`
         })
         const reqData = {
@@ -67,19 +70,49 @@ class Home extends Component {
                     rating: this.props.searchTaxiRes.data.rating
                 }
             })
-            const reviewReqData = {
-                page_no: 1,
-                limit: 2
-            }
-            await this.props.getReviews(reviewReqData, this.props.searchTaxiRes.data.id)
-            if (this.props.getReviewRes && this.props.getReviewRes.code === 1) {
-                console.log(this.props.searchTaxiRes)
-                console.log(this.props.searchTaxiRes)
-                this.setState({ reviews: this.props.getReviewRes.data.reviews })
-            } else {
-                displayLog(0, this.props.getReviewRes.message)
-            }
+            this.getReviews()
         } else {
+            displayLog(0, this.props.searchTaxiRes.message)
+        }
+    }
+    getReviews = async () => {
+        const reviewReqData = {
+            page_no: 1,
+            limit: 2
+        }
+        await this.props.getReviews(reviewReqData, this.props.searchTaxiRes.data.id)
+        if (this.props.getReviewRes && this.props.getReviewRes.code === 1) {
+            this.setState({ reviews: this.props.getReviewRes.data.reviews })
+        } else {
+            displayLog(0, this.props.getReviewRes.message)
+        }
+    }
+    toggleReviewPopup = (flag) => {
+        this.setState({ openReviewModal: flag })
+    }
+    changeRating = (newRating, name) => {
+        this.setState({ ratingForm: { ...this.state.ratingForm, [name]: newRating } });
+    }
+    changeRatingComment = (event) => {
+        this.setState({ ratingForm: { ...this.state.ratingForm, [event.target.name]: event.target.value } })
+    }
+    submitReviewHandler = async () => {
+        const reqData = {
+            taxi_id: this.props.searchTaxiRes.data.id,
+            rating: this.state.ratingForm.rating
+        },
+            reqHeader = {
+                auth_token: this.props.loginRes.data.auth_token
+            }
+        if (this.state.ratingForm.comment) {
+            reqData.comment = this.state.ratingForm.comment
+        }
+        await this.props.addReview(reqData, reqHeader)
+        if (this.props.addReviewRes && this.props.addReviewRes.code === 1) {
+            this.setState({ openReviewModal: false, ratingForm: { rating: 0, comment: "" } })
+            this.getReviews()
+        } else {
+            displayLog(0, this.props.addReviewRes.message)
         }
     }
     render() {
@@ -110,7 +143,6 @@ class Home extends Component {
                                                     className='mb-2'
                                                     rating={this.state.taxiDetails.rating}
                                                     starRatedColor="gold"
-                                                    changeRating={this.changeRating}
                                                     numberOfStars={5}
                                                     starDimension="28px"
                                                     name='rating'
@@ -122,6 +154,7 @@ class Home extends Component {
                                         <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Brand: </span>{this.state.taxiDetails.brand_name}</CardText>
                                         <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Model: </span>{this.state.taxiDetails.brand_model}</CardText>
                                         <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Colour: </span>{this.state.taxiDetails.colour}</CardText>
+                                        <button style={{ margin: '10px 0' }} type="button" className="smallBtn" onClick={() => this.toggleReviewPopup(true)}>Give Review</button>
                                         <div style={{ padding: '5px 0' }}>
                                             {
                                                 this.state.reviews.map((review, index) => {
@@ -131,7 +164,6 @@ class Home extends Component {
                                                                 className='mb-2'
                                                                 rating={review.rating}
                                                                 starRatedColor="gold"
-                                                                changeRating={this.changeRating}
                                                                 numberOfStars={5}
                                                                 starDimension="20px"
                                                                 name='rating'
@@ -150,6 +182,25 @@ class Home extends Component {
                         :
                         null
                 }
+                <Modal isOpen={this.state.openReviewModal} toggle={() => this.toggleReviewPopup(false)}>
+                    <ModalHeader toggle={() => this.toggleReviewPopup(false)}>Give a review</ModalHeader>
+                    <ModalBody>
+                        <StarRatings
+                            className='mb-2'
+                            rating={this.state.ratingForm.rating}
+                            starRatedColor="gold"
+                            changeRating={this.changeRating}
+                            numberOfStars={5}
+                            starDimension="25px"
+                            name='rating'
+                        />
+                        <Input type="textarea" style={{ resize: 'none', marginTop: '10px' }} className="" placeholder="Leave a comment" name='comment' value={this.state.ratingForm.comment} onChange={this.changeRatingComment} />
+                    </ModalBody>
+                    <ModalFooter>
+                        <button color="primary" className="smallBtn" onClick={this.submitReviewHandler}>Submit</button>{' '}
+                        <button className="btn btn-secondary" onClick={() => this.toggleReviewPopup(false)}>Cancel</button>
+                    </ModalFooter>
+                </Modal>
             </Container >
         );
     }
@@ -158,14 +209,17 @@ class Home extends Component {
 const mapStateToProps = state => {
     return {
         searchTaxiRes: state.reducer.searchTaxiRes,
-        getReviewRes: state.reducer.getReviewRes
+        addReviewRes: state.reducer.addReviewRes,
+        getReviewRes: state.reducer.getReviewRes,
+        loginRes: state.reducer.loginRes
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         searchTaxi: (reqData) => dispatch(searchTaxi(reqData)),
-        getReviews: (reqData, id) => dispatch(getReviews(reqData, id))
+        getReviews: (reqData, id) => dispatch(getReviews(reqData, id)),
+        addReview: (reqData, header) => dispatch(addReview(reqData, header))
     }
 }
 

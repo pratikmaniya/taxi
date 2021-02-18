@@ -127,7 +127,7 @@ export const apiCall = (method, url, actionType, reqData, params, headers) => {
             }
         }
         if (url === 'signin') {
-            reqHeaders['auth_token'] = '"%!DyVNgw4x%MOBpwHgEeG&glJRsN3wlC4p4yMpHkmv^NW7BK%Z';
+            reqHeaders['auth_token'] = '%!DyVNgw4x%MOBpwHgEeG&glJRsN3wlC4p4yMpHkmv^NW7BK%Z';
         }
         axios({
             method: method,
