@@ -25,12 +25,12 @@ class Taxi {
     }
     async addTaxi(req, res) {
         try {
-            console.log(req.files)
+            await taxiValidator.validateAddTaxiForm(req.body)
+            const taxi = await taxiHelper.selectTaxi(req.body.plate_no, 2, true)
             if (req.files.license_image_front && req.files.license_image_front.length > 0
                 && req.files.license_image_back && req.files.license_image_back.length > 0
                 && req.files.vehicle_image && req.files.vehicle_image.length > 0
                 && req.files.proof_of_eligibility_image && req.files.proof_of_eligibility_image.length > 0) {
-                await taxiValidator.validateAddTaxiForm(req.body)
                 req.body.license_image_front = await S3helper.uploadImageOnS3('taxi/', req.files.license_image_front[0])
                 req.body.license_image_back = await S3helper.uploadImageOnS3('taxi/', req.files.license_image_back[0])
                 req.body.vehicle_image = await S3helper.uploadImageOnS3('taxi/', req.files.vehicle_image[0])
