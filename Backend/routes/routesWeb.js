@@ -23,10 +23,10 @@ const multer = Multer({
 router.post('/signin', headerValidator.nonAuthValidation, userAuth.signin)
 
 // taxi
-router.get('/taxi', taxi.getTaxi)
-router.put('/taxi', multer.fields(taxi_image_fields), taxi.addTaxi)
-router.get('/review/:taxi_id', taxi.getReviews)
-router.put('/review', taxi.addReview)
+router.get('/taxi', headerValidator.nonAuthValidation, taxi.getTaxi)
+router.put('/taxi', headerValidator.nonAuthValidation, multer.fields(taxi_image_fields), taxi.addTaxi)
+router.get('/review/:taxi_id', headerValidator.nonAuthValidation, taxi.getReviews)
+router.put('/review', headerValidator.authValidation, taxi.addReview)
 
 
 module.exports = router

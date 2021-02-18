@@ -11,11 +11,11 @@ class UserAuthHelper {
                     last_name: body.last_name,
                     email: body.email
                 }
-            let user = await db.select('users', ' first_name ', condition)
+            let user = await db.select('users', ' id,first_name ', condition)
             if (user && user.length > 0) return user[0]
             user = await db.insert('users', data)
             console.log("result", user)
-            return { first_name: user.first_name }
+            return user
         } catch (error) {
             return promise.reject(error)
         }

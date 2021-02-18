@@ -9,7 +9,7 @@ class HeaderValidator {
     let error
     if (!headers.auth_token) {
       error = { param: 'auth_token', type: 'required' }
-    } 
+    }
     return error
   }
 
@@ -40,11 +40,7 @@ class HeaderValidator {
         } else if (decoded && decoded.user_id && decoded.user_type) {
           req.user_id = decoded.user_id
           req.user_type = decoded.user_type
-          if (decoded.user_type === 2) {
-            next()
-          } else {
-            HV.isUserActive(req, res, next, decoded)
-          }
+          next()
         } else {
           responseHelper.error(res, 'TOKEN_MALFORMED', req.headers.language)
         }
@@ -65,17 +61,6 @@ class HeaderValidator {
       next()
     } else {
       responseHelper.error(res, 'NOT_AUTHORISED', req.headers.language)
-    }
-  }
-
-  async isUserActive(req, res, next, decoded) {
-    let selectParams = 'is_active',
-      where = `id='${decoded.user_id}'`,
-      user = await db.select('users', selectParams, where)
-    if (user[0] && user[0].is_active) {
-      next();
-    } else {
-      responseHelper.error(res, 'USER_BLOCKED', req.headers.language)
     }
   }
 }
