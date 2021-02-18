@@ -3,7 +3,7 @@ config['AUTHORIZATION'] = '%!DyVNgw4x%MOBpwHgEeG&glJRsN3wlC4p4yMpHkmv^NW7BK%Z';
 console.log('Environment:::', process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {
     config = {
-        API_BASE_URL: 'https://www.noticetenant.com:8443/api/v1/',
+        API_BASE_URL: 'https://info.incoognito.com/api/v1/',
         //http://159.100.208.43/wage
         image_url: 'https://home.wagedev.com:8443',
         LANGUAGE: 'EN',
