@@ -118,16 +118,9 @@ export const apiCall = (method, url, actionType, reqData, params, headers) => {
         store.dispatch({
             type: Types.START_LOADER
         })
-        let reqHeaders = {};
+        let reqHeaders = { "auth_token": config.AUTHORIZATION };
         if (headers) {
             reqHeaders = headers;
-        } else {
-            reqHeaders = {
-                "auth_token": (!localStorage.getItem(config.STORAGE_KEYS.AUTH_TOKEN)) ? config.AUTHORIZATION : localStorage.getItem(config.STORAGE_KEYS.AUTH_TOKEN)
-            }
-        }
-        if (url === 'signin') {
-            reqHeaders['auth_token'] = '%!DyVNgw4x%MOBpwHgEeG&glJRsN3wlC4p4yMpHkmv^NW7BK%Z';
         }
         axios({
             method: method,

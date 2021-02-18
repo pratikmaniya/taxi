@@ -1,8 +1,8 @@
 let config = {}
-config['AUTHORIZATION'] = '%!DyVNgw4x%MOBpwHgEeG&glJRsN3wlC4p4yMpHkmv^NW7BK%Z';
 console.log('Environment:::', process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {
     config = {
+        AUTHORIZATION: '%!DyVNgw4x%MOBpwHgEeG&glJRsN3wlC4p4yMpHkmv^NW7BK%Z',
         API_BASE_URL: 'https://info.incoognito.com/api/v1/',
         //http://159.100.208.43/wage
         image_url: 'https://home.wagedev.com:8443',
@@ -20,6 +20,7 @@ if (process.env.NODE_ENV === 'production') {
 } else {
     //https://admin.wagedev.com/ http://3.217.25.173:3005/api/v1/ http://3.217.25.173:3005/admin/
     config = {
+        AUTHORIZATION: '%!DyVNgw4x%MOBpwHgEeG&glJRsN3wlC4p4yMpHkmv^NW7BK%Z',
         API_BASE_URL: 'http://localhost:3004/api/v1/',
         image_url: 'https://home.wagedev.com:8443',
         LANGUAGE: 'EN',

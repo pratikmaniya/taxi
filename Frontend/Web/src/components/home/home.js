@@ -7,7 +7,6 @@ import queryString from 'query-string'
 
 import { searchTaxi, getReviews, addReview } from '../../store/actions';
 import { displayLog } from "../../utils/functions";
-import header from "../common/header";
 
 class Home extends Component {
     state = {
