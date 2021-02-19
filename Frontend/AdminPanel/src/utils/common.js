@@ -138,8 +138,6 @@ export const apiCall = async (method, url, reqData, params, header) => {
         if (error && error.response && error.response.status === 401) {
           displayLog(0, messages.EN.SESSION_EXPIRED_MSG);
           logOut(false);
-        } else {
-          logOut(true);
         }
         return error;
       })
@@ -179,8 +177,8 @@ export const confirmBox = (title, message) => {
 }
 
 export const getFormatedDateFromTimeStamp = (timestamp) => {
-  let date = new Date(Number(timestamp) * 1000).getDate(),
-    month = new Date(Number(timestamp) * 1000).getMonth() + 1,
-    year = new Date(Number(timestamp) * 1000).getFullYear()
+  let date = new Date(timestamp).getDate(),
+    month = new Date(timestamp).getMonth() + 1,
+    year = new Date(timestamp).getFullYear()
   return `${String(date).padStart(2, '0')}-${String(month).padStart(2, '0')}-${year}`
 }

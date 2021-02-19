@@ -57,9 +57,12 @@ class TaxiHelper {
     }
     async selectTaxis(body) {
         try {
-            let selectParams = ` * `,
+            let selectParams = ` *, CONCAT('${config.s3uploadURL}', license_image_front) AS license_image_front,
+                                CONCAT('${config.s3uploadURL}', license_image_back) AS license_image_back,
+                                CONCAT('${config.s3uploadURL}', vehicle_image) AS vehicle_image,
+                                CONCAT('${config.s3uploadURL}', proof_of_eligibility_image) AS proof_of_eligibility_image `,
                 where = ` 1=1 `,
-                pagination = ` ORDER BY created_date DESC LIMIT ${Number(body.limit)} OFFSET ${Number(body.limit) * (Number(body.page_no) - 1)}`
+                pagination = ` ORDER BY created_date DESC LIMIT ${Number(config.limit)} OFFSET ${Number(config.limit) * (Number(body.page_no) - 1)}`
             if (body.query_string && body.query_string.trim().length > 0) {
                 where += ` AND LOWER(name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%') `
             }

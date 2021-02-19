@@ -49,7 +49,7 @@ class HeaderValidator {
   }
 
   isAdmin(req, res, next) {
-    if (req.user_type === 3) {
+    if (req.user_type === 2) {
       next()
     } else {
       responseHelper.error(res, 'NOT_AUTHORISED', req.headers.language)

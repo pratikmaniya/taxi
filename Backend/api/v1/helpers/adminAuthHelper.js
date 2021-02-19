@@ -10,7 +10,7 @@ class AdminAuthHelper {
                 password = bcrypt.hashSync(new_password, salt),
                 data = {
                     password: password,
-                    modified_date: dateHelper.getCurrentTimeStamp()
+                    modified_date: 'now()'
                 },
                 where = `id='${user_id}'`
             await db.update('admin', where, data)

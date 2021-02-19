@@ -10,20 +10,18 @@ module.exports = (function () {
     default_auth_token: "%!DyVNgw4x%MOBpwHgEeG&glJRsN3wlC4p4yMpHkmv^NW7BK%Z",
     host: "localhost",
     port: 3004,
-    androidAppVerision: "1.0.0",
-    iosAppVerision: "1.0.0",
-    logoLink: "",
-    mailerEmail: "",
-    mailerPassword: "",
+    logoLink: "https://taxi-review.s3-us-west-1.amazonaws.com/logo.png",
+    mailerEmail: "karlonincoognito@gmail.com",
+    mailerPassword: "Upwork2021!",
     awsAccesskey: "AKIAXTG4E23EFUPKC67Z",
     awsSecretkey: "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",
     s3bucketName: "taxi-review",
     s3uploadURL: "https://taxi-review.s3-us-west-1.amazonaws.com",
-    resetPasswordURLPrefix:"http://localhost:3000/resetPassword",
+    resetPasswordURLPrefix: "http://localhost:3000/resetPassword",
     limit: 10
   }
   if (process.env.NODE_ENV === "production") {
-    
+    data.resetPasswordURLPrefix = "https://info.incoognito.com/admin-panel/resetPassword"
   }
   return data;
 })();

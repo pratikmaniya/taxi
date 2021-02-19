@@ -28,7 +28,7 @@ class Login extends Component {
       const response = await apiCall('POST', 'signin', this.state.form);
       displayLog(response.code, response.message);
       localStorage.setItem('MOTO_AUTH_TOKEN', response.data.auth_token);
-      this.props.history.push(process.env.PUBLIC_URL + '/dashboard');
+      this.props.history.push(process.env.PUBLIC_URL + '/taxis');
     }
   }
   changeValuesHandler = (event) => {

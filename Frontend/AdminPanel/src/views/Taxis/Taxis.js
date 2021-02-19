@@ -1,36 +1,32 @@
 import React, { Component } from 'react';
 import Pagination from "react-js-pagination";
-import { Card, CardBody, CardHeader, Col, Row, Table, Button, Input } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Row, Table, Input } from 'reactstrap';
 import Img from 'react-image';
 import { connect } from 'react-redux';
 
-import Dialog from '../../DefaultLayout/Dialog'
 import { apiCall, getFormatedDateFromTimeStamp } from '../../utils/common';
 import loading_image from '../../assets/images/loading_img.png'
 import default_img from '../../assets/images/default_img.png'
-import { getDialogBody } from './VehiclesFunctions'
 import store from '../../utils/store';
 import * as actionTypes from '../../store/actionTypes';
 
-class Vehicles extends Component {
+class Taxis extends Component {
     state = {
-        vehicles: [],
+        taxis: [],
         totalItemCount: '',
-        isDialogOpen: false,
-        selected_vehicle: {},
         page_no: this.props.global_page_no,
         limit: this.props.global_page_no
     }
-    getVehicles = async (data) => {
-        let response = await apiCall('POST', 'getAllvehicles', data);
-        this.setState({ vehicles: response.data.vehicles, totalItemCount: response.data.total_vehicles });
+    getTaxis = async (data) => {
+        let response = await apiCall('GET', `taxis?page_no=${this.state.page_no}`, data);
+        this.setState({ taxis: response.data.taxis, totalItemCount: response.data.total_taxis });
     }
     componentDidMount() {
         let data = {
             page_no: this.props.global_page_no,
             limit: this.props.global_limit
         }
-        this.getVehicles(data)
+        this.getTaxis(data)
         this.setState({
             page_no: this.props.global_page_no,
             limit: this.props.global_limit,
@@ -43,24 +39,13 @@ class Vehicles extends Component {
                 page_no: this.props.global_page_no,
                 limit: this.props.global_limit
             }
-            await this.getVehicles(data);
+            await this.getTaxis(data);
             this.setState({
                 page_no: this.props.global_page_no,
                 limit: this.props.global_limit
             })
 
         }
-    }
-    isDialogOpenHandler = async (flag, vehicle_id) => {
-        let selected_vehicle = {}
-        if (flag) {
-            let data = {
-                vehicle_id: vehicle_id
-            }
-            let response = await apiCall('POST', 'getSinglevehicle', data);
-            selected_vehicle = response.data
-        }
-        this.setState({ isDialogOpen: flag, selected_vehicle: selected_vehicle })
     }
     changeLimitHandler = event => {
         store.dispatch({
@@ -78,25 +63,25 @@ class Vehicles extends Component {
             page_no: pageNumber
         })
     }
-    tableRow = (vehicle, index) => {
+    tableRow = (taxi, index) => {
         return (
             <tr key={index}>
                 <td className="text-center">{(this.state.page_no - 1) * this.state.limit + index + 1}</td>
                 <td className="align-middle">
                     <Img
                         className="table-cell-img"
-                        src={vehicle.vehicle_image}
+                        src={taxi.vehicle_image}
                         loader={<img className="table-cell-img loading-img" alt="motologs" src={loading_image} />}
                         unloader={<img className="table-cell-img" alt="motologs" title="No Image Found" src={default_img} />}
                     />
                 </td>
-                <td className="align-middle">{vehicle.model ? vehicle.model : vehicle.custom_model ? vehicle.custom_model + "(custom)" : "N/A"}</td>
-                <td className="align-middle">{vehicle.brand}</td>
-                <td className="align-middle">{vehicle.vehicle_type}</td>
-                <td className="align-middle">{vehicle.year}</td>
-                <td className="align-middle">{getFormatedDateFromTimeStamp(vehicle.created_date)}</td>
+                <td className="align-middle">{taxi.model}</td>
+                <td className="align-middle">{taxi.brand}</td>
+                <td className="align-middle">{taxi.vehicle_type}</td>
+                <td className="align-middle">{taxi.year}</td>
+                <td className="align-middle">{getFormatedDateFromTimeStamp(taxi.created_date)}</td>
                 <td className="align-middle">
-                    <span className="fa fa-info-circle action-icon" title="View Vehicle Details" onClick={() => this.isDialogOpenHandler(true, vehicle.id)} ></span>
+                    <span className="fa fa-info-circle action-icon" title="View Taxi Details" onClick={() => this.isDialogOpenHandler(true, taxi.id)} ></span>
                 </td>
             </tr>
         )
@@ -108,7 +93,7 @@ class Vehicles extends Component {
                     <Col xl={12}>
                         <Card>
                             <CardHeader>
-                                <h4 className="card-header-custom">Vehicles</h4>
+                                <h4 className="card-header-custom">Taxis</h4>
                             </CardHeader>
                             <CardBody>
                                 <Row className="align-items-right">
@@ -136,11 +121,11 @@ class Vehicles extends Component {
                                         </tr>
                                     </thead>
                                     {
-                                        this.state.vehicles.length > 0
+                                        this.state.taxis.length > 0
                                             ?
                                             <tbody>
-                                                {this.state.vehicles.map((vehicle, index) =>
-                                                    this.tableRow(vehicle, index)
+                                                {this.state.taxis.map((taxi, index) =>
+                                                    this.tableRow(taxi, index)
                                                 )}
                                             </tbody>
                                             :
@@ -150,7 +135,7 @@ class Vehicles extends Component {
                                     }
                                 </Table>
                                 {
-                                    this.state.vehicles.length > 0
+                                    this.state.taxis.length > 0
                                         ?
                                         <div className="float-right">
                                             <Pagination
@@ -169,19 +154,6 @@ class Vehicles extends Component {
                         </Card>
                     </Col>
                 </Row>
-                <Dialog
-                    modalTitle="Vehicle Details"
-                    className="dialog-height"
-                    modalBody={getDialogBody(this.state.selected_vehicle)}
-                    modalFooter={
-                        <React.Fragment>
-                            <Button color="secondary" className="black-btn" onClick={() => this.isDialogOpenHandler(false, -1)}>Ok</Button>
-                        </React.Fragment>
-                    }
-                    isModalOpen={this.state.isDialogOpen}
-                    toggle={this.isDialogOpenHandler}
-                    size="lg"
-                />
             </div>
         )
     }
@@ -195,4 +167,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Vehicles);
+export default connect(mapStateToProps)(Taxis);

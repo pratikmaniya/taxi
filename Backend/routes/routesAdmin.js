@@ -8,8 +8,8 @@ const taxi = require('../api/v1/controllers/taxi')
 
 //authentication
 router.post('/signin', headerValidator.nonAuthValidation, adminAuth.signin)
+router.post('/sendForgotPasswordMail', headerValidator.nonAuthValidation, adminAuth.sendForgotPasswordMail)
 router.post('/changePassword', headerValidator.authValidation, adminAuth.changePassword)
-router.post('/sendForgotPasswordMail', headerValidator.authValidation, adminAuth.sendForgotPasswordMail)
 router.post('/resetPassword', headerValidator.authValidation, adminAuth.resetPassword)
 
 //users

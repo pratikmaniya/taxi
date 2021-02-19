@@ -6,8 +6,8 @@ const S3helper = require('../../utils/S3helper')
 class Taxi {
     async getTaxis(req, res) {
         try {
-            await taxiValidator.validateGetAllTaxisForm(req.body)
-            const taxis = await taxiHelper.selectTaxis(req.body)
+            await taxiValidator.validateGetAllTaxisForm(req.query)
+            const taxis = await taxiHelper.selectTaxis(req.query)
             responseHelper.success(res, 'GET_TAXIS_SUCCESS', req.headers.language, { total_taxis: taxis.taxisCount, taxis: taxis.taxis })
         } catch (error) {
             console.log(error)
