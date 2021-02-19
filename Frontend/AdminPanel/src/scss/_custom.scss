@@ -8,23 +8,8 @@
   background-color: #0000006e;
 }
 
-.attribute-row {
-  padding: 2% 0 1% 0;
-  // border-top: 1px solid #e4e7ea;
-  border-bottom: 1px solid #daf5ff;
-}
-
 .cursor-pointer{
   cursor: pointer;
-}
-
-.form-group label,
-.label-weight {
-  font-weight: 550;
-}
-
-.button-margin {
-  margin: 0px 10px;
 }
 
 .disable-outline{
@@ -55,15 +40,6 @@
 
 .edit.action-icon {
   color: #2ba8d8;
-}
-
-.page-item.active .page-link {
-  z-index: 1;
-  color: #fff!important;
-  background-color: #1d1d1d;
-  color: red!important;
-  // background-color: red;
-  // border-color: red !important;
 }
 
 .page-link:focus{
@@ -111,27 +87,6 @@ select.form-control:not([size]):not([multiple]){
 .black-btn:hover{
   color: red!important;
   background: #1b1b1b;
-}
-
-.sidebar {
-  background: #1d1d1d;
-}
-
-.sidebar .nav-link:hover {
-  background: #b5b5b51f;
-}
-
-.sidebar .nav-link.active{
-  color: red;
-  background:#101010; 
-}
-
-.sidebar .nav-link .nav-icon{
-color: #ffffff;
-}
-
-.sidebar .nav-link.active .nav-icon {
-  color: red;
 }
 
 .edit.action-icon {
@@ -195,11 +150,6 @@ input[type="radio"], input[type="checkbox"]{
   margin-right: 3px;
 }
 
-.form-group label{
-  vertical-align: middle;
-  margin-top: 2px;
-}
-
 .dialog-height>.modal-content>.modal-body{
   max-height: calc(100vh - 200px);
   overflow: auto;
@@ -227,12 +177,6 @@ input[type="radio"], input[type="checkbox"]{
   float: right;
 }
 
-.dialog-img{
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-}
-
 .dialog-details-table {
   width: 100%;
 }
@@ -257,31 +201,8 @@ input[type="radio"], input[type="checkbox"]{
   font-weight: 400;
 }
 
-.csv-table-container {
-  max-height: calc(100vh - 350px);
-  overflow-y: auto;
-}
-
-.csv-table-container  table{
-  width: 100%;
-}
-
-.csv-table-container table td{
-  padding: 10px;
-  border: 1px solid #d4d4d49e;
-}
-
-.csv-table-container table tr:first-child{
-  font-weight: 500;
-}
-
 .card-header-custom{
   margin: 0;
-}
-
-.dropdown-item.active,
-.dropdown-item:active {
-  background: #566272;
 }
 
 .form-control:focus {
@@ -289,71 +210,14 @@ input[type="radio"], input[type="checkbox"]{
   border-color: #566272
 }
 
-.rdtPicker td.rdtActive,
-.rdtPicker td.rdtActive:hover {
-  background-color: #566272 !important
-}
-
-.rdtPicker td.rdtToday::before {
-  border-bottom-color: #566272 !important;
-}
-
-.table-bordered th, .table-bordered td{
-text-align: center;
-}
-
-.css-31r155{
-  border-color:#313841 !important;
-  border-bottom-color: transparent !important;
-}
-
-.btn-link{
-  color: #566272 !important;
-}
-.btn-link:hover{
-  color: #626262 !important;
-}
-
-.oroom-logo-login{
-  height: 120px;
-   margin: 20px auto;
-    width: 100%;
-}
-
-.profile-img {
-  height: 150px;
-  width: 150px;
-  border:1px solid gray;
-  border-radius: 50%;
-  // transform: rotate(0deg);
-}
 .form-control[readonly]{
   background-color: #fff;
   // background-clip: padding-box;
-}
-.post-image {
-  width: 75px;
-  height: 75px;
-}
-
-.file-input {
-  width: 200px;
-}
-
-.ck-editor__editable {
-  min-height: 500px !important;
-  max-height: 500px !important;
 }
 
 .vehicle-details-file-list{
   padding: 0;
   list-style-type: none;
-}
-
-.uploadData{
-  bottom: 4px;
-      right: 8px;
-      position: relative;
 }
 
 .main-header{

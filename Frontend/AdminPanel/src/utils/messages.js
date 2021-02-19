@@ -12,10 +12,6 @@ const Messages = {
 
         ASK_TO_DELETE_BRAND: "Are you sure you want to delete this brand?",
         
-        ASK_TO_DELETE_NEWS: "Are you sure you want to delete this news?",
-
-        ASK_TO_DELETE_FAQ: "Are you sure you want to delete this FAQs?",
-
         ASK_TO_DELETE_YEAR: "Are you sure you want to delete this year?",
     }
 };

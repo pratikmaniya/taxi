@@ -3,15 +3,13 @@ import { Route, Switch, withRouter, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './App.scss';
-import LoaderComponent from './views/Pages/Loader/Loader';
+import LoaderComponent from './utils/Loader';
 import store from './utils/store';
 import * as actionTypes from './store/actionTypes'
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 const DefaultLayout = React.lazy(() => import('./DefaultLayout'));
-const Login = React.lazy(() => import('./views/Pages/Login'));
-const Page404 = React.lazy(() => import('./views/Pages/Page404'));
-const Page500 = React.lazy(() => import('./views/Pages/Page500'));
+const Login = React.lazy(() => import('./views/Login/Login'));
 const ForgotPass = React.lazy(() => import('./views/ForgotPassword/ForgotPassword'))
 
 class App extends Component {
@@ -29,8 +27,6 @@ class App extends Component {
         <React.Suspense fallback={loading()}>
           <Switch>
             <Route exact path={process.env.PUBLIC_URL + "/login"} name="Login Page" render={props => <Login {...props} />} />
-            <Route exact path={process.env.PUBLIC_URL + "/404"} name="Page 404" render={props => <Page404 {...props} />} />
-            <Route exact path={process.env.PUBLIC_URL + "/500"} name="Page 500" render={props => <Page500 {...props} />} />
             <Route path={process.env.PUBLIC_URL + "/resetpassword/:token"} exact component={ForgotPass} />
             <Route path={process.env.PUBLIC_URL + "/"} name="Home" render={props => <DefaultLayout {...props} />} />
           </Switch>

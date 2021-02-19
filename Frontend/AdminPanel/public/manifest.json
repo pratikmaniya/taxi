@@ -1,6 +1,6 @@
 {
-  "short_name": "Oroom",
-  "name": "Oroom-admin panel",
+  "short_name": "Taxi",
+  "name": "Taxi-admin panel",
   "icons": [
     {
       "src": "./assets/img/favicon.png",

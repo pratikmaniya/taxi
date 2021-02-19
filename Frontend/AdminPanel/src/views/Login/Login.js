@@ -3,8 +3,8 @@ import { Redirect, withRouter } from 'react-router-dom';
 import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Alert } from 'reactstrap';
 import Joi from 'joi-browser';
 
-import { validateSchema, formValueChangeHandler, apiCall, displayLog } from '../../../utils/common';
-import config from '../../../config';
+import { validateSchema, formValueChangeHandler, apiCall, displayLog } from '../../utils/common';
+import config from '../../config';
 
 class Login extends Component {
   state = {

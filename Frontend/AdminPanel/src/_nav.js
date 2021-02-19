@@ -41,11 +41,6 @@ export default {
       icon: 'fa fa-file-text'
     },
     {
-      name: 'FAQs',
-      url: process.env.PUBLIC_URL + '/FrequantlyAskQuestions',
-      icon: 'fa fa-question-circle'
-    },
-    {
       name: 'News',
       url: process.env.PUBLIC_URL + '/news',
       icon: 'fa fa-newspaper-o'

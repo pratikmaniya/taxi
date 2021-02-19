@@ -4,7 +4,7 @@ class DefaultFooter extends Component {
   render() {
     return (
       <React.Fragment>
-        <span>&copy; 2020 <span style={{ color: '#ff0000' }}>LOGGY</span>.</span>
+        <span>&copy; 2020 <span style={{ color: '#ff0000' }}>TAXI</span>.</span>
       </React.Fragment>
     );
   }
