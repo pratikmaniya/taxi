@@ -1,6 +1,6 @@
 {
-  "name": "taxi-admin-panel",
-  "description": "Taxi admin panel",
+  "name": "incoognito-admin-panel",
+  "description": "incoognito admin panel",
   "homepage": "https://info.incoognito.com/admin-panel/",
   "dependencies": {
     "@coreui/coreui": "2.1.12",

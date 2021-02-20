@@ -118,7 +118,7 @@ class Home extends Component {
         return (
             <Container>
                 <div className="search-input-container">
-                    <Input type='text' className="search-input" placeholder="Search taxi by plate number" name='search_text' value={this.state.search_text} onKeyPress={this.enterPressed} onChange={this.inputChangeHandler} />
+                    <Input type='text' className="search-input" placeholder="Search plate number" name='search_text' value={this.state.search_text} onKeyPress={this.enterPressed} onChange={this.inputChangeHandler} />
                     <span className='search-input-icon-container' onClick={this.searchHandler}>
                         <span className="fa fa-search search-input-icon"></span>
                     </span>

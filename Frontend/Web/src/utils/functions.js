@@ -172,7 +172,7 @@ export const logout = async () => {
             await localStorage.clear()
             history.push(process.env.PUBLIC_URL + '/')
         }
-    }).setHeader('Taxi').set('labels', { ok: 'OK', cancel: 'CANCEL' });
+    }).setHeader('Incoognito').set('labels', { ok: 'OK', cancel: 'CANCEL' });
 }
 export const displayLog = (code, message) => {
     // console.log('1111122222')

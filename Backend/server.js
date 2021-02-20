@@ -24,7 +24,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/web/', express.static('build-web'))
+app.use('/web', express.static('build-web'))
 app.get('/web/*', (req, res) => {
   res.sendFile(__dirname + '/build-web/index.html')
 })

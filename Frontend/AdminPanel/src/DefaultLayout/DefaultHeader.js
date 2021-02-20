@@ -96,7 +96,7 @@ class DefaultHeader extends Component {
             full={{ src: logo, width: 100, alt: 'motologs Logo' }}
             minimized={{ src: loading_img, alt: 'motologs Logo' }}
           /> */}
-          <h3 className="main-header">TAXI</h3>
+          <h3 className="main-header">INCOOGNITO</h3>
         </Link>
         <AppSidebarToggler className="d-md-down-none disable-outline" display="lg" />
         <Nav className="ml-auto" navbar>
