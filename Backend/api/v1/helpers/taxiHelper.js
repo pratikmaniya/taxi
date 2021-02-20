@@ -2,6 +2,7 @@ const promise = require('bluebird')
 
 const config = require('../../utils/config')
 const db = require('../../utils/db')
+const taxi = require('../controllers/taxi')
 
 class TaxiHelper {
     async insertTaxi(body) {
@@ -111,6 +112,17 @@ class TaxiHelper {
                 comment: body.comment
             }
             await db.insert('reviews', data)
+            return true
+        } catch (error) {
+            return promise.reject(error)
+        }
+    }
+    async isAbleToReview(user_id, taxi_id) {
+        try {
+            const selectParams = ` COUNT(id) AS total_ratings, COUNT(id) FILTER(where taxi_id=${taxi_id}) AS today_taxi_rating `,
+                where = ` user_id=${user_id} AND DATE(created_date)=CURRENT_DATE `,
+             reviews = await db.select('reviews', selectParams, where)
+            console.log(reviews)
             return true
         } catch (error) {
             return promise.reject(error)

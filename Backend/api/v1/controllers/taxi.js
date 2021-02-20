@@ -17,6 +17,10 @@ class Taxi {
     async getTaxi(req, res) {
         try {
             const taxi = await taxiHelper.selectTaxi(req.query.search, req.user_type)
+            // console.log(req.user_type,req.user_id)
+            // if (req.user_type !== 2 && req.user_id) {
+            //     taxi.is_able_to_review = await taxiHelper.isAbleToReview(req.user_id, taxi.id)
+            // }
             responseHelper.success(res, 'GET_TAXIS_SUCCESS', req.headers.language, { ...taxi })
         } catch (error) {
             console.log(error)
