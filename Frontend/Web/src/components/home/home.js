@@ -5,9 +5,12 @@ import { CardText, CardBody, CardTitle, Row, Col, Container, Input, Modal, Modal
 import StarRatings from 'react-star-ratings';
 import queryString from 'query-string'
 import ReactTooltip from 'react-tooltip';
+import Img from 'react-image';
 
 import { searchTaxi, getReviews, addReview } from '../../store/actions';
 import { displayLog } from "../../utils/functions";
+import loading_image from '../../images/loading_img.png'
+import default_img from '../../images/default_img.png'
 
 class Home extends Component {
     state = {
@@ -126,8 +129,18 @@ class Home extends Component {
                         <div className="taxi-card">
                             <Row>
                                 <Col md='4' sm='12' style={{ textAlign: "center", borderRight: '1px solid #3e77f763', padding: '0 30px' }}>
-                                    <img height="180px" width='300px' style={{ objectFit: 'contain', boxShadow: 'rgb(0 0 0 / 12%) 0px 0px 7px 1px', margin: '10px 0', padding: '5px' }} alt="license" src={this.state.taxiDetails.license_image_front} />
-                                    <img height="180px" width='300px' style={{ objectFit: 'contain', boxShadow: 'rgb(0 0 0 / 12%) 0px 0px 7px 1px', margin: '10px 0', padding: '5px' }} alt="vehicle" src={this.state.taxiDetails.vehicle_image} />
+                                    <Img
+                                        className="taxi-card-img"
+                                        src={this.state.taxiDetails.license_image_front}
+                                        loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                        unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                    />
+                                    <Img
+                                        className="taxi-card-img"
+                                        src={this.state.taxiDetails.vehicle_image}
+                                        loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                        unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                    />
                                 </Col>
                                 <Col md='8' sm='12'>
                                     <CardBody>
