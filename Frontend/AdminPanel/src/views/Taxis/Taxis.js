@@ -94,7 +94,7 @@ class Taxis extends Component {
         displayLog(response.code, response.message);
     }
     taxiDetailsClickHandler = (taxi_id) => {
-        this.props.history.push(process.env.PUBLIC_URL + `taxi-details/${taxi_id}`)
+        this.props.history.push(process.env.PUBLIC_URL + `/taxi-details/${taxi_id}`)
     }
     tableRow = (taxi, index) => {
         return (

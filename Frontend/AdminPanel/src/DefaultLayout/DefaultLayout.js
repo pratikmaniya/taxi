@@ -76,7 +76,7 @@ function DefaultLayout(props) {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from="/" to={process.env.PUBLIC_URL + "/dashboard"} />
+                  <Redirect from="/" to={process.env.PUBLIC_URL + "/taxis"} />
                 </Switch>
               </Suspense>
             </Container>

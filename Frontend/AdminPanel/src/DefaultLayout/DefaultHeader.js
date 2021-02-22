@@ -90,7 +90,7 @@ class DefaultHeader extends Component {
           toggle={this.isDialogOpenHandler}
         />
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
-        <Link style={{ textDecoration: "none" }} to={process.env.PUBLIC_URL + "/dashboard"}>
+        <Link style={{ textDecoration: "none" }} to={process.env.PUBLIC_URL + "/taxis"}>
           <AppNavbarBrand
             tag="span"
             full={{ src: 'https://taxi-review.s3-us-west-1.amazonaws.com/logo.png', width: 100, alt: 'motologs Logo' }}
