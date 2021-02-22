@@ -14,7 +14,8 @@ class Signin extends Component {
     const reqData = {
       first_name: response.first_name,
       last_name: response.last_name,
-      email: response.email
+      email: response.email,
+      login_by: 0
     }
     this.signin(reqData)
   }
@@ -27,7 +28,8 @@ class Signin extends Component {
     const reqData = {
       first_name: response.profileObj.givenName,
       last_name: response.profileObj.familyName,
-      email: response.profileObj.email
+      email: response.profileObj.email,
+      login_by: 1
     }
     this.signin(reqData)
   }
