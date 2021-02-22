@@ -2,7 +2,7 @@
   "name": "ridesafett",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://www.ridesafett.com/web",
+  "homepage": "https://www.ridesafett.com",
   "dependencies": {
     "alertifyjs": "1.13.1",
     "axios": "0.21.1",

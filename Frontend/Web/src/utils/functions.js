@@ -156,7 +156,7 @@ export const apiCall = (method, url, actionType, reqData, params, headers) => {
                             localStorage.clear()
                             history.push(process.env.PUBLIC_URL + '/signin');
                         }
-                    }).setHeader('Ride Safett').set('labels', { ok: 'OK', cancel: 'CANCEL' });
+                    }).setHeader('Ridesafett').set('labels', { ok: 'OK', cancel: 'CANCEL' });
                 } else {
                     localStorage.clear()
                     if (!error.code === 403) {
@@ -175,7 +175,7 @@ export const logout = async () => {
             await localStorage.clear()
             history.push(process.env.PUBLIC_URL + '/')
         }
-    }).setHeader('Ride Safett').set('labels', { ok: 'OK', cancel: 'CANCEL' });
+    }).setHeader('Ridesafett').set('labels', { ok: 'OK', cancel: 'CANCEL' });
 }
 export const displayLog = (code, message) => {
     // console.log('1111122222')

@@ -24,17 +24,17 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/web', express.static('build-web'))
-app.get('/web/*', (req, res) => {
-  res.sendFile(__dirname + '/build-web/index.html')
-})
+app.use('/api/v1', v1Routes)
+app.use('/api/v1/admin', v1RoutesAdmin)
+
 app.use('/admin-panel', express.static('build-admin'))
 app.get('/admin-panel/*', (req, res) => {
   res.sendFile(__dirname + '/build-admin/index.html')
 })
-
-app.use('/api/v1', v1Routes)
-app.use('/api/v1/admin', v1RoutesAdmin)
+app.use('/', express.static('build-web'))
+app.get('/*', (req, res) => {
+  res.sendFile(__dirname + '/build-web/index.html')
+})
 
 db.getConnection()
   .then(() => {
