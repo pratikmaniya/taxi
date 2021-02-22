@@ -1,8 +1,8 @@
 {
-  "name": "incoognito",
+  "name": "ridesafett",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://info.incoognito.com/web",
+  "homepage": "https://info.ridesafett.com/web",
   "dependencies": {
     "alertifyjs": "1.13.1",
     "axios": "0.21.1",

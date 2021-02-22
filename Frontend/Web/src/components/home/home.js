@@ -122,7 +122,7 @@ class Home extends Component {
         await this.getReviews()
     }
     render() {
-        const loggedIn = localStorage.getItem('INCOOGNITO-TOKEN') ? true : false,
+        const loggedIn = localStorage.getItem('RIDESAFETT-TOKEN') ? true : false,
             displayLoadMore = this.state.totalReviews && this.state.totalReviews > this.state.reviews.length
         return (
             <Container>

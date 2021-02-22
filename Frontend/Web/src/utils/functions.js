@@ -118,8 +118,8 @@ export const apiCall = (method, url, actionType, reqData, params, headers) => {
             type: Types.START_LOADER
         })
         let reqHeaders = { "auth_token": config.AUTHORIZATION };
-        if (localStorage.getItem('INCOOGNITO-TOKEN')) {
-            reqHeaders.auth_token = localStorage.getItem('INCOOGNITO-TOKEN');
+        if (localStorage.getItem('RIDESAFETT-TOKEN')) {
+            reqHeaders.auth_token = localStorage.getItem('RIDESAFETT-TOKEN');
         }
         axios({
             method: method,
@@ -156,7 +156,7 @@ export const apiCall = (method, url, actionType, reqData, params, headers) => {
                             localStorage.clear()
                             history.push(process.env.PUBLIC_URL + '/signin');
                         }
-                    }).setHeader('Incoognito').set('labels', { ok: 'OK', cancel: 'CANCEL' });
+                    }).setHeader('Ride Safett').set('labels', { ok: 'OK', cancel: 'CANCEL' });
                 } else {
                     localStorage.clear()
                     if (!error.code === 403) {
@@ -175,7 +175,7 @@ export const logout = async () => {
             await localStorage.clear()
             history.push(process.env.PUBLIC_URL + '/')
         }
-    }).setHeader('Incoognito').set('labels', { ok: 'OK', cancel: 'CANCEL' });
+    }).setHeader('Ride Safett').set('labels', { ok: 'OK', cancel: 'CANCEL' });
 }
 export const displayLog = (code, message) => {
     // console.log('1111122222')

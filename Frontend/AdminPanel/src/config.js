@@ -7,7 +7,7 @@ let config = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-    config.API_BASE_URL = 'https://info.incoognito.com/api/v1/admin/'
+    config.API_BASE_URL = 'https://info.ridesafett.com/api/v1/admin/'
     config.urlCheckIndex = 2
 } else {
     config.API_BASE_URL = 'http://localhost:3004/api/v1/admin/'
