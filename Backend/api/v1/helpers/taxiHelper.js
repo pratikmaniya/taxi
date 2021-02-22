@@ -65,7 +65,9 @@ class TaxiHelper {
                 where = ` 1=1 `,
                 pagination = ` ORDER BY created_date DESC LIMIT ${Number(config.limit)} OFFSET ${Number(config.limit) * (Number(body.page_no) - 1)}`
             if (body.query_string && body.query_string.trim().length > 0) {
-                where += ` AND LOWER(name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%') `
+                where += ` AND (LOWER(first_name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%')
+                            OR LOWER(last_name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%')
+                            OR LOWER(plate_no) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%')) `
             }
             const taxis = await db.select('taxis', selectParams, where + pagination),
                 taxisCount = await db.select('taxis', `COUNT(*) AS count`, where)

@@ -1,17 +1,15 @@
 const promise = require('bluebird')
 
 const db = require('../../utils/db')
+const config = require('../../utils/config')
 
 class UsersHelper {
     async selectUsers(body) {
         try {
-            let selectParams = "id, name, email, mobile_no, profile_image, address, created_date, modified_date, is_active",
+            const selectParams = "id, first_name, last_name, email, created_date, modified_date, login_by",
                 where = ` 1=1 `,
-                pagination = ` ORDER BY created_date DESC LIMIT ${Number(body.limit)} OFFSET ${Number(body.limit) * (Number(body.page_no) - 1)}`
-            if (body.query_string && body.query_string.trim().length > 0) {
-                where += ` AND LOWER(name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%') `
-            }
-            const users = await db.select('users', selectParams, where + pagination),
+                pagination = ` ORDER BY created_date DESC LIMIT ${Number(config.limit)} OFFSET ${Number(config.limit) * (Number(body.page_no) - 1)}`,
+                users = await db.select('users', selectParams, where + pagination),
                 usersCount = await db.select('users', `COUNT(*) AS count`, where)
             return { users, usersCount: usersCount.length > 0 ? usersCount[0].count : 0 }
         } catch (error) {

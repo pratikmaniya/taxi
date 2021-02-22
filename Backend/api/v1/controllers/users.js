@@ -5,8 +5,8 @@ const responseHelper = require('../../utils/responseHelper')
 class Users {
     async getAllUsers(req, res) {
         try {
-            await usersValidator.validateGetAllUsersForm(req.body)
-            const users = await usersHelper.selectUsers(req.body)
+            await usersValidator.validateGetAllUsersForm(req.query)
+            const users = await usersHelper.selectUsers(req.query)
             responseHelper.success(res, 'GET_ALL_USER_SUCCESS', req.headers.language, { total_users: users.usersCount, users: users.users })
         } catch (error) {
             console.log(error)

@@ -9,7 +9,8 @@ class UserAuthValidator {
             const schema = joi.object().keys({
                 first_name: joi.string(),
                 last_name: joi.string(),
-                email: joi.string().email().required()
+                email: joi.string().email().required(),
+                login_by: joi.number().integer().required()
             })
             await joiValidator.validateJoiSchema(body, schema);
         } catch (error) {

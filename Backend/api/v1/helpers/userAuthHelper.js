@@ -9,7 +9,8 @@ class UserAuthHelper {
                 data = {
                     first_name: body.first_name,
                     last_name: body.last_name,
-                    email: body.email
+                    email: body.email,
+                    login_by: body.login_by
                 }
             let user = await db.select('users', ' id,first_name ', condition)
             if (user && user.length > 0) return user[0]
