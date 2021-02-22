@@ -1,7 +1,7 @@
 {
   "name": "ridesafett-admin-panel",
   "description": "ridesafett admin panel",
-  "homepage": "https://info.ridesafett.com/admin-panel/",
+  "homepage": "https://www.ridesafett.com/admin-panel/",
   "dependencies": {
     "@coreui/coreui": "2.1.12",
     "@coreui/icons": "0.3.0",

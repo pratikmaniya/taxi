@@ -22,7 +22,7 @@ module.exports = (function () {
     daily_review_limit: 4
   }
   if (process.env.NODE_ENV === "production") {
-    data.resetPasswordURLPrefix = "https://info.ridesafett.com/admin-panel/resetPassword"
+    data.resetPasswordURLPrefix = "https://www.ridesafett.com/admin-panel/resetPassword"
   }
   return data;
 })();
