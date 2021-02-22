@@ -1,205 +1,119 @@
 import React, { Component } from 'react';
-import Pagination from "react-js-pagination";
-import { Card, CardBody, CardHeader, Col, Row, Table, Button, Input } from 'reactstrap';
+import { Card, CardHeader, CardText, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import StarRatings from 'react-star-ratings';
 import Img from 'react-image';
 import { connect } from 'react-redux';
 
-import { apiCall, getFormatedDateFromTimeStamp, displayLog } from '../../utils/common';
-import store from '../../utils/store';
-import * as actionTypes from '../../store/actionTypes';
+import { apiCall, displayLog } from '../../utils/common';
 import loading_image from '../../assets/images/loading_img.png'
 import default_img from '../../assets/images/default_img.png'
-import config from '../../config';
 
 class Taxis extends Component {
     state = {
-        taxis: [],
-        search_keyword: "",
-        totalItemCount: 0,
-        page_no: this.props.global_page_no
+        taxiDetails: {},
+        reviews: [],
+        page_no: 1,
+        totalReviews: 0
     }
-    getTaxis = async (data) => {
-        let response = await apiCall('GET', `taxis?page_no=${data.page_no}${data.query_string ? `&query_string=${data.query_string}` : ""}`);
-        this.setState({ taxis: response.data.taxis, totalItemCount: response.data.total_taxis });
-    }
-    componentDidMount() {
-        let data = {
-            page_no: this.props.global_page_no
-        }
-        if (this.props.global_search_keyword) {
-            data.query_string = this.props.global_search_keyword
-        }
-        this.getTaxis(data)
-        this.setState({
-            page_no: this.props.global_page_no,
-            search_keyword: this.props.global_search_keyword
-        })
-    }
-    async componentDidUpdate(prevProps) {
-        if (prevProps.global_page_no !== this.props.global_page_no
-            || prevProps.global_search_keyword !== this.props.global_search_keyword) {
-            let data = {
-                page_no: this.props.global_page_no
-            }
-            if (this.props.global_search_keyword) {
-                data.query_string = this.props.global_search_keyword
-            }
-            await this.getTaxis(data);
-            this.setState({
-                search_keyword: this.props.global_search_keyword,
-                page_no: this.props.global_page_no
-            })
-
+    async componentDidMount() {
+        console.log(this.props.match.params.taxi_id)
+        const response = await apiCall('GET', `taxi/${this.props.match.params.taxi_id}`);
+        if (response && response.code === 1) {
+            this.setState({ taxiDetails: response.data });
+            this.getReviews()
+        } else {
+            displayLog(0, response.message)
         }
     }
-    changeSearch = (event) => {
-        this.setState({ [event.target.name]: event.target.value })
-    }
-    enterPressed = (event) => {
-        if (event.keyCode === 13 || event.which === 13) {
-            this.search()
+    getReviews = async () => {
+        const response = await apiCall('GET', `review/${this.props.match.params.taxi_id}?page_no=${this.state.page_no}`);
+        if (response && response.code === 1) {
+            this.setState({ reviews: [...this.state.reviews, ...response.data.reviews], totalReviews: Number(response.data.total_reviews) })
+        } else {
+            displayLog(0, response.message)
         }
     }
-    search() {
-        if ((this.state.search_keyword.length === 0 && this.state.search_keyword.trim().length === 0) || (this.state.search_keyword.trim().length > 0)) {
-            let query_string = this.state.search_keyword.trim().length === 0 ? undefined : this.state.search_keyword.trim()
-            store.dispatch({
-                type: actionTypes.SET_PAGE_NO,
-                page_no: 1
-            })
-            store.dispatch({
-                type: actionTypes.SET_SEARCH_KEYWORD,
-                search_keyword: query_string ? query_string : ""
-            })
-        }
-    }
-    handlePageChange = pageNumber => {
-        store.dispatch({
-            type: actionTypes.SET_PAGE_NO,
-            page_no: pageNumber
-        })
-    }
-    activeClickHandler = async (taxi, flag, index) => {
-        console.log(taxi, flag, index)
-        let reqData = {
-            taxi_id: taxi.id,
-            flag: flag
-        }
-        let response = await apiCall('POST', 'taxi', reqData);
-        if (response.code === 1) {
-            let taxis = this.state.taxis;
-            taxis[index].is_approved = flag;
-            this.setState({ taxis: taxis });
-        }
-        displayLog(response.code, response.message);
-    }
-    taxiDetailsClickHandler = (taxi_id) => {
-        this.props.history.push(process.env.PUBLIC_URL + `taxi-details/${taxi_id}`)
-    }
-    tableRow = (taxi, index) => {
-        return (
-            <tr key={index}>
-                <td className="text-center">{(this.state.page_no - 1) * config.LIMIT + index + 1}</td>
-                <td className="align-middle">
-                    <Img
-                        className="table-cell-img"
-                        src={taxi.vehicle_image}
-                        loader={<img className="table-cell-img loading-img" alt="motologs" src={loading_image} />}
-                        unloader={<img className="table-cell-img" alt="motologs" title="No Image Found" src={default_img} />}
-                    />
-                </td>
-                <td className="align-middle">{taxi.plate_no}</td>
-                <td className="align-middle">{taxi.first_name}</td>
-                <td className="align-middle">{taxi.last_name}</td>
-                <td className="align-middle">{getFormatedDateFromTimeStamp(taxi.created_date)}</td>
-                <td className="align-middle text-center">
-                    {
-                        taxi.is_approved === true
-                            ?
-                            <span className={"fa fa-toggle-on active action-icon"} title={"Deactivate Taxi"} onClick={() => this.activeClickHandler(taxi, false, index)}  ></span>
-                            :
-                            <span className={"fa fa-toggle-off active action-icon"} title={"Activate Taxi"} onClick={() => this.activeClickHandler(taxi, true, index)}  ></span>
-                    }
-                    <span className="fa fa-info-circle action-icon" title="View Taxi Details" onClick={() => this.taxiDetailsClickHandler(taxi.id)} ></span>
-                </td>
-            </tr>
-        )
+    loadMoreReview = async () => {
+        await this.setState({ page_no: this.state.page_no + 1 })
+        await this.getReviews()
     }
     render() {
+        const displayLoadMore = this.state.totalReviews && this.state.totalReviews > this.state.reviews.length
         return (
             <div className="animated fadeIn">
-                <Row>
-                    <Col xl={12}>
-                        <Card>
-                            <CardHeader>
-                                <h4 className="card-header-custom">Taxis</h4>
-                            </CardHeader>
-                            <CardBody>
-                                <Row className="align-items-right">
-                                    <Col sm="12" md="6" xl="4" className="mb-3 mb-xl-0">
-                                    </Col>
-                                    <Col sm="12" md="6" xl="8" className="mb-3 mb-xl-0">
-                                        <Row className="justify-content-end">
-                                            <Col sm="12" md="6" xs xl="5" className="mb-3 mb-xl-0">
-                                                <Input type="text" placeholder={`Search by name`}
-                                                    value={this.state.search_keyword}
-                                                    name="search_keyword" onChange={(event) => this.changeSearch(event)}
-                                                    onKeyPress={(event) => this.enterPressed(event)} />
-                                            </Col>
-                                            <Col sm="12" md="4" xs xl="3" className="mb-3 mb-xl-0">
-                                                <Button block className="black-btn" color="secondary" size="sm" onClick={() => this.search()}>Search</Button>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                            </CardBody>
-                            <CardBody>
-                                <Table bordered striped responsive size="sm">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" className="text-center">No</th>
-                                            <th scope="col" className="align-middle">Phone No</th>
-                                            <th scope="col" className="align-middle">Plate Number</th>
-                                            <th scope="col" className="align-middle">First Name</th>
-                                            <th scope="col" className="align-middle">Last Name</th>
-                                            <th scope="col" className="align-middle">Created date</th>
-                                            <th scope="col" className="align-middle text-center">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    {
-                                        this.state.taxis.length > 0
-                                            ?
-                                            <tbody>
-                                                {this.state.taxis.map((taxi, index) =>
-                                                    this.tableRow(taxi, index)
-                                                )}
-                                            </tbody>
-                                            :
-                                            <tbody>
-                                                <tr className="text-center"><td colSpan={8}> No Data Found </td></tr>
-                                            </tbody>
-                                    }
-                                </Table>
+                <Card>
+                    <CardHeader>
+                        <h4 className="card-header-custom">Taxi Details</h4>
+                    </CardHeader>
+                    <CardBody>
+                        <Row>
+                            <Col md='4' sm='12' style={{ textAlign: "center", borderRight: '1px solid #00000036', padding: '0 30px' }}>
+                                <Img
+                                    className="taxi-card-img"
+                                    src={this.state.taxiDetails.license_image_front}
+                                    loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                    unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                />
+                                <Img
+                                    className="taxi-card-img"
+                                    src={this.state.taxiDetails.vehicle_image}
+                                    loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                    unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                />
+                            </Col>
+                            <Col md='8' sm='12'>
+                                <CardTitle style={{ fontSize: '28px' }}><span className="mb-2 text-muted">Plate Number: </span>{this.state.taxiDetails.plate_no}</CardTitle>
                                 {
-                                    this.state.taxis.length > 0
+                                    this.state.taxiDetails.rating
                                         ?
-                                        <div className="float-right">
-                                            <Pagination
-                                                activePage={this.props.global_page_no}
-                                                itemsCountPerPage={config.LIMIT}
-                                                totalItemsCount={Number(this.state.totalItemCount)}
-                                                itemClass='page-item'
-                                                linkClass='page-link'
-                                                onChange={this.handlePageChange}
-                                            />
-                                        </div>
+                                        <StarRatings
+                                            className='mb-2'
+                                            rating={this.state.taxiDetails.rating}
+                                            starRatedColor="gold"
+                                            numberOfStars={5}
+                                            starDimension="28px"
+                                            name='rating'
+                                        />
                                         :
-                                        null
+                                        <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">No Ratings</span></CardText>
                                 }
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
+                                <CardText style={{ fontSize: '18px', marginTop: '10px' }}><span className="mb-2 text-muted">Name: </span>{this.state.taxiDetails.first_name + ' ' + this.state.taxiDetails.last_name}</CardText>
+                                <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Brand: </span>{this.state.taxiDetails.brand_name}</CardText>
+                                <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Model: </span>{this.state.taxiDetails.brand_model}</CardText>
+                                <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Colour: </span>{this.state.taxiDetails.colour}</CardText>
+                                <div style={{ padding: '5px 0' }}>
+                                    {
+                                        this.state.reviews.map((review, index) => {
+                                            return <div key={index} style={{ boxShadow: 'rgb(0 0 0 / 12%) 0px 0px 4px 1px', margin: '15px 0', padding: '10px 20px' }}>
+                                                <div style={{ margin: '0 0 5px 0' }}>
+                                                    <StarRatings
+                                                        className='mb-2'
+                                                        rating={review.rating}
+                                                        starRatedColor="gold"
+                                                        numberOfStars={5}
+                                                        starDimension="20px"
+                                                        name='rating'
+                                                    />
+                                                </div>
+                                                <CardText style={{ fontSize: '14px', fontWeight: 'bold' }}><span className="text-muted">{new Date(review.created_date).toDateString()} ({review.first_name + ' ' + review.last_name})</span></CardText>
+                                                <CardText style={{ fontSize: '17px' }}>{review.comment}</CardText>
+                                            </div>
+                                        })
+                                    }
+                                    {
+                                        displayLoadMore
+                                            ?
+                                            <div className="text-center">
+                                                <button style={{ margin: '10px 0' }} type="button" className="smallBtn" onClick={this.loadMoreReview}>Load more reviews</button>
+                                            </div>
+                                            :
+                                            null
+                                    }
+                                </div>
+                            </Col>
+                        </Row>
+                    </CardBody>
+                </Card>
             </div>
         )
     }

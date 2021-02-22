@@ -23,6 +23,15 @@ class Taxi {
             responseHelper.error(res, error, req.headers.language)
         }
     }
+    async getTaxiForAdmin(req, res) {
+        try {
+            const taxi = await taxiHelper.selectTaxiForAdmin(req.params.taxi_id)
+            responseHelper.success(res, 'GET_TAXIS_SUCCESS', req.headers.language, { ...taxi })
+        } catch (error) {
+            console.log(error)
+            responseHelper.error(res, error, req.headers.language)
+        }
+    }
     async addTaxi(req, res) {
         try {
             await taxiValidator.validateAddTaxiForm(req.body)
@@ -58,6 +67,15 @@ class Taxi {
     async getReviews(req, res) {
         try {
             const reviews = await taxiHelper.selectReviews(req.params.taxi_id, req.query.page_no)
+            responseHelper.success(res, 'GET_REVIEWS_SUCCESS', req.headers.language, { total_reviews: reviews.reviewsCount, reviews: reviews.reviews })
+        } catch (error) {
+            console.log(error)
+            responseHelper.error(res, error, req.headers.language)
+        }
+    }
+    async getReviewsForAdmin(req, res) {
+        try {
+            const reviews = await taxiHelper.selectReviewsForAdmin(req.params.taxi_id, req.query.page_no)
             responseHelper.success(res, 'GET_REVIEWS_SUCCESS', req.headers.language, { total_reviews: reviews.reviewsCount, reviews: reviews.reviews })
         } catch (error) {
             console.log(error)

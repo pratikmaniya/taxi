@@ -56,6 +56,23 @@ class TaxiHelper {
             return promise.reject(error)
         }
     }
+    async selectTaxiForAdmin(taxi_id) {
+        try {
+            const selectParams = ` taxis.*, CONCAT('${config.s3uploadURL}/', taxis.license_image_front) AS license_image_front,
+                                CONCAT('${config.s3uploadURL}/', taxis.vehicle_image) AS vehicle_image, AVG(reviews.rating) AS rating `,
+                joins = ` LEFT JOIN reviews ON reviews.taxi_id=taxis.id `,
+                where = ` taxis.id=${taxi_id} `,
+                pagination = ` GROUP BY taxis.id `,
+                taxis = await db.select('taxis' + joins, selectParams, where + pagination)
+            if (taxis.length === 0) {
+                throw 'TAXI_WITH_ID_NOT_FOUND'
+            } else {
+                return taxis[0]
+            }
+        } catch (error) {
+            return promise.reject(error)
+        }
+    }
     async selectTaxis(body) {
         try {
             let selectParams = ` *, CONCAT('${config.s3uploadURL}/', license_image_front) AS license_image_front,
@@ -99,6 +116,19 @@ class TaxiHelper {
                 where = ` taxi_id=${taxi_id} `,
                 pagination = ` ORDER BY created_date DESC LIMIT ${Number(config.limit)} OFFSET ${Number(config.limit) * (Number(page_no) - 1)} `,
                 reviews = await db.select('reviews', selectParams, where + pagination),
+                reviewsCount = await db.select('reviews', `COUNT(DISTINCT id) AS count`, where)
+            return { reviews, reviewsCount: reviewsCount.length > 0 ? reviewsCount[0].count : 0 }
+        } catch (error) {
+            return promise.reject(error)
+        }
+    }
+    async selectReviewsForAdmin(taxi_id, page_no) {
+        try {
+            const selectParams = ` reviews.rating, reviews.comment, reviews.created_date, users.first_name, users.last_name `,
+                joins = ` LEFT JOIN users ON reviews.user_id=users.id `,
+                where = ` taxi_id=${taxi_id} `,
+                pagination = ` ORDER BY created_date DESC LIMIT ${Number(config.limit)} OFFSET ${Number(config.limit) * (Number(page_no) - 1)} `,
+                reviews = await db.select('reviews' + joins, selectParams, where + pagination),
                 reviewsCount = await db.select('reviews', `COUNT(DISTINCT id) AS count`, where)
             return { reviews, reviewsCount: reviewsCount.length > 0 ? reviewsCount[0].count : 0 }
         } catch (error) {
