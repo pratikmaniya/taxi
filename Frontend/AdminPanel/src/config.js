@@ -1,13 +1,13 @@
 console.log('Environment:::', process.env.NODE_ENV)
 
 let config = {
-    SampleCSVURL: "https://motologs-dev.s3.amazonaws.com/backend-utils/MotologsSampleCSV.csv",
+    LIMIT:10,
     auth_token: "%!DyVNgw4x%MOBpwHgEeG&glJRsN3wlC4p4yMpHkmv^NW7BK%Z",
     EMAIL_REGEX: /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 }
 
 if (process.env.NODE_ENV === 'production') {
-    config.API_BASE_URL = 'https://admin.loggy.com:8443/api/v1/admin/'
+    config.API_BASE_URL = 'https://info.incoognito.com/api/v1/admin/'
     config.urlCheckIndex = 2
 } else {
     config.API_BASE_URL = 'http://localhost:3004/api/v1/admin/'

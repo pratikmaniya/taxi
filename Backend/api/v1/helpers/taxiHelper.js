@@ -78,8 +78,8 @@ class TaxiHelper {
         try {
             const where = ` id=${taxi_id} `,
                 data = {
-                    is_active: flag,
-                    modified_date: dateHelper.getCurrentTimeStamp()
+                    is_approved: flag,
+                    modified_date: 'now()'
                 },
                 result = await db.update('taxis', where, data)
             if (result.affectedRows === 0) {

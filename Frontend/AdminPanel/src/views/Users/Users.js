@@ -9,23 +9,22 @@ import store from '../../utils/store';
 import * as actionTypes from '../../store/actionTypes';
 import loading_image from '../../assets/images/loading_img.png'
 import default_img from '../../assets/images/default_img.png'
+import config from '../../config';
 
 class Users extends Component {
     state = {
         users: [],
         totalItemCount: 0,
         search_keyword: "",
-        page_no: this.props.global_page_no,
-        limit: this.props.global_page_no
+        page_no: this.props.global_page_no
     }
     getUsers = async (reqData) => {
-        let response = await apiCall('POST', 'getAllUsers', reqData);
+        let response = await apiCall('POST', 'users', reqData);
         this.setState({ users: response.data.users, totalItemCount: response.data.total_users });
     }
     componentDidMount() {
         let data = {
-            page_no: this.props.global_page_no,
-            limit: this.props.global_limit
+            page_no: this.props.global_page_no
         }
         if (this.props.global_search_keyword) {
             data.query_string = this.props.global_search_keyword
@@ -33,17 +32,14 @@ class Users extends Component {
         this.getUsers(data)
         this.setState({
             page_no: this.props.global_page_no,
-            limit: this.props.global_limit,
             search_keyword: this.props.global_search_keyword
         })
     }
     async componentDidUpdate(prevProps) {
         if (prevProps.global_page_no !== this.props.global_page_no
-            || prevProps.global_limit !== this.props.global_limit
             || prevProps.global_search_keyword !== this.props.global_search_keyword) {
             let data = {
-                page_no: this.props.global_page_no,
-                limit: this.props.global_limit
+                page_no: this.props.global_page_no
             }
             if (this.props.global_search_keyword) {
                 data.query_string = this.props.global_search_keyword
@@ -51,14 +47,10 @@ class Users extends Component {
             await this.getUsers(data);
             this.setState({
                 search_keyword: this.props.global_search_keyword,
-                page_no: this.props.global_page_no,
-                limit: this.props.global_limit
+                page_no: this.props.global_page_no
             })
 
         }
-    }
-    addUser = () => {
-        this.props.history.push(process.env.PUBLIC_URL + '/users/add');
     }
     changeSearch = (event) => {
         this.setState({ [event.target.name]: event.target.value })
@@ -81,29 +73,6 @@ class Users extends Component {
             })
         }
     }
-    activeClickHandler = async (user, flag, index) => {
-        let reqData = {
-            user_id: user.id,
-            flag: flag
-        }
-        let response = await apiCall('POST', 'updateActiveStatusOfUser', reqData);
-        if (response.code === 1) {
-            let users = this.state.users;
-            users[index].is_active = flag;
-            this.setState({ users: users });
-        }
-        displayLog(response.code, response.message);
-    }
-    changeLimitHandler = event => {
-        store.dispatch({
-            type: actionTypes.SET_PAGE_NO,
-            page_no: 1
-        })
-        store.dispatch({
-            type: actionTypes.SET_PAGE_LIMIT,
-            limit: event.target.value
-        })
-    }
     handlePageChange = pageNumber => {
         store.dispatch({
             type: actionTypes.SET_PAGE_NO,
@@ -113,7 +82,7 @@ class Users extends Component {
     tableRow = (user, index) => {
         return (
             <tr key={index}>
-                <td className="text-center">{(this.state.page_no - 1) * this.state.limit + index + 1}</td>
+                <td className="text-center">{(this.state.page_no - 1) * config.LIMIT + index + 1}</td>
                 <td className="align-middle">
                     <Img
                         className="table-cell-img"
@@ -149,11 +118,6 @@ class Users extends Component {
                             <CardBody>
                                 <Row className="align-items-right">
                                     <Col sm="12" md="6" xl="4" className="mb-3 mb-xl-0">
-                                        <Input type="select" name="type" className="w-25" onChange={(event) => { this.changeLimitHandler(event) }} value={this.props.global_limit}>
-                                            <option value="10"> 10 </option>
-                                            <option value="20"> 20 </option>
-                                            <option value="30"> 30 </option>
-                                        </Input>
                                     </Col>
                                     <Col sm="12" md="6" xl="8" className="mb-3 mb-xl-0">
                                         <Row className="justify-content-end">
@@ -200,7 +164,7 @@ class Users extends Component {
                                         <div className="float-right">
                                             <Pagination
                                                 activePage={this.props.global_page_no}
-                                                itemsCountPerPage={this.props.global_limit}
+                                                itemsCountPerPage={config.LIMIT}
                                                 totalItemsCount={Number(this.state.totalItemCount)}
                                                 itemClass='page-item'
                                                 linkClass='page-link'
@@ -222,7 +186,6 @@ class Users extends Component {
 const mapStateToProps = state => {
     return {
         global_page_no: state.reducer.page_no,
-        global_limit: state.reducer.limit,
         global_search_keyword: state.reducer.search_keyword
     }
 }

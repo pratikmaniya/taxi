@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, Button, Input } from 'reactstrap';
 import Joi from 'joi-browser';
 import { withRouter, Link } from 'react-router-dom';
-import { AppSidebarToggler } from '@coreui/react';
+import { AppSidebarToggler,AppNavbarBrand } from '@coreui/react';
 
 import * as common from '../utils/common';
 import { validateSchema, formValueChangeHandler, apiCall, displayLog } from '../utils/common';
@@ -91,12 +91,12 @@ class DefaultHeader extends Component {
         />
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
         <Link style={{ textDecoration: "none" }} to={process.env.PUBLIC_URL + "/dashboard"}>
-          {/* <AppNavbarBrand
+          <AppNavbarBrand
             tag="span"
-            full={{ src: logo, width: 100, alt: 'motologs Logo' }}
-            minimized={{ src: loading_img, alt: 'motologs Logo' }}
-          /> */}
-          <h3 className="main-header">INCOOGNITO</h3>
+            full={{ src: 'https://taxi-review.s3-us-west-1.amazonaws.com/logo.png', width: 100, alt: 'motologs Logo' }}
+            minimized={{ src: 'https://taxi-review.s3-us-west-1.amazonaws.com/logo.png', alt: 'motologs Logo' }}
+          />
+          {/* <h3 className="main-header">INCOOGNITO</h3> */}
         </Link>
         <AppSidebarToggler className="d-md-down-none disable-outline" display="lg" />
         <Nav className="ml-auto" navbar>

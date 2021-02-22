@@ -9,11 +9,6 @@ export default {
       name: 'Users',
       url: process.env.PUBLIC_URL + '/users',
       icon: 'fa fa-users',
-    },
-    {
-      name: 'Reviews',
-      url: process.env.PUBLIC_URL + "/reviews",
-      icon: 'fa fa-tachometer',
     }
   ],
 };

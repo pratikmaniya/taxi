@@ -52,7 +52,7 @@ class Taxi {
     async updateTaxi(req, res) {
         try {
             await taxiValidator.validateEditTaxiForm(req.body)
-            await taxiHelper.updateTaxi(req.body)
+            await taxiHelper.updateTaxi(req.body.taxi_id, req.body.flag)
             responseHelper.success(res, 'EDIT_TAXI_SUCCESS', req.headers.language)
         } catch (error) {
             console.log(error)
