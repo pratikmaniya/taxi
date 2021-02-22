@@ -58,10 +58,10 @@ class TaxiHelper {
     }
     async selectTaxis(body) {
         try {
-            let selectParams = ` *, CONCAT('${config.s3uploadURL}', license_image_front) AS license_image_front,
-                                CONCAT('${config.s3uploadURL}', license_image_back) AS license_image_back,
-                                CONCAT('${config.s3uploadURL}', vehicle_image) AS vehicle_image,
-                                CONCAT('${config.s3uploadURL}', proof_of_eligibility_image) AS proof_of_eligibility_image `,
+            let selectParams = ` *, CONCAT('${config.s3uploadURL}/', license_image_front) AS license_image_front,
+                                CONCAT('${config.s3uploadURL}/', license_image_back) AS license_image_back,
+                                CONCAT('${config.s3uploadURL}/', vehicle_image) AS vehicle_image,
+                                CONCAT('${config.s3uploadURL}/', proof_of_eligibility_image) AS proof_of_eligibility_image `,
                 where = ` 1=1 `,
                 pagination = ` ORDER BY created_date DESC LIMIT ${Number(config.limit)} OFFSET ${Number(config.limit) * (Number(body.page_no) - 1)}`
             if (body.query_string && body.query_string.trim().length > 0) {
@@ -119,11 +119,16 @@ class TaxiHelper {
     }
     async isAbleToReview(user_id, taxi_id) {
         try {
-            const selectParams = ` COUNT(id) AS total_ratings, COUNT(id) FILTER(where taxi_id=${taxi_id}) AS today_taxi_rating `,
+            const selectParams = ` COUNT(id) AS today_total_ratings, COUNT(id) FILTER(where taxi_id=${taxi_id}) AS today_taxi_rating `,
                 where = ` user_id=${user_id} AND DATE(created_date)=CURRENT_DATE `,
-             reviews = await db.select('reviews', selectParams, where)
-            console.log(reviews)
-            return true
+                reviews = await db.select('reviews', selectParams, where)
+            if (Number(reviews[0].today_total_ratings) > config.daily_review_limit) {
+                return { code: 2, message: 'DAILY_REVIEW_LIMIT_REACHED' }
+            } else if (Number(reviews[0].today_taxi_rating) > 0) {
+                return { code: 2, message: 'ALREADY_SUBMITTED_REVIEW_FOR_TODAY' }
+            } else {
+                return { code: 1, message: 'ABLE_TO_REVIEW' }
+            }
         } catch (error) {
             return promise.reject(error)
         }

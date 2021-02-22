@@ -17,10 +17,6 @@ class Taxi {
     async getTaxi(req, res) {
         try {
             const taxi = await taxiHelper.selectTaxi(req.query.search, req.user_type)
-            // console.log(req.user_type,req.user_id)
-            // if (req.user_type !== 2 && req.user_id) {
-            //     taxi.is_able_to_review = await taxiHelper.isAbleToReview(req.user_id, taxi.id)
-            // }
             responseHelper.success(res, 'GET_TAXIS_SUCCESS', req.headers.language, { ...taxi })
         } catch (error) {
             console.log(error)
@@ -73,6 +69,15 @@ class Taxi {
             await taxiValidator.validateAddReviewForm(req.body)
             await taxiHelper.insertReview(req.body, req.user_id)
             responseHelper.success(res, 'ADD_REVIEW_SUCCESS', req.headers.language)
+        } catch (error) {
+            console.log(error)
+            responseHelper.error(res, error, req.headers.language)
+        }
+    }
+    async isAbleToReview(req, res) {
+        try {
+            const message = await taxiHelper.isAbleToReview(req.user_id, req.params.taxi_id)
+            responseHelper.success(res, message.message, req.headers.language, { ...message })
         } catch (error) {
             console.log(error)
             responseHelper.error(res, error, req.headers.language)

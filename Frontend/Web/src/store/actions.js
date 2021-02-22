@@ -53,6 +53,17 @@ export const addReview = (data) => {
     }
 }
 
+export const isAbleToReview = (taxi_id) => {
+    return async (dispatch) => {
+        let response = await common.apiCall('get', `isAbleToReview/${taxi_id}`, Types.IS_ABLE_TO_REVIEW_SUCCESS)
+        console.log('Response::::', response)
+        dispatch({
+            type: Types.IS_ABLE_TO_REVIEW_SUCCESS,
+            res: response
+        });
+    }
+}
+
 export const registerTaxi = (data) => {
     return async (dispatch) => {
         let response = await common.apiCall('PUT', 'taxi', Types.REGISTER_TAXI_SUCCESS, data)

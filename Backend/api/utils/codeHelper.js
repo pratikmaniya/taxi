@@ -17,7 +17,7 @@ class CodeHelper {
     }
     getJwtToken(user_id, user_type) {
         try {
-            let expirationTime = 15 * 60,
+            let expirationTime = 120 * 60,
                 sign = {
                     user_id: user_id,
                     user_type: user_type

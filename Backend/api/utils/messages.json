@@ -17,6 +17,8 @@
         "TAXI_WITH_PLATE_NO_ALREADY_REGISTERED": "Taxi with specified plate number already registered!",
         "ADD_TAXI_SUCCESS": "Taxi added successfully",
         "EDIT_TAXI_SUCCESS": "Taxi updated successfully",
+        "DAILY_REVIEW_LIMIT_REACHED": "You reached daily limit of submitting reviews",
+        "ALREADY_SUBMITTED_REVIEW_FOR_TODAY": "You already submitted review for this taxi for today",
         "ADD_REVIEW_SUCCESS": "Review added successfully",
         "GET_REVIEWS_SUCCESS": "Reviews retrieved successfully",
         "GET_ALL_USER_SUCCESS": "Users retrieved successfully",

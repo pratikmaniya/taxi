@@ -25,6 +25,7 @@ class HeaderValidator {
   }
 
   authValidation(req, res, next) {
+    console.log("req.headers", req.headers)
     let error = HV.validateHeaders(req.headers)
     if (error) {
       responseHelper.error(res, error, req.headers.language)

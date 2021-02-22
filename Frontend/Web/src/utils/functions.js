@@ -148,12 +148,15 @@ export const apiCall = (method, url, actionType, reqData, params, headers) => {
             .catch(async (error) => {
                 console.log('=================error', error);
                 if (error.response && error.response.status === 401) {
-                    history.push(process.env.PUBLIC_URL + '/signin');
-                    localStorage.clear()
-                    displayLog(0, 'Session expired!');
                     store.dispatch({
                         type: Types.STOP_LOADER
                     })
+                    alertify.confirm("You need to login first!", (status) => {
+                        if (status) {
+                            localStorage.clear()
+                            history.push(process.env.PUBLIC_URL + '/signin');
+                        }
+                    }).setHeader('Incoognito').set('labels', { ok: 'OK', cancel: 'CANCEL' });
                 } else {
                     localStorage.clear()
                     if (!error.code === 403) {

@@ -16,9 +16,10 @@ module.exports = (function () {
     awsAccesskey: "AKIAXTG4E23EFUPKC67Z",
     awsSecretkey: "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",
     s3bucketName: "taxi-review",
-    s3uploadURL: "https://taxi-review.s3-us-west-1.amazonaws.com/",
+    s3uploadURL: "https://taxi-review.s3-us-west-1.amazonaws.com",
     resetPasswordURLPrefix: "http://localhost:3000/resetPassword",
-    limit: 10
+    limit: 10,
+    daily_review_limit: 4
   }
   if (process.env.NODE_ENV === "production") {
     data.resetPasswordURLPrefix = "https://info.incoognito.com/admin-panel/resetPassword"

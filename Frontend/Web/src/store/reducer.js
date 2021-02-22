@@ -7,6 +7,7 @@ const initialState = {
   searchTaxiRes: {},
   getReviewRes: {},
   addReviewRes: {},
+  isAbleToreviewRes: {},
   registerTaxiRes: {},
 }
 
@@ -35,6 +36,13 @@ const addReviewSuccess = (state, action) => {
   return {
     ...state,
     addReviewRes: action.res,
+  }
+}
+
+const isAbleToReviewSuccess = (state, action) => {
+  return {
+    ...state,
+    isAbleToreviewRes: action.res,
   }
 }
 
@@ -72,6 +80,7 @@ const reducer = (state = initialState, action) => {
     case Types.REGISTER_TAXI_SUCCESS: return registerTaxiSuccess(state, action)
     case Types.GET_REVIEWS_SUCCESS: return getReviewsSuccess(state, action)
     case Types.ADD_REVIEW_SUCCESS: return addReviewSuccess(state, action)
+    case Types.IS_ABLE_TO_REVIEW_SUCCESS: return isAbleToReviewSuccess(state, action)
     default:
       return state
   }

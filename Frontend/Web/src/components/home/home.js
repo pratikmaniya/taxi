@@ -7,13 +7,15 @@ import queryString from 'query-string'
 import ReactTooltip from 'react-tooltip';
 import Img from 'react-image';
 
-import { searchTaxi, getReviews, addReview } from '../../store/actions';
+import { searchTaxi, getReviews, addReview, isAbleToReview } from '../../store/actions';
 import { displayLog } from "../../utils/functions";
 import loading_image from '../../images/loading_img.png'
 import default_img from '../../images/default_img.png'
 
 class Home extends Component {
     state = {
+        isAbleToReview: false,
+        isAbleToReviewMessage: "",
         search_text: '',
         ratingForm: {
             rating: 0,
@@ -64,9 +66,22 @@ class Home extends Component {
                     rating: this.props.searchTaxiRes.data.rating
                 }
             })
+            this.isAbleToReview()
             this.getReviews()
         } else {
             displayLog(0, this.props.searchTaxiRes.message)
+        }
+    }
+    isAbleToReview = async () => {
+        await this.props.isAbleToReview(this.props.searchTaxiRes.data.id)
+        if (this.props.isAbleToreviewRes && this.props.isAbleToreviewRes.code === 1) {
+            if (this.props.isAbleToreviewRes.data.code === 2) {
+                this.setState({ isAbleToReview: false, isAbleToReviewMessage: this.props.isAbleToreviewRes.message })
+            } else {
+                this.setState({ isAbleToReview: true, isAbleToReviewMessage: " this.props.isAbleToreviewRes.data.message" })
+            }
+        } else {
+            displayLog(0, this.props.isAbleToreviewRes.message)
         }
     }
     getReviews = async () => {
@@ -160,7 +175,7 @@ class Home extends Component {
                                         <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Brand: </span>{this.state.taxiDetails.brand_name}</CardText>
                                         <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Model: </span>{this.state.taxiDetails.brand_model}</CardText>
                                         <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Colour: </span>{this.state.taxiDetails.colour}</CardText>
-                                        <button style={loggedIn ? { margin: '10px 0' } : { margin: '10px 0', opacity: 0.5 }} type="button" data-tip={loggedIn ? "" : "Please login to submit a review!"} className="smallBtn" onClick={loggedIn ? () => this.toggleReviewPopup(true) : null}>Give Review</button>
+                                        <button style={this.state.isAbleToReview ? { margin: '10px 0' } : { margin: '10px 0', opacity: 0.5 }} type="button" data-tip={this.state.isAbleToReview ? "" : this.state.isAbleToReviewMessage} className="smallBtn" onClick={this.state.isAbleToReview ? () => this.toggleReviewPopup(true) : null}>Give Review</button>
                                         <ReactTooltip place="top" type="dark" effect="float" />
                                         <div style={{ padding: '5px 0' }}>
                                             {
@@ -226,7 +241,8 @@ const mapStateToProps = state => {
     return {
         searchTaxiRes: state.reducer.searchTaxiRes,
         addReviewRes: state.reducer.addReviewRes,
-        getReviewRes: state.reducer.getReviewRes
+        getReviewRes: state.reducer.getReviewRes,
+        isAbleToreviewRes: state.reducer.isAbleToreviewRes
     }
 }
 
@@ -234,7 +250,8 @@ const mapDispatchToProps = dispatch => {
     return {
         searchTaxi: (reqData) => dispatch(searchTaxi(reqData)),
         getReviews: (reqData, id) => dispatch(getReviews(reqData, id)),
-        addReview: (reqData) => dispatch(addReview(reqData))
+        addReview: (taxi_id) => dispatch(addReview(taxi_id)),
+        isAbleToReview: (reqData) => dispatch(isAbleToReview(reqData))
     }
 }
 
