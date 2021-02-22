@@ -31,7 +31,11 @@ class Register extends Component {
     }
     fileSelectHandler = (event) => {
         console.log(event.target.files, event.target.file)
-        this.setState({ form: { ...this.state.form, [event.target.name]: event.target.files[0] } });
+        if (event.target.files[0].size <= 1000000) {
+            this.setState({ form: { ...this.state.form, [event.target.name]: event.target.files[0] } });
+        } else {
+            displayLog(0, 'Image must be less than 1MB')
+        }
     }
     submitHandler = async () => {
         const formData = {
