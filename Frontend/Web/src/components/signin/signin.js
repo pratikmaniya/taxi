@@ -41,7 +41,8 @@ class Signin extends Component {
   signin = async (data) => {
     await this.props.login(data)
     if (this.props.loginRes && this.props.loginRes.code === 1) {
-      this.props.history.push({ pathname: process.env.PUBLIC_URL + '/' })
+      localStorage.setItem('INCOOGNITO-TOKEN', this.props.loginRes.data.auth_token)
+      this.props.history.push(process.env.PUBLIC_URL + '/')
       displayLog(1, this.props.loginRes.message)
     } else {
       displayLog(0, this.props.loginRes.message)

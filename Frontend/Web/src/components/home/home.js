@@ -93,14 +93,11 @@ class Home extends Component {
         const reqData = {
             taxi_id: this.props.searchTaxiRes.data.id,
             rating: this.state.ratingForm.rating
-        },
-            reqHeader = {
-                auth_token: this.props.loginRes.data.auth_token
-            }
+        }
         if (this.state.ratingForm.comment) {
             reqData.comment = this.state.ratingForm.comment
         }
-        await this.props.addReview(reqData, reqHeader)
+        await this.props.addReview(reqData)
         if (this.props.addReviewRes && this.props.addReviewRes.code === 1) {
             this.setState({ openReviewModal: false, ratingForm: { rating: 0, comment: "" } })
             this.getReviews()
@@ -113,7 +110,7 @@ class Home extends Component {
         await this.getReviews()
     }
     render() {
-        const loggedIn = this.props.loginRes.data && this.props.loginRes.data.auth_token,
+        const loggedIn = localStorage.getItem('INCOOGNITO-TOKEN') ? true : false,
             displayLoadMore = this.state.totalReviews && this.state.totalReviews > this.state.reviews.length
         return (
             <Container>
@@ -229,8 +226,7 @@ const mapStateToProps = state => {
     return {
         searchTaxiRes: state.reducer.searchTaxiRes,
         addReviewRes: state.reducer.addReviewRes,
-        getReviewRes: state.reducer.getReviewRes,
-        loginRes: state.reducer.loginRes
+        getReviewRes: state.reducer.getReviewRes
     }
 }
 
@@ -238,7 +234,7 @@ const mapDispatchToProps = dispatch => {
     return {
         searchTaxi: (reqData) => dispatch(searchTaxi(reqData)),
         getReviews: (reqData, id) => dispatch(getReviews(reqData, id)),
-        addReview: (reqData, header) => dispatch(addReview(reqData, header))
+        addReview: (reqData) => dispatch(addReview(reqData))
     }
 }
 

@@ -17,7 +17,7 @@ function Header(props) {
                             <ul className="d-flex align-items-center snip menu">
                                 <li><NavLink to={process.env.PUBLIC_URL + '/'}>Home</NavLink></li>
                                 <li><NavLink to={process.env.PUBLIC_URL + '/register'}>Register Taxi</NavLink></li>
-                                {props.loginRes.data && props.loginRes.data.auth_token ?
+                                {(props.loginRes.data && props.loginRes.data.auth_token) || localStorage.getItem('INCOOGNITO-TOKEN') ?
                                     <li><a style={{ cursor: 'pointer' }} onClick={() => common.logout()}>Log Out</a></li>
                                     :
                                     <li className="signInUpBtn">

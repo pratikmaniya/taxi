@@ -42,9 +42,9 @@ export const getReviews = (params, taxi_id) => {
     }
 }
 
-export const addReview = (data, header) => {
+export const addReview = (data) => {
     return async (dispatch) => {
-        let response = await common.apiCall('PUT', `review`, Types.ADD_REVIEW_SUCCESS, data, {}, header)
+        let response = await common.apiCall('PUT', `review`, Types.ADD_REVIEW_SUCCESS, data, {})
         console.log('Response::::', response)
         dispatch({
             type: Types.ADD_REVIEW_SUCCESS,

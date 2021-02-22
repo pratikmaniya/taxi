@@ -118,8 +118,8 @@ export const apiCall = (method, url, actionType, reqData, params, headers) => {
             type: Types.START_LOADER
         })
         let reqHeaders = { "auth_token": config.AUTHORIZATION };
-        if (headers) {
-            reqHeaders = headers;
+        if (localStorage.getItem('INCOOGNITO-TOKEN')) {
+            reqHeaders.auth_token = localStorage.getItem('INCOOGNITO-TOKEN');
         }
         axios({
             method: method,
