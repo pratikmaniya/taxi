@@ -12,6 +12,40 @@ import { displayLog } from "../../utils/functions";
 import loading_image from '../../images/loading_img.png'
 import default_img from '../../images/default_img.png'
 
+const defaultTaxiDetails = {
+    id: 4,
+    phone_no: "8685431234",
+    email: "karlonstbernard@gmail.com",
+    first_name: "Test Karlon",
+    last_name: "Test Karlon",
+    plate_no: "HHHH1234",
+    brand_name: "Honda",
+    brand_model: "Civic",
+    colour: "Blue",
+    license_image_front: "https://taxi-review.s3-us-west-1.amazonaws.com/taxi/1613816619059-Karlon St Bernard  2020.JPG",
+    license_image_back: "taxi/1613816619269-Karlon St Bernard  2020.JPG",
+    vehicle_image: "https://taxi-review.s3-us-west-1.amazonaws.com/taxi/1613816619345-Karlon St Bernard  2020.JPG",
+    proof_of_eligibility_image: "taxi/1613816619398-Karlon St Bernard  2020.JPG",
+    created_date: "2021-02-20T10:23:39.519Z",
+    modified_date: "2021-02-21T07:04:25.630Z",
+    is_approved: true,
+    rating: 3.5
+},
+    defaultReviews = [
+        {
+            rating: 3,
+            comment: "good service",
+            created_date: "2021-02-22T05:18:29.236Z",
+            modified_date: "2021-02-22T05:18:29.236Z"
+        },
+        {
+            rating: 4,
+            comment: "test",
+            created_date: "2021-02-20T07:20:53.073Z",
+            modified_date: "2021-02-20T07:20:53.073Z"
+        }
+    ]
+
 class Home extends Component {
     state = {
         search_text: '',
@@ -19,8 +53,8 @@ class Home extends Component {
             rating: 0,
             comment: ""
         },
-        taxiDetails: {},
-        reviews: [],
+        taxiDetails: { ...defaultTaxiDetails },
+        reviews: [...defaultReviews],
         page_no: 1,
         totalReviews: 0,
         openReviewModal: false
@@ -42,31 +76,35 @@ class Home extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
     searchHandler = async () => {
-        this.props.history.push({
-            pathname: process.env.PUBLIC_URL + '/',
-            search: `?search=${this.state.search_text}`
-        })
-        const reqData = {
-            search: this.state.search_text.trim()
-        }
-        await this.props.searchTaxi(reqData)
-        if (this.props.searchTaxiRes && this.props.searchTaxiRes.code === 1) {
-            await this.setState({
-                taxiDetails: {
-                    first_name: this.props.searchTaxiRes.data.first_name,
-                    last_name: this.props.searchTaxiRes.data.last_name,
-                    plate_no: this.props.searchTaxiRes.data.plate_no,
-                    brand_name: this.props.searchTaxiRes.data.brand_name,
-                    brand_model: this.props.searchTaxiRes.data.brand_model,
-                    colour: this.props.searchTaxiRes.data.colour,
-                    license_image_front: this.props.searchTaxiRes.data.license_image_front,
-                    vehicle_image: this.props.searchTaxiRes.data.vehicle_image,
-                    rating: this.props.searchTaxiRes.data.rating
-                }
+        if (this.state.search_text) {
+            this.props.history.push({
+                pathname: process.env.PUBLIC_URL + '/',
+                search: `?search=${this.state.search_text}`
             })
-            this.getReviews()
+            const reqData = {
+                search: this.state.search_text.trim()
+            }
+            await this.props.searchTaxi(reqData)
+            if (this.props.searchTaxiRes && this.props.searchTaxiRes.code === 1) {
+                await this.setState({
+                    taxiDetails: {
+                        first_name: this.props.searchTaxiRes.data.first_name,
+                        last_name: this.props.searchTaxiRes.data.last_name,
+                        plate_no: this.props.searchTaxiRes.data.plate_no,
+                        brand_name: this.props.searchTaxiRes.data.brand_name,
+                        brand_model: this.props.searchTaxiRes.data.brand_model,
+                        colour: this.props.searchTaxiRes.data.colour,
+                        license_image_front: this.props.searchTaxiRes.data.license_image_front,
+                        vehicle_image: this.props.searchTaxiRes.data.vehicle_image,
+                        rating: this.props.searchTaxiRes.data.rating
+                    }
+                })
+                this.getReviews()
+            } else {
+                displayLog(0, this.props.searchTaxiRes.message)
+            }
         } else {
-            displayLog(0, this.props.searchTaxiRes.message)
+            this.props.history.push({ pathname: process.env.PUBLIC_URL + '/' })
         }
     }
     getReviews = async () => {
@@ -137,7 +175,7 @@ class Home extends Component {
                         ?
                         <div className="taxi-card">
                             <Row>
-                                <Col md='4' sm='12' style={{ textAlign: "center", borderRight: '1px solid #3e77f763', padding: '0 30px' }}>
+                                <Col md='4' sm='12' className="img-container">
                                     <Img
                                         className="taxi-card-img"
                                         src={this.state.taxiDetails.license_image_front}

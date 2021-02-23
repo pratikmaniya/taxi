@@ -11,22 +11,29 @@ function Header(props) {
         <header>
             <div className="logoSection">
                 <div className="container">
-                    <div className="logoContent d-flex align-items-center">
+                    <nav class="navbar navbar-expand-lg navbar-dark logoContent d-flex align-items-center">
                         <NavLink className="logo" to={process.env.PUBLIC_URL + '/'}><img src={logo} alt="logo" height='75px' /></NavLink>
-                        <nav className="header">
-                            <ul className="d-flex align-items-center snip menu">
-                                <li><NavLink to={process.env.PUBLIC_URL + '/'}>Home</NavLink></li>
-                                <li><NavLink to={process.env.PUBLIC_URL + '/register'}>Register Taxi</NavLink></li>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav d-flex align-items-center snip menu">
+                                <li class="nav-item">
+                                    <NavLink to={process.env.PUBLIC_URL + '/'}>Home</NavLink>
+                                </li>
+                                <li class="nav-item">
+                                    <NavLink to={process.env.PUBLIC_URL + '/register'}>Driver Registration</NavLink>
+                                </li>
                                 {(props.loginRes.data && props.loginRes.data.auth_token) || localStorage.getItem('RIDESAFETT-TOKEN') ?
-                                    <li><a style={{ cursor: 'pointer' }} onClick={() => common.logout()}>Log Out</a></li>
+                                    <li class="nav-item"><a style={{ cursor: 'pointer' }} onClick={() => common.logout()}>Log Out</a></li>
                                     :
-                                    <li className="signInUpBtn">
-                                        <NavLink className="" to={process.env.PUBLIC_URL + '/signin'}>Sign In</NavLink>
+                                    <li class="nav-item">
+                                        <NavLink className="" to={process.env.PUBLIC_URL + '/signin'}>Register/SignIn</NavLink>
                                     </li>
                                 }
                             </ul>
-                        </nav>
-                    </div>
+                        </div>
+                    </nav>
                 </div>
             </div>
         </header>

@@ -75,12 +75,14 @@ header ul.socialIcon li {
     margin: 0 15px;
 }
 
-header ul.socialIcon li:last-child {
-    margin-right: 0px;
-}
-
 header ul.socialIcon {
     justify-content: flex-end;
+}
+
+.logoSection {
+    background-color: #4f9ae4;
+    color: #FFF;
+    border-bottom: 2px solid #f4c243;
 }
 
 header .logoContent {
@@ -96,15 +98,12 @@ header nav li a {
 }
 
 header nav li {
+    padding: 10px 0;
     margin: 0 22px;
 }
 
-header nav li:last-child {
-    margin-right: 0px;
-}
-
 header li.signInUpBtn {
-    background: #1a73e8;
+    background: #4f9ae4;
     padding: 7px 14px;
     border-radius: 4px;
     color: #fff;
@@ -125,13 +124,17 @@ header .snip li.signInUpBtn a:before {
 }
 
 header .snip a {
-    color: #1a73e8;
+    color: #FFF;
     position: relative;
     transition: all 0.3s ease;
 }
 
+.snip.menu {
+    margin: 0 0 0 auto;
+}
+
 header .snip a:hover {
-    color: #1a73e8;
+    color: #f4c243;
 }
 
 header .snip li.activeMenu a:before {
@@ -141,14 +144,14 @@ header .snip li.activeMenu a:before {
     height: 3px;
     z-index: 9;
     bottom: -21px;
-    background: #1a73e8;
+    background: #4f9ae4;
     transition: all 0.3s ease;
     opacity: 1;
     visibility: visible;
 }
 
 header nav li.activeMenu a {
-    color: #1a73e8;
+    color: #4f9ae4;
 }
 
 header .snip a:before {
@@ -158,7 +161,7 @@ header .snip a:before {
     height: 3px;
     z-index: 9;
     bottom: -21px;
-    background: #1a73e8;
+    background: #f4c243;
     transition: all 0.3s ease;
     opacity: 0;
     visibility: hidden;
@@ -171,7 +174,7 @@ header .snip a:hover:before {
 
 button.Btn {
     padding: 16px 46px;
-    background: #1a73e8;
+    background: #4f9ae4;
     border-radius: 5px;
     color: #fff;
     font-size: 20px;
@@ -229,7 +232,7 @@ footer {
 }
 
 .footerSocialIcon li a:hover {
-    background: #1a73e8;
+    background: #4f9ae4;
 }
 
 .footerSocialIcon li a:hover svg {
@@ -269,7 +272,7 @@ ul.others li {
 }
 
 ul.others a:hover {
-    color: #1a73e8;
+    color: #4f9ae4;
 }
 
 ul.others li:before {
@@ -323,7 +326,7 @@ ul.others.contactUs {
 }
 
 .footerMenu li a:hover {
-    color: #1a73e8;
+    color: #4f9ae4;
 }
 
 .copyright {
@@ -332,10 +335,6 @@ ul.others.contactUs {
 
 .footerMenu li {
     margin: 0 20px;
-}
-
-.footerMenu li:last-child {
-    margin-right: 0px;
 }
 
 ul.footerMenu {
@@ -377,7 +376,7 @@ ul.footerMenu {
 }
 
 .smallBtn {
-    background: #1a73e8;
+    background: #4f9ae4;
     border: none;
     color: #fff;
     font-size: 18px;
@@ -493,7 +492,7 @@ button.smallBtn.width {
     border-bottom-right-radius: 15px;
     height: 70px;
     font-size: 30px;
-    border: 2px solid #1a73e8!important;
+    border: 2px solid #4f9ae4!important;
     box-shadow: none!important;
 }
 
@@ -502,7 +501,7 @@ button.smallBtn.width {
     top: 0;
     right: 0;
     padding: 12px 20px;
-    background-color: #1a73e8;
+    background-color: #4f9ae4;
     font-size: 30px;
     color: #FFF;
     border-top-right-radius: 15px;
@@ -511,17 +510,17 @@ button.smallBtn.width {
 }
 
 .search-input-icon-container:hover {
-    color: #a1b5e4;
+    color: #f4c243;
 }
 
 .taxi-card {
-    border: 1px solid #1a73e863;
+    border: 1px solid #4f9ae4;
     border-radius: 5px;
 }
 
-.taxi-card-img{
-    height:180px;
-    width:300px;
+.taxi-card-img {
+    height: 180px;
+    width: 90%;
     object-fit: contain;
     box-shadow: rgb(0 0 0 / 12%) 0px 0px 7px 1px;
     margin: 10px 0;
@@ -530,4 +529,19 @@ button.smallBtn.width {
 
 .loading-img {
     filter: blur(1.5px);
+}
+
+.img-container {
+    text-align: center;
+    border-right: 1px solid #4f9ae4;
+    padding: 0 30px
+}
+
+@media (max-width: 500px) {
+    .img-container {
+        border: none;
+    }
+    .search-input {
+        font-size: 20px;
+    }
 }
