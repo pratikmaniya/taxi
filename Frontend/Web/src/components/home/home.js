@@ -229,7 +229,7 @@ class Home extends Component {
                                             {
                                                 defaultTaxiDetails.id !== this.state.taxiDetails.id
                                                     ?
-                                                    <button style={loggedIn ? { margin: '10px 0' } : { margin: '10px 0', opacity: 0.5 }} type="button" data-tip={loggedIn ? "" : "You need to login to give a review"} className="smallBtn" onClick={loggedIn ? this.giveReviewClickHandler : null}>Give Review</button>
+                                                    <button style={loggedIn ? { margin: '10px 0' } : { margin: '10px 0', opacity: 0.5 }} type="button" data-tip={loggedIn ? "" : "Please login to give a review. Click on Register/Sign In at the top of the page."} className="smallBtn" onClick={loggedIn ? this.giveReviewClickHandler : null}>Give Review</button>
                                                     :
                                                     null
                                             }

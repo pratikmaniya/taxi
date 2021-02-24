@@ -79,7 +79,7 @@ class Register extends Component {
     }
     render() {
         return (
-            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <div style={{ maxWidth: '800px', margin: '40px auto' }}>
                 <div className="container" style={{ border: '2px solid #1a73e8' }}>
                     <div style={{ padding: '50px 10%' }}>
                         <h2 className="text-center mb-4">Register Taxi</h2>
