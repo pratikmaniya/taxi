@@ -82,6 +82,7 @@ class Home extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
     searchHandler = async () => {
+        await this.setState({ taxiDetails: {}, reviews: [] })
         if (this.state.search_text) {
             this.props.history.push({
                 pathname: process.env.PUBLIC_URL + '/',
