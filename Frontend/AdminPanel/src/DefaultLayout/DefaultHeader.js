@@ -93,10 +93,10 @@ class DefaultHeader extends Component {
         <Link style={{ textDecoration: "none" }} to={process.env.PUBLIC_URL + "/taxis"}>
           <AppNavbarBrand
             tag="span"
-            full={{ src: 'https://taxi-review.s3-us-west-1.amazonaws.com/logo.png', width: 100, alt: 'motologs Logo' }}
-            minimized={{ src: 'https://taxi-review.s3-us-west-1.amazonaws.com/logo.png', alt: 'motologs Logo' }}
+            full={{ src: 'https://taxi-review.s3-us-west-1.amazonaws.com/logo.png', height: 50, alt: 'ridesafett Logo' }}
+            minimized={{ src: 'https://taxi-review.s3-us-west-1.amazonaws.com/logo.png', alt: 'ridesafett Logo' }}
           />
-          {/* <h3 className="main-header">INCOOGNITO</h3> */}
+          {/* <h3 className="main-header">Ridesafett</h3> */}
         </Link>
         <AppSidebarToggler className="d-md-down-none disable-outline" display="lg" />
         <Nav className="ml-auto" navbar>
