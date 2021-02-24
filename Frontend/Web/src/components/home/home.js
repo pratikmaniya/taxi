@@ -13,16 +13,16 @@ import loading_image from '../../images/loading_img.png'
 import default_img from '../../images/default_img.png'
 
 const defaultTaxiDetails = {
-    id: 4,
+    id: 4.3,
     phone_no: "8685431234",
     email: "karlonstbernard@gmail.com",
-    first_name: "Test Karlon",
-    last_name: "Test Karlon",
+    first_name: "Karlon",
+    last_name: "St",
     plate_no: "HHHH1234",
     brand_name: "Honda",
     brand_model: "Civic",
     colour: "Blue",
-    license_image_front: "https://taxi-review.s3-us-west-1.amazonaws.com/example-license-front.jpg",
+    license_image_front: "https://taxi-review.s3-us-west-1.amazonaws.com/taxi/1613816619059-Karlon St Bernard  2020.JPG",
     license_image_back: "taxi/1613816619269-Karlon St Bernard  2020.JPG",
     vehicle_image: "https://taxi-review.s3-us-west-1.amazonaws.com/example-vehicle.png",
     proof_of_eligibility_image: "taxi/1613816619398-Karlon St Bernard  2020.JPG",
@@ -33,7 +33,7 @@ const defaultTaxiDetails = {
 },
     defaultReviews = [
         {
-            rating: 3,
+            rating: 4,
             comment: "The driver vehicle was immaculate, and the driver took his time while driving.",
             created_date: "2021-02-22T05:18:29.236Z",
             modified_date: "2021-02-22T05:18:29.236Z"
