@@ -163,7 +163,7 @@ class Taxis extends Component {
                                             <th scope="col" className="align-middle">First Name</th>
                                             <th scope="col" className="align-middle">Last Name</th>
                                             <th scope="col" className="align-middle">Created date</th>
-                                            <th scope="col" className="align-middle text-center">Actions</th>
+                                            <th scope="col" className="align-middle text-center">Approve/View Driver</th>
                                         </tr>
                                     </thead>
                                     {

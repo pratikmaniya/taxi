@@ -4,7 +4,7 @@ import StarRatings from 'react-star-ratings';
 import Img from 'react-image';
 import { connect } from 'react-redux';
 
-import { apiCall, displayLog } from '../../utils/common';
+import { apiCall, displayLog, getFormatedDateFromTimeStamp } from '../../utils/common';
 import loading_image from '../../assets/images/loading_img.png'
 import default_img from '../../assets/images/default_img.png'
 
@@ -50,18 +50,30 @@ class Taxis extends Component {
                             <Col md='4' sm='12' style={{ textAlign: "center", borderRight: '1px solid #00000036', padding: '0 30px' }}>
                                 <Img
                                     className="taxi-card-img"
+                                    src={this.state.taxiDetails.vehicle_image}
+                                    loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                    unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                />
+                                <Img
+                                    className="taxi-card-img"
                                     src={this.state.taxiDetails.license_image_front}
                                     loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
                                     unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
                                 />
                                 <Img
                                     className="taxi-card-img"
-                                    src={this.state.taxiDetails.vehicle_image}
+                                    src={this.state.taxiDetails.license_image_back}
+                                    loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                    unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                />
+                                <Img
+                                    className="taxi-card-img"
+                                    src={this.state.taxiDetails.proof_of_eligibility_image}
                                     loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
                                     unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
                                 />
                             </Col>
-                            <Col md='8' sm='12'>
+                            <Col md='8' sm='12' className="taxi-details-container">
                                 <CardTitle style={{ fontSize: '28px' }}><span className="mb-2 text-muted">Plate Number: </span>{this.state.taxiDetails.plate_no}</CardTitle>
                                 {
                                     this.state.taxiDetails.rating
@@ -75,12 +87,16 @@ class Taxis extends Component {
                                             name='rating'
                                         />
                                         :
-                                        <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">No Ratings</span></CardText>
+                                        <CardText style={{ fontSize: '18px' }}><span className="text-muted">No Ratings</span></CardText>
                                 }
-                                <CardText style={{ fontSize: '18px', marginTop: '10px' }}><span className="mb-2 text-muted">Name: </span>{this.state.taxiDetails.first_name + ' ' + this.state.taxiDetails.last_name}</CardText>
-                                <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Brand: </span>{this.state.taxiDetails.brand_name}</CardText>
-                                <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Model: </span>{this.state.taxiDetails.brand_model}</CardText>
-                                <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Colour: </span>{this.state.taxiDetails.colour}</CardText>
+                                <CardText style={{ fontSize: '18px', marginTop: '10px' }}><span className="text-muted">First Name: </span>{this.state.taxiDetails.first_name}</CardText>
+                                <CardText style={{ fontSize: '18px' }}><span className="text-muted">Last Name: </span>{this.state.taxiDetails.last_name}</CardText>
+                                <CardText style={{ fontSize: '18px' }}><span className="text-muted">Email: </span>{this.state.taxiDetails.email}</CardText>
+                                <CardText style={{ fontSize: '18px' }}><span className="text-muted">Phone Number: </span>{this.state.taxiDetails.phone_no}</CardText>
+                                <CardText style={{ fontSize: '18px' }}><span className="text-muted">Brand: </span>{this.state.taxiDetails.brand_name}</CardText>
+                                <CardText style={{ fontSize: '18px' }}><span className="text-muted">Model: </span>{this.state.taxiDetails.brand_model}</CardText>
+                                <CardText style={{ fontSize: '18px' }}><span className="text-muted">Colour: </span>{this.state.taxiDetails.colour}</CardText>
+                                <CardText style={{ fontSize: '18px' }}><span className="text-muted">Registered on: </span>{getFormatedDateFromTimeStamp(this.state.taxiDetails.created_date)}</CardText>
                                 <div style={{ padding: '5px 0' }}>
                                     {
                                         this.state.reviews.map((review, index) => {

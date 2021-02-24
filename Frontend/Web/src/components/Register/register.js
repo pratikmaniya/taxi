@@ -34,7 +34,7 @@ class Register extends Component {
         if (event.target.files[0].size <= 1000000) {
             this.setState({ form: { ...this.state.form, [event.target.name]: event.target.files[0] } });
         } else {
-            displayLog(0, 'Image must be less than 1MB')
+            displayLog(0, 'The image must be less than 1MB. Please compress the image to make it smaller')
         }
     }
     submitHandler = async () => {
@@ -118,19 +118,19 @@ class Register extends Component {
                             </div>
                             <div className="fieldset col-12">
                                 <label>Please Attach Driver's Taxi Badge/Driver's License Image Front*</label>
-                                <Input type="file" name='license_image_front' value={this.state.license_image_front} onChange={this.fileSelectHandler} />
+                                <Input type="file" name='license_image_front' value={this.state.license_image_front} onChange={this.fileSelectHandler} accept="image/x-png,image/gif,image/jpeg" />
                             </div>
                             <div className="fieldset col-12">
                                 <label>Please Attach Driver's Taxi Badge/Driver's License Image Back*</label>
-                                <Input type="file" name='license_image_back' value={this.state.license_image_back} onChange={this.fileSelectHandler} />
+                                <Input type="file" name='license_image_back' value={this.state.license_image_back} onChange={this.fileSelectHandler} accept="image/x-png,image/gif,image/jpeg" />
                             </div>
                             <div className="fieldset col-12">
                                 <label>Please Attach Image Of Vehicle*</label>
-                                <Input type="file" name='vehicle_image' value={this.state.vehicle_image} onChange={this.fileSelectHandler} />
+                                <Input type="file" name='vehicle_image' value={this.state.vehicle_image} onChange={this.fileSelectHandler} accept="image/x-png,image/gif,image/jpeg" />
                             </div>
                             <div className="fieldset col-12">
                                 <label>Please Attach Proof Of Eligibility To Drive This Vehicle*</label>
-                                <Input type="file" name='proof_of_eligibility_image' value={this.state.proof_of_eligibility_image} onChange={this.fileSelectHandler} />
+                                <Input type="file" name='proof_of_eligibility_image' value={this.state.proof_of_eligibility_image} onChange={this.fileSelectHandler} accept="image/x-png,image/gif,image/jpeg" />
                             </div>
                         </div>
                     </div>

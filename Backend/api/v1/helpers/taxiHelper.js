@@ -59,6 +59,8 @@ class TaxiHelper {
     async selectTaxiForAdmin(taxi_id) {
         try {
             const selectParams = ` taxis.*, CONCAT('${config.s3uploadURL}/', taxis.license_image_front) AS license_image_front,
+                                CONCAT('${config.s3uploadURL}/', taxis.license_image_back) AS license_image_back,
+                                CONCAT('${config.s3uploadURL}/', taxis.proof_of_eligibility_image) AS proof_of_eligibility_image,
                                 CONCAT('${config.s3uploadURL}/', taxis.vehicle_image) AS vehicle_image, AVG(reviews.rating) AS rating `,
                 joins = ` LEFT JOIN reviews ON reviews.taxi_id=taxis.id `,
                 where = ` taxis.id=${taxi_id} `,
