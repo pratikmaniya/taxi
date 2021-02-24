@@ -158,7 +158,7 @@ class Taxis extends Component {
                                     <thead>
                                         <tr>
                                             <th scope="col" className="text-center">No</th>
-                                            <th scope="col" className="align-middle">Phone No</th>
+                                            <th scope="col" className="align-middle">Vehicle Image</th>
                                             <th scope="col" className="align-middle">Plate Number</th>
                                             <th scope="col" className="align-middle">First Name</th>
                                             <th scope="col" className="align-middle">Last Name</th>
