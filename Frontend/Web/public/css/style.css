@@ -545,6 +545,7 @@ button.smallBtn.width {
 }
 
 .taxi-card {
+    margin-bottom: 20px;
     border: 1px solid #4f9ae4;
     border-radius: 5px;
 }
