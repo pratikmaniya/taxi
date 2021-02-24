@@ -64,7 +64,6 @@ header {
     background: #fff;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 12px #e8e8e8;
 }
 
 header .headerTop {
@@ -480,9 +479,40 @@ button.smallBtn.width {
     width: 250px;
 }
 
-.search-input-container {
+.home-banner {
+    width: 100%;
+    height: 600px;
     position: relative;
-    margin: 20px auto;
+    background: url('../images/home_banner.png') top left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.home-banner-text-container {
+    padding: 0 250px;
+    position: absolute;
+    top: 30%;
+    color: #FFF;
+}
+
+.home-banner-text-container h1 {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.home-banner-text-container h4 {
+    font-size: 20px;
+}
+
+.search-input-container {
+    position: absolute;
+    bottom: 20px;
+    padding: 20px;
+    width: 100%;
 }
 
 .search-input {
@@ -500,6 +530,7 @@ button.smallBtn.width {
     position: absolute;
     top: 0;
     right: 0;
+    margin: 20px;
     padding: 12px 20px;
     background-color: #4f9ae4;
     font-size: 30px;
@@ -538,6 +569,10 @@ button.smallBtn.width {
 }
 
 @media (max-width: 500px) {
+    .home-banner-text-container {
+        padding: 0 40px;
+        top: 25%;
+    }
     .img-container {
         border: none;
     }

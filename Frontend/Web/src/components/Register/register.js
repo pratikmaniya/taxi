@@ -129,7 +129,7 @@ class Register extends Component {
                                 <Input type="file" name='vehicle_image' value={this.state.vehicle_image} onChange={this.fileSelectHandler} />
                             </div>
                             <div className="fieldset col-12">
-                                <label>Please Attach Proof od Eligibility To Drive This Vehicle*</label>
+                                <label>Please Attach Proof Of Eligibility To Drive This Vehicle*</label>
                                 <Input type="file" name='proof_of_eligibility_image' value={this.state.proof_of_eligibility_image} onChange={this.fileSelectHandler} />
                             </div>
                         </div>

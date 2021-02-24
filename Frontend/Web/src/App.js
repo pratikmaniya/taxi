@@ -18,7 +18,7 @@ class App extends Component {
 			<>
 				{this.props.loading === true ? <LoaderComponent /> : null}
 				<Header />
-				<div style={{ margin: '30px 10px' }}>
+				<div>
 					<BrowserRouter>
 						<React.Suspense fallback={loading()}>
 							<Switch>
