@@ -27,7 +27,7 @@
 .action-icon {
   cursor: pointer;
   margin: 0 3px;
-  font-size: 17px;
+  font-size: 20px;
 }
 
 .action-icon:hover{
@@ -226,12 +226,19 @@ input[type="radio"], input[type="checkbox"]{
   padding: 13px 24px;
 }
 
+.taxi-card-img-container{
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  width: 300px;
+  margin: 7px 0;
+}
+
 .taxi-card-img{
   height:180px;
-  width:300px;
+  width:280px;
   object-fit: contain;
   box-shadow: 0px 0px 7px 1px #00000030;
-  margin: 10px 0;
+  margin: 5px 0 10px;
   padding: 5px;
 }
 

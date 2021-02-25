@@ -15,7 +15,7 @@
         "GET_TAXIS_SUCCESS": "Taxis retrieved successfully",
         "TAXI_WITH_ID_NOT_FOUND": "Driver with that plate number does not exist.",
         "TAXI_WITH_PLATE_NO_ALREADY_REGISTERED": "Taxi with specified plate number already registered!",
-        "ADD_TAXI_SUCCESS": "Taxi added successfully",
+        "ADD_TAXI_SUCCESS": "Your submission was successful. It is now under review and should take 2-5 days",
         "EDIT_TAXI_SUCCESS": "Taxi updated successfully",
         "DAILY_REVIEW_LIMIT_REACHED": "You reached daily limit of submitting reviews",
         "ALREADY_SUBMITTED_REVIEW_FOR_TODAY": "You already submitted a review for this driver today. Please wait until tomorrow to submit another review for this driver.",

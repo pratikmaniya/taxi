@@ -48,30 +48,42 @@ class Taxis extends Component {
                     <CardBody>
                         <Row>
                             <Col md='4' sm='12' style={{ textAlign: "center", borderRight: '1px solid #00000036', padding: '0 30px' }}>
-                                <Img
-                                    className="taxi-card-img"
-                                    src={this.state.taxiDetails.vehicle_image}
-                                    loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
-                                    unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
-                                />
-                                <Img
-                                    className="taxi-card-img"
-                                    src={this.state.taxiDetails.license_image_front}
-                                    loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
-                                    unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
-                                />
-                                <Img
-                                    className="taxi-card-img"
-                                    src={this.state.taxiDetails.license_image_back}
-                                    loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
-                                    unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
-                                />
-                                <Img
-                                    className="taxi-card-img"
-                                    src={this.state.taxiDetails.proof_of_eligibility_image}
-                                    loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
-                                    unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
-                                />
+                                <div className="taxi-card-img-container">
+                                    <label className="text-muted m-0">Vehicle Image</label>
+                                    <Img
+                                        className="taxi-card-img"
+                                        src={this.state.taxiDetails.vehicle_image}
+                                        loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                        unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                    />
+                                </div>
+                                <div className="taxi-card-img-container">
+                                    <label className="text-muted m-0">License Image Front</label>
+                                    <Img
+                                        className="taxi-card-img"
+                                        src={this.state.taxiDetails.license_image_front}
+                                        loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                        unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                    />
+                                </div>
+                                <div className="taxi-card-img-container">
+                                    <label className="text-muted m-0">License Image Back</label>
+                                    <Img
+                                        className="taxi-card-img"
+                                        src={this.state.taxiDetails.license_image_back}
+                                        loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                        unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                    />
+                                </div>
+                                <div className="taxi-card-img-container">
+                                    <label className="text-muted m-0">Proof Of Eligibility Image</label>
+                                    <Img
+                                        className="taxi-card-img"
+                                        src={this.state.taxiDetails.proof_of_eligibility_image}
+                                        loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                        unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                    />
+                                </div>
                             </Col>
                             <Col md='8' sm='12' className="taxi-details-container">
                                 <CardTitle style={{ fontSize: '28px' }}><span className="mb-2 text-muted">Plate Number: </span>{this.state.taxiDetails.plate_no}</CardTitle>
