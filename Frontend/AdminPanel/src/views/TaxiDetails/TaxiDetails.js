@@ -108,6 +108,7 @@ class Taxis extends Component {
                                 <CardText style={{ fontSize: '18px' }}><span className="text-muted">Brand: </span>{this.state.taxiDetails.brand_name}</CardText>
                                 <CardText style={{ fontSize: '18px' }}><span className="text-muted">Model: </span>{this.state.taxiDetails.brand_model}</CardText>
                                 <CardText style={{ fontSize: '18px' }}><span className="text-muted">Colour: </span>{this.state.taxiDetails.colour}</CardText>
+                                <CardText style={{ fontSize: '18px' }}><span className="text-muted">Insurance Provider: </span>{this.state.taxiDetails.insurance_provider}</CardText>
                                 <CardText style={{ fontSize: '18px' }}><span className="text-muted">Registered on: </span>{getFormatedDateFromTimeStamp(this.state.taxiDetails.created_date)}</CardText>
                                 <div style={{ padding: '5px 0' }}>
                                     {
