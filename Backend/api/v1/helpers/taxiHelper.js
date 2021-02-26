@@ -16,6 +16,7 @@ class TaxiHelper {
                 brand_name: body.brand_name,
                 brand_model: body.brand_model,
                 colour: body.colour,
+                insurance_provider: body.insurance_provider,
                 license_image_front: body.license_image_front,
                 license_image_back: body.license_image_back,
                 vehicle_image: body.vehicle_image,

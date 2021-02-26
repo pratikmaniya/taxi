@@ -19,6 +19,7 @@ class Register extends Component {
             brand_name: '',
             brand_model: '',
             colour: '',
+            insurance_provider: '',
             license_image_front: null,
             license_image_back: null,
             vehicle_image: null,
@@ -41,6 +42,10 @@ class Register extends Component {
         const formData = {
             ...this.state.form
         }
+        if (formData.insurance_provider === "Other") {
+            formData.insurance_provider = formData.insurance_provider_custom
+            delete formData.insurance_provider_custom
+        }
         await this.addBrand(formData)
     }
     addBrand = async (form) => {
@@ -53,6 +58,7 @@ class Register extends Component {
             brand_name: Joi.string().label("Vehicle Brand Name").required(),
             brand_model: Joi.string().label("Vehicle Brand Model").required(),
             colour: Joi.string().label("Vehicle Colour").required(),
+            insurance_provider: Joi.string().label("Insurance Provider").required(),
             license_image_front: Joi.object().label("Taxi Badge/Driver's License Image Front").required(),
             license_image_back: Joi.object().label("Taxi Badge/Driver's License Image Back").required(),
             vehicle_image: Joi.object().label('vehicle Image').required(),
@@ -115,6 +121,32 @@ class Register extends Component {
                             <div className="fieldset col-12">
                                 <label>Vehicle Colour*</label>
                                 <Input type="text" name='colour' value={this.state.colour} onChange={this.inputChangeHandler} />
+                            </div>
+                            <div className="fieldset col-12">
+                                <label>Please select your insurance provider from the following*</label>
+                                <select name="insurance_provider" value={this.state.form.insurance_provider} onChange={this.inputChangeHandler}>
+                                    <option value="Colfire">Colfire</option>
+                                    <option value="Tatil">Tatil</option>
+                                    <option value="Massy United insurance">Massy United insurance</option>
+                                    <option value="Nagico">Nagico</option>
+                                    <option value="Gulf">Gulf</option>
+                                    <option value="ICWI">ICWI</option>
+                                    <option value="Furness">Furness</option>
+                                    <option value="Pan American">Pan American</option>
+                                    <option value="Beacon">Beacon</option>
+                                    <option value="Sagicor">Sagicor</option>
+                                    <option value="Capital">Capital</option>
+                                    <option value="Guardian life">Guardian life</option>
+                                    <option value="ANSA McAL">ANSA McAL</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                {
+                                    this.state.form.insurance_provider === "Other"
+                                        ?
+                                        <Input type="text" className="mt-2" name='insurance_provider_custom' value={this.state.insurance_provider_custom} onChange={this.inputChangeHandler} placeholder="Please type in insurance provider" />
+                                        :
+                                        null
+                                }
                             </div>
                             <div className="fieldset col-12">
                                 <label>Please Attach Driver's Taxi Badge/Driver's License Image Front*</label>

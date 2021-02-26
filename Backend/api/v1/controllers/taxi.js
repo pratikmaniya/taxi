@@ -35,7 +35,7 @@ class Taxi {
     async addTaxi(req, res) {
         try {
             await taxiValidator.validateAddTaxiForm(req.body)
-            const taxi = await taxiHelper.selectTaxi(req.body.plate_no, 2, true)
+            await taxiHelper.selectTaxi(req.body.plate_no, 2, true)
             if (req.files.license_image_front && req.files.license_image_front.length > 0
                 && req.files.license_image_back && req.files.license_image_back.length > 0
                 && req.files.vehicle_image && req.files.vehicle_image.length > 0

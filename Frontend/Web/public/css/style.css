@@ -347,7 +347,7 @@ ul.footerMenu {
     width: 100%;
 }
 
-.fieldset input {
+.fieldset input, .fieldset select {
     height: 42px;
     background: #FFFFFF;
     box-shadow: 0px 3px 6px #DEDEDE26;

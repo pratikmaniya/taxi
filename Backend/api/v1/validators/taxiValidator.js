@@ -14,7 +14,8 @@ class TaxiValidator {
                 plate_no: joi.string().required(),
                 brand_name: joi.string().required(),
                 brand_model: joi.string().required(),
-                colour: joi.string().required()
+                colour: joi.string().required(),
+                insurance_provider: joi.string().required()
             })
             await joiValidator.validateJoiSchema(body, schema);
         } catch (error) {
