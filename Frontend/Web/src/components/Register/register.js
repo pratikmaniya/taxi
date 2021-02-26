@@ -125,6 +125,7 @@ class Register extends Component {
                             <div className="fieldset col-12">
                                 <label>Please select your insurance provider from the following*</label>
                                 <select name="insurance_provider" value={this.state.form.insurance_provider} onChange={this.inputChangeHandler}>
+                                    <option value="">Please Select</option>
                                     <option value="Colfire">Colfire</option>
                                     <option value="Tatil">Tatil</option>
                                     <option value="Massy United insurance">Massy United insurance</option>
