@@ -569,6 +569,21 @@ button.smallBtn.width {
     padding: 0 30px
 }
 
+.driver-card-continer {
+    margin: 10px 0;
+}
+
+.driver-card {
+    box-shadow: rgb(0 0 0 / 12%) 0px 0px 4px 1px;
+    margin: 5px 0;
+    padding: 10px 20px;
+    cursor: pointer
+}
+
+.driver-card:hover, .driver-card.selected {
+    box-shadow: rgb(79 154 228 / 44%) 0px 0px 4px 1px;
+}
+
 @media (max-width: 500px) {
     .home-banner-text-container {
         padding: 0 40px;

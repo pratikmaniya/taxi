@@ -177,8 +177,12 @@ export const confirmBox = (title, message) => {
 }
 
 export const getFormatedDateFromTimeStamp = (timestamp) => {
-  let date = new Date(timestamp).getDate(),
-    month = new Date(timestamp).getMonth() + 1,
-    year = new Date(timestamp).getFullYear()
-  return `${String(date).padStart(2, '0')}-${String(month).padStart(2, '0')}-${year}`
+  if (timestamp) {
+    let date = new Date(timestamp).getDate(),
+      month = new Date(timestamp).getMonth() + 1,
+      year = new Date(timestamp).getFullYear()
+    return `${String(date).padStart(2, '0')}-${String(month).padStart(2, '0')}-${year}`
+  } else {
+    return null
+  }
 }

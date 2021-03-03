@@ -12,9 +12,9 @@ class Register extends Component {
     state = {
         form: {
             phone_no: '',
-            email: '',
             first_name: '',
             last_name: '',
+            driver_permit_number: '',
             plate_no: '',
             brand_name: '',
             brand_model: '',
@@ -22,8 +22,7 @@ class Register extends Component {
             insurance_provider: '',
             license_image_front: null,
             license_image_back: null,
-            vehicle_image: null,
-            proof_of_eligibility_image: null
+            vehicle_image: null
         },
         currentStep: 5
     }
@@ -51,9 +50,9 @@ class Register extends Component {
     addBrand = async (form) => {
         let schema = Joi.object().keys({
             phone_no: Joi.string().label("Phone Number").regex(config.MOBILE_REGEX).required(),
-            email: Joi.string().label("Email").regex(config.EMAIL_REGEX).required(),
             first_name: Joi.string().label("First Name").required(),
             last_name: Joi.string().label("Last Name").required(),
+            driver_permit_number: Joi.string().label("Driver Permit Number").required(),
             plate_no: Joi.string().label("Vehicle Plate Number").required(),
             brand_name: Joi.string().label("Vehicle Brand Name").required(),
             brand_model: Joi.string().label("Vehicle Brand Model").required(),
@@ -61,8 +60,7 @@ class Register extends Component {
             insurance_provider: Joi.string().label("Insurance Provider").required(),
             license_image_front: Joi.object().label("Taxi Badge/Driver's License Image Front").required(),
             license_image_back: Joi.object().label("Taxi Badge/Driver's License Image Back").required(),
-            vehicle_image: Joi.object().label('vehicle Image').required(),
-            proof_of_eligibility_image: Joi.object().label('Proof od Eligibility').required()
+            vehicle_image: Joi.object().label('vehicle Image').required()
         })
         console.log(form)
         this.setState({ error: await validateSchema(form, schema) }, async () => {
@@ -95,16 +93,16 @@ class Register extends Component {
                                 <Input type="text" name='phone_no' value={this.state.phone_no} onChange={this.inputChangeHandler} />
                             </div>
                             <div className="fieldset col-12">
-                                <label>Email*</label>
-                                <Input type="text" name='email' value={this.state.email} onChange={this.inputChangeHandler} />
-                            </div>
-                            <div className="fieldset col-12">
                                 <label>First Name*</label>
                                 <Input type="text" name='first_name' value={this.state.first_name} onChange={this.inputChangeHandler} />
                             </div>
                             <div className="fieldset col-12">
                                 <label>Last Name*</label>
                                 <Input type="text" name='last_name' value={this.state.last_name} onChange={this.inputChangeHandler} />
+                            </div>
+                            <div className="fieldset col-12">
+                                <label>Driver Permit Number*</label>
+                                <Input type="text" name='driver_permit_number' value={this.state.driver_permit_number} onChange={this.inputChangeHandler} />
                             </div>
                             <div className="fieldset col-12">
                                 <label>Vehicle Plate Number*</label>
@@ -160,10 +158,6 @@ class Register extends Component {
                             <div className="fieldset col-12">
                                 <label>Please Attach Image Of Vehicle*</label>
                                 <Input type="file" name='vehicle_image' value={this.state.vehicle_image} onChange={this.fileSelectHandler} accept="image/x-png,image/gif,image/jpeg" />
-                            </div>
-                            <div className="fieldset col-12">
-                                <label>Please Attach Proof Of Eligibility To Drive This Vehicle*</label>
-                                <Input type="file" name='proof_of_eligibility_image' value={this.state.proof_of_eligibility_image} onChange={this.fileSelectHandler} accept="image/x-png,image/gif,image/jpeg" />
                             </div>
                         </div>
                     </div>

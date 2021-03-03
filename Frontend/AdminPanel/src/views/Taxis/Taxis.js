@@ -93,6 +93,20 @@ class Taxis extends Component {
         }
         displayLog(response.code, response.message);
     }
+    stolenClickHandler = async (taxi, flag, index) => {
+        console.log(taxi, flag, index)
+        let reqData = {
+            taxi_id: taxi.id,
+            stolen_flag: flag
+        }
+        let response = await apiCall('POST', 'taxi', reqData);
+        if (response.code === 1) {
+            let taxis = this.state.taxis;
+            taxis[index].is_stolen = flag;
+            this.setState({ taxis: taxis });
+        }
+        displayLog(response.code, response.message);
+    }
     taxiDetailsClickHandler = (taxi_id) => {
         this.props.history.push(process.env.PUBLIC_URL + `/taxi-details/${taxi_id}`)
     }
@@ -109,8 +123,9 @@ class Taxis extends Component {
                     />
                 </td>
                 <td className="align-middle">{taxi.plate_no}</td>
-                <td className="align-middle">{taxi.first_name}</td>
-                <td className="align-middle">{taxi.last_name}</td>
+                <td className="align-middle">{taxi.brand_name}</td>
+                <td className="align-middle">{taxi.brand_model}</td>
+                <td className="align-middle">{taxi.colour}</td>
                 <td className="align-middle">{getFormatedDateFromTimeStamp(taxi.created_date)}</td>
                 <td className="align-middle text-center">
                     {
@@ -119,6 +134,13 @@ class Taxis extends Component {
                             <span className={"fa fa-toggle-on active action-icon"} title={"Deactivate Taxi"} onClick={() => this.activeClickHandler(taxi, false, index)}  ></span>
                             :
                             <span className={"fa fa-toggle-off active action-icon"} title={"Activate Taxi"} onClick={() => this.activeClickHandler(taxi, true, index)}  ></span>
+                    }
+                    {
+                        taxi.is_stolen === true
+                            ?
+                            <span className={"fa fa-toggle-on danger action-icon"} title={"Unmark Taxi as stolen"} onClick={() => this.stolenClickHandler(taxi, false, index)}  ></span>
+                            :
+                            <span className={"fa fa-toggle-off danger action-icon"} title={"MArk Taxi as stolen"} onClick={() => this.stolenClickHandler(taxi, true, index)}  ></span>
                     }
                     <span className="fa fa-info-circle action-icon" title="View Taxi Details" onClick={() => this.taxiDetailsClickHandler(taxi.id)} ></span>
                 </td>
@@ -160,8 +182,9 @@ class Taxis extends Component {
                                             <th scope="col" className="text-center">No</th>
                                             <th scope="col" className="align-middle">Vehicle Image</th>
                                             <th scope="col" className="align-middle">Plate Number</th>
-                                            <th scope="col" className="align-middle">First Name</th>
-                                            <th scope="col" className="align-middle">Last Name</th>
+                                            <th scope="col" className="align-middle">Brand Name</th>
+                                            <th scope="col" className="align-middle">Model</th>
+                                            <th scope="col" className="align-middle">Colour</th>
                                             <th scope="col" className="align-middle">Created date</th>
                                             <th scope="col" className="align-middle text-center">Approve/View Driver</th>
                                         </tr>
