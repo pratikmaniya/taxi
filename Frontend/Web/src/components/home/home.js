@@ -116,7 +116,11 @@ class Home extends Component {
         }
         await this.props.getReviews(reviewReqData, this.state.selectedDriver.id)
         if (this.props.getReviewRes && this.props.getReviewRes.code === 1) {
-            this.setState({ reviews: [...this.state.reviews, ...this.props.getReviewRes.data.reviews], totalReviews: Number(this.props.getReviewRes.data.total_reviews) })
+            let reviews = [...this.state.reviews, ...this.props.getReviewRes.data.reviews]
+            if (this.state.page_no === 1) {
+                reviews = [...this.props.getReviewRes.data.reviews]
+            }
+            this.setState({ reviews, totalReviews: Number(this.props.getReviewRes.data.total_reviews) })
         } else {
             displayLog(0, this.props.getReviewRes.message)
         }
@@ -131,7 +135,7 @@ class Home extends Component {
         this.setState({ ratingForm: { ...this.state.ratingForm, [event.target.name]: event.target.value } })
     }
     giveReviewClickHandler = async () => {
-        await this.props.isAbleToReview(this.props.searchTaxiRes.data.id)
+        await this.props.isAbleToReview(this.props.getDriverRes.data.id)
         if (this.props.isAbleToreviewRes && this.props.isAbleToreviewRes.code === 1) {
             if (this.props.isAbleToreviewRes.data.code === 2) {
                 displayLog(0, this.props.isAbleToreviewRes.message)
@@ -253,20 +257,22 @@ class Home extends Component {
                                     <Col md='8' sm='12'>
                                         <CardBody>
                                             <CardTitle style={{ fontSize: '28px' }}>{this.state.selectedDriver.first_name} {this.state.selectedDriver.last_name}</CardTitle>
-                                            {
-                                                this.state.selectedDriver.rating
-                                                    ?
-                                                    <StarRatings
-                                                        className='mb-2'
-                                                        rating={this.state.selectedDriver.rating}
-                                                        starRatedColor="gold"
-                                                        numberOfStars={5}
-                                                        starDimension="28px"
-                                                        name='rating'
-                                                    />
-                                                    :
-                                                    <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">No Ratings</span></CardText>
-                                            }
+                                            <div>
+                                                {
+                                                    this.state.selectedDriver.rating
+                                                        ?
+                                                        <StarRatings
+                                                            className='mb-2'
+                                                            rating={this.state.selectedDriver.rating}
+                                                            starRatedColor="gold"
+                                                            numberOfStars={5}
+                                                            starDimension="28px"
+                                                            name='rating'
+                                                        />
+                                                        :
+                                                        <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">No Ratings</span></CardText>
+                                                }
+                                            </div>
                                             <button style={loggedIn ? { margin: '10px 0' } : { margin: '10px 0', opacity: 0.5 }} type="button" data-tip={loggedIn ? "" : "Please login to give a review. Click on Register/Sign In at the top of the page."} className="smallBtn" onClick={loggedIn ? this.giveReviewClickHandler : null}>Give Review</button>
                                             <ReactTooltip place="top" type="dark" effect="float" />
                                             <div style={{ padding: '5px 0' }}>
