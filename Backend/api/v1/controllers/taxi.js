@@ -16,7 +16,7 @@ class Taxi {
     }
     async getTaxi(req, res) {
         try {
-            const taxi = await taxiHelper.selectTaxi(req.query.search, req.user_type)
+            const taxi = await taxiHelper.selectTaxi(req.query.search, req.user_type, true)
             responseHelper.success(res, 'GET_TAXIS_SUCCESS', req.headers.language, { ...taxi })
         } catch (error) {
             console.log(error)

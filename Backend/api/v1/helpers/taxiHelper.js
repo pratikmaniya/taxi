@@ -38,7 +38,7 @@ class TaxiHelper {
             return promise.reject(error)
         }
     }
-    async selectTaxi(plate_no, user_type) {
+    async selectTaxi(plate_no, user_type, throw_error_for_not_exists) {
         try {
             let selectParams = ` taxis.*, 
                                 COALESCE(JSON_AGG(json_build_object(
@@ -56,7 +56,11 @@ class TaxiHelper {
             }
             const taxis = await db.select('taxis' + joins, selectParams, where + pagination)
             if (taxis.length === 0) {
-                throw 'TAXI_WITH_ID_NOT_FOUND'
+                if (throw_error_for_not_exists) {
+                    throw 'TAXI_WITH_ID_NOT_FOUND'
+                } else {
+                    return false
+                }
             } else {
                 return taxis[0]
             }

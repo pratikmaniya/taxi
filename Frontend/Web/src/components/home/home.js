@@ -60,6 +60,7 @@ class Home extends Component {
             comment: ""
         },
         taxiDetails: {},
+        drivers: [],
         selectedDriver: {},
         reviews: [],
         page_no: 1,
@@ -94,7 +95,7 @@ class Home extends Component {
             }
             await this.props.searchTaxi(reqData)
             if (this.props.searchTaxiRes && this.props.searchTaxiRes.code === 1) {
-                await this.setState({ taxiDetails: { ...this.props.searchTaxiRes.data } })
+                await this.setState({ taxiDetails: { ...this.props.searchTaxiRes.data }, drivers: this.props.searchTaxiRes.data && this.props.searchTaxiRes.data.drivers ? [...this.props.searchTaxiRes.data.drivers] : [] })
             } else {
                 displayLog(0, this.props.searchTaxiRes.message)
             }
@@ -110,7 +111,7 @@ class Home extends Component {
                 selectedDriver: { ...this.props.getDriverRes.data },
                 taxiDetails: {
                     ...this.state.taxiDetails,
-                    drivers: this.state.taxiDetails.drivers.filter(driver => driver.id !== driver_id)
+                    drivers: this.state.drivers.filter(driver => driver.id !== driver_id)
                 }
             })
             await this.taxiDetails.current.scrollIntoView()
