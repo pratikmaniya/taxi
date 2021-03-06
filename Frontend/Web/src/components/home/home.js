@@ -84,7 +84,7 @@ class Home extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
     searchHandler = async () => {
-        await this.setState({ taxiDetails: {}, reviews: [], selectedDriver: {} })
+        await this.setState({ taxiDetails: {}, reviews: [], selectedDriver: {}, drivers: [] })
         if (this.state.search_text) {
             this.props.history.push({
                 pathname: process.env.PUBLIC_URL + '/',
@@ -100,7 +100,6 @@ class Home extends Component {
                 displayLog(0, this.props.searchTaxiRes.message)
             }
         } else {
-            this.setState({ selectedDriver: {} })
             this.props.history.push({ pathname: process.env.PUBLIC_URL + '/' })
         }
     }
