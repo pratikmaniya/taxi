@@ -58,9 +58,9 @@ class Home extends Component {
             rating: 0,
             comment: ""
         },
-        taxiDetails: { ...defaultTaxiDetails },
+        taxiDetails: {},
         selectedDriver: {},
-        reviews: [...defaultReviews],
+        reviews: [],
         page_no: 1,
         totalReviews: 0,
         openReviewModal: false
@@ -98,6 +98,7 @@ class Home extends Component {
                 displayLog(0, this.props.searchTaxiRes.message)
             }
         } else {
+            this.setState({ selectedDriver: {} })
             this.props.history.push({ pathname: process.env.PUBLIC_URL + '/' })
         }
     }
@@ -215,7 +216,7 @@ class Home extends Component {
                                             <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Model: </span>{this.state.taxiDetails.brand_model}</CardText>
                                             <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Colour: </span>{this.state.taxiDetails.colour}</CardText>
                                             {
-                                                this.state.taxiDetails && this.state.taxiDetails.drivers
+                                                this.state.taxiDetails && this.state.taxiDetails.drivers && this.state.taxiDetails.drivers.length > 0
                                                     ?
                                                     <div className='driver-card-continer'>
                                                         <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Drivers: </span></CardText>
@@ -224,7 +225,13 @@ class Home extends Component {
                                                                 this.state.taxiDetails.drivers.map((driver, index) => {
                                                                     return <Col md='6' sm='12' key={index} onClick={() => this.selectDriverClickHandler(driver.id)}>
                                                                         <div className={'driver-card' + (driver.id === this.state.selectedDriver.id ? ' selected' : '')}>
-                                                                            <CardText style={{ fontSize: '14px', fontWeight: 'bold' }}><span className="mb-2 text-muted">{driver.first_name} {driver.last_name}</span></CardText>
+                                                                            <CardText style={{ fontSize: '16px', fontWeight: 'bold' }}><span className="mb-2 text-muted">{driver.first_name} {driver.last_name}</span></CardText>
+                                                                            <Img
+                                                                                className="taxi-card-img"
+                                                                                src={driver.license_image_front}
+                                                                                loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                                                                unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                                                            />
                                                                         </div>
                                                                     </Col>
                                                                 })
@@ -232,14 +239,77 @@ class Home extends Component {
                                                         </Row>
                                                     </div>
                                                     :
-                                                    null
+                                                    <div className='driver-card-continer'>
+                                                        <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">No Drivers Registered</span></CardText>
+                                                    </div>
                                             }
                                         </CardBody>
                                     </Col>
                                 </Row>
                             </div>
                             :
-                            null
+                            <div className="taxi-card">
+                                <Row>
+                                    <Col md='4' sm='12' className="img-container">
+                                        <Img
+                                            className="taxi-card-img"
+                                            src={defaultTaxiDetails.license_image_front}
+                                            loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                            unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                        />
+                                        <Img
+                                            className="taxi-card-img"
+                                            src={defaultTaxiDetails.vehicle_image}
+                                            loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                            unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                        />
+                                    </Col>
+                                    <Col md='8' sm='12'>
+                                        <CardBody>
+                                            <CardTitle style={{ fontSize: '28px' }}><span className="mb-2 text-muted">Plate Number: </span>{defaultTaxiDetails.plate_no}</CardTitle>
+                                            {
+                                                defaultTaxiDetails.rating
+                                                    ?
+                                                    <StarRatings
+                                                        className='mb-2'
+                                                        rating={defaultTaxiDetails.rating}
+                                                        starRatedColor="gold"
+                                                        numberOfStars={5}
+                                                        starDimension="28px"
+                                                        name='rating'
+                                                    />
+                                                    :
+                                                    <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">No Ratings</span></CardText>
+                                            }
+                                            <CardText style={{ fontSize: '18px', marginTop: '10px' }}><span className="mb-2 text-muted">Name: </span>{defaultTaxiDetails.first_name + ' ' + defaultTaxiDetails.last_name}</CardText>
+                                            <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Brand: </span>{defaultTaxiDetails.brand_name}</CardText>
+                                            <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Model: </span>{defaultTaxiDetails.brand_model}</CardText>
+                                            <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Colour: </span>{defaultTaxiDetails.colour}</CardText>
+                                            <ReactTooltip place="top" type="dark" effect="float" />
+                                            <div style={{ padding: '5px 0' }}>
+                                                {
+                                                    defaultReviews.map((review, index) => {
+                                                        return <div key={index} style={{ boxShadow: 'rgb(0 0 0 / 12%) 0px 0px 4px 1px', margin: '15px 0', padding: '10px 20px' }}>
+                                                            <div style={{ margin: '0 0 5px 0' }}>
+                                                                <StarRatings
+                                                                    className='mb-2'
+                                                                    rating={review.rating}
+                                                                    starRatedColor="gold"
+                                                                    numberOfStars={5}
+                                                                    starDimension="20px"
+                                                                    name='rating'
+                                                                />
+                                                            </div>
+                                                            <CardText style={{ fontSize: '14px', fontWeight: 'bold' }}><span className="mb-2 text-muted">{new Date(review.created_date).toDateString()}</span></CardText>
+                                                            <CardText style={{ fontSize: '17px' }}>{review.comment}</CardText>
+                                                        </div>
+                                                    })
+                                                }
+                                            </div>
+                                        </CardBody>
+                                    </Col>
+                                </Row>
+                            </div>
                     }
                     {
                         this.state.selectedDriver && Object.keys(this.state.selectedDriver).length > 0

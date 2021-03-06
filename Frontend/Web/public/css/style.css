@@ -577,7 +577,8 @@ button.smallBtn.width {
     box-shadow: #00000061 0px 0px 4px 1px;
     margin: 5px 0;
     padding: 10px 20px;
-    cursor: pointer
+    cursor: pointer;
+    text-align: center;
 }
 
 .driver-card:hover, .driver-card.selected {

@@ -41,11 +41,12 @@ class TaxiHelper {
     async selectTaxi(plate_no, user_type) {
         try {
             let selectParams = ` taxis.*, 
-                                JSON_AGG(DISTINCT jsonb(json_build_object(
+                                COALESCE(JSON_AGG(json_build_object(
                                     'id', drivers.id,
                                     'first_name', drivers.first_name,
-                                    'last_name', drivers.last_name
-                                ))) AS drivers,
+                                    'last_name', drivers.last_name,
+                                    'license_image_front', CONCAT('${config.s3uploadURL}/', drivers.license_image_front)
+                                )) FILTER (WHERE drivers.id IS NOT NULL),'[]') AS drivers,
                                 CONCAT('${config.s3uploadURL}/', taxis.vehicle_image) AS vehicle_image `,
                 joins = ` LEFT JOIN drivers ON drivers.taxi_id=taxis.id AND drivers.is_approved=true `,
                 where = ` REPLACE(LOWER(plate_no), ' ', '')=REPLACE(LOWER('${plate_no}'), ' ', '') `,
@@ -66,7 +67,7 @@ class TaxiHelper {
     async selectTaxiForAdmin(taxi_id) {
         try {
             const selectParams = ` taxis.*, 
-                                JSON_AGG(DISTINCT jsonb(json_build_object(
+                                COALESCE(JSON_AGG(json_build_object(
                                     'id', drivers.id,
                                     'phone_no', drivers.phone_no,
                                     'first_name', drivers.first_name,
@@ -77,7 +78,7 @@ class TaxiHelper {
                                     'modified_date', drivers.modified_date,
                                     'license_image_front', CONCAT('${config.s3uploadURL}/', drivers.license_image_front),
                                     'license_image_back', CONCAT('${config.s3uploadURL}/', drivers.license_image_back)
-                                ))) AS drivers,
+                                )) FILTER (WHERE drivers.id IS NOT NULL),'[]') AS drivers,
                                 CONCAT('${config.s3uploadURL}/', taxis.vehicle_image) AS vehicle_image `,
                 joins = ` LEFT JOIN drivers ON drivers.taxi_id=taxis.id `,
                 where = ` taxis.id=${taxi_id} `,
