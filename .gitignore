@@ -40,6 +40,8 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+.DS_Store
+package-lock.json
 
 # TypeScript v1 declaration files
 typings/
@@ -106,6 +108,3 @@ dist
 build/
 build-web/
 build-admin/
-
-.DS_Store
-package-lock.json

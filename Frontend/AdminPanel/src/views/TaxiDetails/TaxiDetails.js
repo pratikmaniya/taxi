@@ -44,6 +44,7 @@ class Taxis extends Component {
                 <td className="align-middle">{driver.phone_no}</td>
                 <td className="align-middle">{driver.first_name}</td>
                 <td className="align-middle">{driver.last_name}</td>
+                <td className="align-middle">{driver.driver_permit_number}</td>
                 <td className="align-middle">{getFormatedDateFromTimeStamp(driver.created_date)}</td>
                 <td className="align-middle text-center">
                     {
@@ -106,6 +107,7 @@ class Taxis extends Component {
                                                 <th scope="col" className="align-middle">Phone Number</th>
                                                 <th scope="col" className="align-middle">First Name</th>
                                                 <th scope="col" className="align-middle">Last Name</th>
+                                                <th scope="col" className="align-middle">Permit Number</th>
                                                 <th scope="col" className="align-middle">Created date</th>
                                                 <th scope="col" className="align-middle text-center">Approve/View Driver</th>
                                             </tr>
