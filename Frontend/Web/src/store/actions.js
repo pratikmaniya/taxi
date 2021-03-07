@@ -31,6 +31,17 @@ export const searchTaxi = (params) => {
     }
 }
 
+export const getDriver = (driver_id) => {
+    return async (dispatch) => {
+        let response = await common.apiCall('GET', `driver/${driver_id}`, Types.GET_DRIVER_SUCCESS)
+        console.log('Response::::', response)
+        dispatch({
+            type: Types.GET_DRIVER_SUCCESS,
+            res: response
+        });
+    }
+}
+
 export const getReviews = (params, taxi_id) => {
     return async (dispatch) => {
         let response = await common.apiCall('GET', `review/${taxi_id}`, Types.GET_REVIEWS_SUCCESS, {}, params)

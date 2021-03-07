@@ -15,8 +15,7 @@ const multer = Multer({
     taxi_image_fields = [
         { name: 'license_image_front', maxCount: 1 },
         { name: 'license_image_back', maxCount: 1 },
-        { name: 'vehicle_image', maxCount: 1 },
-        { name: 'proof_of_eligibility_image', maxCount: 1 }
+        { name: 'vehicle_image', maxCount: 1 }
     ]
 
 // authentication
@@ -24,10 +23,11 @@ router.post('/signin', headerValidator.nonAuthValidation, userAuth.signin)
 
 // taxi
 router.get('/taxi', headerValidator.nonAuthValidation, taxi.getTaxi)
+router.get('/driver/:driver_id', headerValidator.nonAuthValidation, taxi.getDriver)
 router.put('/taxi', headerValidator.nonAuthValidation, multer.fields(taxi_image_fields), taxi.addTaxi)
-router.get('/review/:taxi_id', headerValidator.nonAuthValidation, taxi.getReviews)
+router.get('/review/:driver_id', headerValidator.nonAuthValidation, taxi.getReviews)
 router.put('/review', headerValidator.authValidation, taxi.addReview)
-router.get('/isAbleToReview/:taxi_id', headerValidator.authValidation, taxi.isAbleToReview)
+router.get('/isAbleToReview/:driver_id', headerValidator.authValidation, taxi.isAbleToReview)
 
 
 module.exports = router

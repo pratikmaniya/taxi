@@ -545,7 +545,7 @@ button.smallBtn.width {
 }
 
 .taxi-card {
-    margin-bottom: 20px;
+    margin: 20px 0;
     border: 1px solid #4f9ae4;
     border-radius: 5px;
 }
@@ -567,6 +567,22 @@ button.smallBtn.width {
     text-align: center;
     border-right: 1px solid #4f9ae4;
     padding: 0 30px
+}
+
+.driver-card-continer {
+    margin: 10px 0;
+}
+
+.driver-card {
+    box-shadow: #00000061 0px 0px 4px 1px;
+    margin: 5px 0;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.driver-card:hover, .driver-card.selected {
+    box-shadow: rgb(79 154 228 / 44%) 0px 0px 4px 1px;
 }
 
 @media (max-width: 500px) {

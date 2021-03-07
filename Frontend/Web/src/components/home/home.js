@@ -7,7 +7,7 @@ import queryString from 'query-string'
 import ReactTooltip from 'react-tooltip';
 import Img from 'react-image';
 
-import { searchTaxi, getReviews, addReview, isAbleToReview } from '../../store/actions';
+import { searchTaxi, getDriver, getReviews, addReview, isAbleToReview } from '../../store/actions';
 import { displayLog } from "../../utils/functions";
 import loading_image from '../../images/loading_img.png'
 import default_img from '../../images/default_img.png'
@@ -25,7 +25,6 @@ const defaultTaxiDetails = {
     license_image_front: "https://taxi-review.s3-us-west-1.amazonaws.com/taxi/1613816619059-Karlon St Bernard  2020.JPG",
     license_image_back: "taxi/1613816619269-Karlon St Bernard  2020.JPG",
     vehicle_image: "https://taxi-review.s3-us-west-1.amazonaws.com/example-vehicle.png",
-    proof_of_eligibility_image: "taxi/1613816619398-Karlon St Bernard  2020.JPG",
     created_date: "2021-02-20T10:23:39.519Z",
     modified_date: "2021-02-21T07:04:25.630Z",
     is_approved: true,
@@ -53,14 +52,17 @@ const defaultTaxiDetails = {
     ]
 
 class Home extends Component {
+    taxiDetails = React.createRef()
     state = {
         search_text: '',
         ratingForm: {
             rating: 0,
             comment: ""
         },
-        taxiDetails: { ...defaultTaxiDetails },
-        reviews: [...defaultReviews],
+        taxiDetails: {},
+        drivers: [],
+        selectedDriver: {},
+        reviews: [],
         page_no: 1,
         totalReviews: 0,
         openReviewModal: false
@@ -82,7 +84,7 @@ class Home extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
     searchHandler = async () => {
-        await this.setState({ taxiDetails: {}, reviews: [] })
+        await this.setState({ taxiDetails: {}, reviews: [], selectedDriver: {}, drivers: [] })
         if (this.state.search_text) {
             this.props.history.push({
                 pathname: process.env.PUBLIC_URL + '/',
@@ -93,20 +95,7 @@ class Home extends Component {
             }
             await this.props.searchTaxi(reqData)
             if (this.props.searchTaxiRes && this.props.searchTaxiRes.code === 1) {
-                await this.setState({
-                    taxiDetails: {
-                        first_name: this.props.searchTaxiRes.data.first_name,
-                        last_name: this.props.searchTaxiRes.data.last_name,
-                        plate_no: this.props.searchTaxiRes.data.plate_no,
-                        brand_name: this.props.searchTaxiRes.data.brand_name,
-                        brand_model: this.props.searchTaxiRes.data.brand_model,
-                        colour: this.props.searchTaxiRes.data.colour,
-                        license_image_front: this.props.searchTaxiRes.data.license_image_front,
-                        vehicle_image: this.props.searchTaxiRes.data.vehicle_image,
-                        rating: this.props.searchTaxiRes.data.rating
-                    }
-                })
-                this.getReviews()
+                await this.setState({ taxiDetails: { ...this.props.searchTaxiRes.data }, drivers: this.props.searchTaxiRes.data && this.props.searchTaxiRes.data.drivers ? [...this.props.searchTaxiRes.data.drivers] : [] })
             } else {
                 displayLog(0, this.props.searchTaxiRes.message)
             }
@@ -114,13 +103,33 @@ class Home extends Component {
             this.props.history.push({ pathname: process.env.PUBLIC_URL + '/' })
         }
     }
+    selectDriverClickHandler = async (driver_id) => {
+        await this.props.getDriver(driver_id)
+        if (this.props.getDriverRes && this.props.getDriverRes.code === 1) {
+            await this.setState({
+                selectedDriver: { ...this.props.getDriverRes.data },
+                taxiDetails: {
+                    ...this.state.taxiDetails,
+                    drivers: this.state.drivers.filter(driver => driver.id !== driver_id)
+                }
+            })
+            await this.taxiDetails.current.scrollIntoView()
+            this.getReviews()
+        } else {
+            displayLog(0, this.props.getDriverRes.message)
+        }
+    }
     getReviews = async () => {
         const reviewReqData = {
             page_no: this.state.page_no
         }
-        await this.props.getReviews(reviewReqData, this.props.searchTaxiRes.data.id)
+        await this.props.getReviews(reviewReqData, this.state.selectedDriver.id)
         if (this.props.getReviewRes && this.props.getReviewRes.code === 1) {
-            this.setState({ reviews: [...this.state.reviews, ...this.props.getReviewRes.data.reviews], totalReviews: Number(this.props.getReviewRes.data.total_reviews) })
+            let reviews = [...this.state.reviews, ...this.props.getReviewRes.data.reviews]
+            if (this.state.page_no === 1) {
+                reviews = [...this.props.getReviewRes.data.reviews]
+            }
+            this.setState({ reviews, totalReviews: Number(this.props.getReviewRes.data.total_reviews) })
         } else {
             displayLog(0, this.props.getReviewRes.message)
         }
@@ -135,7 +144,7 @@ class Home extends Component {
         this.setState({ ratingForm: { ...this.state.ratingForm, [event.target.name]: event.target.value } })
     }
     giveReviewClickHandler = async () => {
-        await this.props.isAbleToReview(this.props.searchTaxiRes.data.id)
+        await this.props.isAbleToReview(this.props.getDriverRes.data.id)
         if (this.props.isAbleToreviewRes && this.props.isAbleToreviewRes.code === 1) {
             if (this.props.isAbleToreviewRes.data.code === 2) {
                 displayLog(0, this.props.isAbleToreviewRes.message)
@@ -148,7 +157,7 @@ class Home extends Component {
     }
     submitReviewHandler = async () => {
         const reqData = {
-            taxi_id: this.props.searchTaxiRes.data.id,
+            driver_id: this.state.selectedDriver.id,
             rating: this.state.ratingForm.rating
         }
         if (this.state.ratingForm.comment) {
@@ -189,15 +198,9 @@ class Home extends Component {
                     {
                         this.state.taxiDetails && Object.keys(this.state.taxiDetails).length > 0
                             ?
-                            <div className="taxi-card">
+                            <div ref={this.taxiDetails} className="taxi-card">
                                 <Row>
                                     <Col md='4' sm='12' className="img-container">
-                                        <Img
-                                            className="taxi-card-img"
-                                            src={this.state.taxiDetails.license_image_front}
-                                            loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
-                                            unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
-                                        />
                                         <Img
                                             className="taxi-card-img"
                                             src={this.state.taxiDetails.vehicle_image}
@@ -207,13 +210,147 @@ class Home extends Component {
                                     </Col>
                                     <Col md='8' sm='12'>
                                         <CardBody>
-                                            <CardTitle style={{ fontSize: '28px' }}><span className="mb-2 text-muted">Plate Number: </span>{this.state.taxiDetails.plate_no}</CardTitle>
+                                            <CardTitle style={{ fontSize: '28px' }}>
+                                                <span className="mb-2 text-muted">Plate Number: </span>
+                                                {this.state.taxiDetails.plate_no}
+                                                {
+                                                    this.state.taxiDetails.is_stolen
+                                                        ? <span style={{ fontWeight: 'bold', color: 'red' }}> (Stolen)</span>
+                                                        :
+                                                        null
+                                                }
+                                            </CardTitle>
+                                            <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Brand: </span>{this.state.taxiDetails.brand_name}</CardText>
+                                            <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Model: </span>{this.state.taxiDetails.brand_model}</CardText>
+                                            <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Colour: </span>{this.state.taxiDetails.colour}</CardText>
                                             {
-                                                this.state.taxiDetails.rating
+                                                this.state.selectedDriver && Object.keys(this.state.selectedDriver).length > 0
+                                                    ?
+                                                    <div className="taxi-card">
+                                                        <Row>
+                                                            <Col md='4' sm='12' className="img-container">
+                                                                <Img
+                                                                    className="taxi-card-img"
+                                                                    src={this.state.selectedDriver.license_image_front}
+                                                                    loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                                                    unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                                                />
+                                                            </Col>
+                                                            <Col md='8' sm='12'>
+                                                                <CardBody>
+                                                                    <CardTitle style={{ fontSize: '28px' }}>{this.state.selectedDriver.first_name} {this.state.selectedDriver.last_name}</CardTitle>
+                                                                    <div>
+                                                                        {
+                                                                            this.state.selectedDriver.rating
+                                                                                ?
+                                                                                <StarRatings
+                                                                                    className='mb-2'
+                                                                                    rating={this.state.selectedDriver.rating}
+                                                                                    starRatedColor="gold"
+                                                                                    numberOfStars={5}
+                                                                                    starDimension="28px"
+                                                                                    name='rating'
+                                                                                />
+                                                                                :
+                                                                                <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">No Ratings</span></CardText>
+                                                                        }
+                                                                    </div>
+                                                                    <button style={loggedIn ? { margin: '10px 0' } : { margin: '10px 0', opacity: 0.5 }} type="button" data-tip={loggedIn ? "" : "Please login to give a review. Click on Register/Sign In at the top of the page."} className="smallBtn" onClick={loggedIn ? this.giveReviewClickHandler : null}>Give Review</button>
+                                                                    <ReactTooltip place="top" type="dark" effect="float" />
+                                                                    <div style={{ padding: '5px 0' }}>
+                                                                        {
+                                                                            this.state.reviews.map((review, index) => {
+                                                                                return <div key={index} style={{ boxShadow: 'rgb(0 0 0 / 12%) 0px 0px 4px 1px', margin: '15px 0', padding: '10px 20px' }}>
+                                                                                    <div style={{ margin: '0 0 5px 0' }}>
+                                                                                        <StarRatings
+                                                                                            className='mb-2'
+                                                                                            rating={review.rating}
+                                                                                            starRatedColor="gold"
+                                                                                            numberOfStars={5}
+                                                                                            starDimension="20px"
+                                                                                            name='rating'
+                                                                                        />
+                                                                                    </div>
+                                                                                    <CardText style={{ fontSize: '14px', fontWeight: 'bold' }}><span className="mb-2 text-muted">{new Date(review.created_date).toDateString()}</span></CardText>
+                                                                                    <CardText style={{ fontSize: '17px' }}>{review.comment}</CardText>
+                                                                                </div>
+                                                                            })
+                                                                        }
+                                                                        {
+                                                                            displayLoadMore
+                                                                                ?
+                                                                                <div className="text-center">
+                                                                                    <button style={{ margin: '10px 0' }} type="button" className="smallBtn" onClick={this.loadMoreReview}>Load more reviews</button>
+                                                                                </div>
+                                                                                :
+                                                                                null
+                                                                        }
+                                                                    </div>
+                                                                </CardBody>
+                                                            </Col>
+                                                        </Row>
+                                                    </div>
+                                                    :
+                                                    null
+                                            }
+                                            {
+                                                this.state.taxiDetails && this.state.taxiDetails.drivers && this.state.taxiDetails.drivers.length > 0
+                                                    ?
+                                                    <div className='driver-card-continer'>
+                                                        <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Drivers: </span></CardText>
+                                                        <Row>
+                                                            {
+                                                                this.state.taxiDetails.drivers.map((driver, index) => {
+                                                                    return <Col md='6' sm='12' key={index} onClick={() => this.selectDriverClickHandler(driver.id)}>
+                                                                        <div className={'driver-card' + (driver.id === this.state.selectedDriver.id ? ' selected' : '')}>
+                                                                            <CardText style={{ fontSize: '16px', fontWeight: 'bold' }}><span className="mb-2 text-muted">{driver.first_name} {driver.last_name}</span></CardText>
+                                                                            <Img
+                                                                                className="taxi-card-img"
+                                                                                src={driver.license_image_front}
+                                                                                loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                                                                unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                                                            />
+                                                                        </div>
+                                                                    </Col>
+                                                                })
+                                                            }
+                                                        </Row>
+                                                    </div>
+                                                    :
+                                                    <div className='driver-card-continer'>
+                                                        <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">No Drivers Registered</span></CardText>
+                                                    </div>
+                                            }
+                                        </CardBody>
+                                    </Col>
+                                </Row>
+                            </div>
+                            :
+                            <div className="taxi-card">
+                                <Row>
+                                    <Col md='4' sm='12' className="img-container">
+                                        <Img
+                                            className="taxi-card-img"
+                                            src={defaultTaxiDetails.license_image_front}
+                                            loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                            unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                        />
+                                        <Img
+                                            className="taxi-card-img"
+                                            src={defaultTaxiDetails.vehicle_image}
+                                            loader={<img className="taxi-card-img loading-img" alt="taxi" src={loading_image} />}
+                                            unloader={<img className="taxi-card-img" alt="taxi" title="No Image Found" src={default_img} />}
+                                        />
+                                    </Col>
+                                    <Col md='8' sm='12'>
+                                        <CardBody>
+                                            <CardTitle style={{ fontSize: '28px' }}><span className="mb-2 text-muted">Plate Number: </span>{defaultTaxiDetails.plate_no}</CardTitle>
+                                            {
+                                                defaultTaxiDetails.rating
                                                     ?
                                                     <StarRatings
                                                         className='mb-2'
-                                                        rating={this.state.taxiDetails.rating}
+                                                        rating={defaultTaxiDetails.rating}
                                                         starRatedColor="gold"
                                                         numberOfStars={5}
                                                         starDimension="28px"
@@ -222,21 +359,14 @@ class Home extends Component {
                                                     :
                                                     <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">No Ratings</span></CardText>
                                             }
-                                            <CardText style={{ fontSize: '18px', marginTop: '10px' }}><span className="mb-2 text-muted">Name: </span>{this.state.taxiDetails.first_name + ' ' + this.state.taxiDetails.last_name}</CardText>
-                                            <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Brand: </span>{this.state.taxiDetails.brand_name}</CardText>
-                                            <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Model: </span>{this.state.taxiDetails.brand_model}</CardText>
-                                            <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Colour: </span>{this.state.taxiDetails.colour}</CardText>
-                                            {
-                                                defaultTaxiDetails.id !== this.state.taxiDetails.id
-                                                    ?
-                                                    <button style={loggedIn ? { margin: '10px 0' } : { margin: '10px 0', opacity: 0.5 }} type="button" data-tip={loggedIn ? "" : "Please login to give a review. Click on Register/Sign In at the top of the page."} className="smallBtn" onClick={loggedIn ? this.giveReviewClickHandler : null}>Give Review</button>
-                                                    :
-                                                    null
-                                            }
+                                            <CardText style={{ fontSize: '18px', marginTop: '10px' }}><span className="mb-2 text-muted">Name: </span>{defaultTaxiDetails.first_name + ' ' + defaultTaxiDetails.last_name}</CardText>
+                                            <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Brand: </span>{defaultTaxiDetails.brand_name}</CardText>
+                                            <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Model: </span>{defaultTaxiDetails.brand_model}</CardText>
+                                            <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">Colour: </span>{defaultTaxiDetails.colour}</CardText>
                                             <ReactTooltip place="top" type="dark" effect="float" />
                                             <div style={{ padding: '5px 0' }}>
                                                 {
-                                                    this.state.reviews.map((review, index) => {
+                                                    defaultReviews.map((review, index) => {
                                                         return <div key={index} style={{ boxShadow: 'rgb(0 0 0 / 12%) 0px 0px 4px 1px', margin: '15px 0', padding: '10px 20px' }}>
                                                             <div style={{ margin: '0 0 5px 0' }}>
                                                                 <StarRatings
@@ -253,22 +383,11 @@ class Home extends Component {
                                                         </div>
                                                     })
                                                 }
-                                                {
-                                                    displayLoadMore
-                                                        ?
-                                                        <div className="text-center">
-                                                            <button style={{ margin: '10px 0' }} type="button" className="smallBtn" onClick={this.loadMoreReview}>Load more reviews</button>
-                                                        </div>
-                                                        :
-                                                        null
-                                                }
                                             </div>
                                         </CardBody>
                                     </Col>
                                 </Row>
                             </div>
-                            :
-                            null
                     }
                     <Modal isOpen={this.state.openReviewModal} toggle={() => this.toggleReviewPopup(false)}>
                         <ModalHeader toggle={() => this.toggleReviewPopup(false)}>Give a review</ModalHeader>
@@ -298,6 +417,7 @@ class Home extends Component {
 const mapStateToProps = state => {
     return {
         searchTaxiRes: state.reducer.searchTaxiRes,
+        getDriverRes: state.reducer.getDriverRes,
         addReviewRes: state.reducer.addReviewRes,
         getReviewRes: state.reducer.getReviewRes,
         isAbleToreviewRes: state.reducer.isAbleToreviewRes
@@ -307,6 +427,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         searchTaxi: (reqData) => dispatch(searchTaxi(reqData)),
+        getDriver: (reqData, id) => dispatch(getDriver(reqData, id)),
         getReviews: (reqData, id) => dispatch(getReviews(reqData, id)),
         addReview: (taxi_id) => dispatch(addReview(taxi_id)),
         isAbleToReview: (reqData) => dispatch(isAbleToReview(reqData))

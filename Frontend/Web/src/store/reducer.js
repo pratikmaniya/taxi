@@ -5,6 +5,7 @@ const initialState = {
   redirect_to_login: false,
   loginRes: {},
   searchTaxiRes: {},
+  getDriverRes: {},
   getReviewRes: {},
   addReviewRes: {},
   isAbleToreviewRes: {},
@@ -22,6 +23,13 @@ const searchTaxiSuccess = (state, action) => {
   return {
     ...state,
     searchTaxiRes: action.res,
+  }
+}
+
+const getDriverSuccess = (state, action) => {
+  return {
+    ...state,
+    getDriverRes: action.res,
   }
 }
 
@@ -78,6 +86,7 @@ const reducer = (state = initialState, action) => {
     case Types.LOGIN_SUCCESS: return loginSuccess(state, action)
     case Types.SEARCH_TAXI_SUCCESS: return searchTaxiSuccess(state, action)
     case Types.REGISTER_TAXI_SUCCESS: return registerTaxiSuccess(state, action)
+    case Types.GET_DRIVER_SUCCESS: return getDriverSuccess(state, action)
     case Types.GET_REVIEWS_SUCCESS: return getReviewsSuccess(state, action)
     case Types.ADD_REVIEW_SUCCESS: return addReviewSuccess(state, action)
     case Types.IS_ABLE_TO_REVIEW_SUCCESS: return isAbleToReviewSuccess(state, action)

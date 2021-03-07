@@ -19,7 +19,9 @@ router.post('/user', headerValidator.authValidation, headerValidator.isAdmin, us
 //Taxi
 router.get('/taxis', headerValidator.authValidation, headerValidator.isAdmin, taxi.getTaxis)
 router.get('/taxi/:taxi_id', headerValidator.authValidation, headerValidator.isAdmin, taxi.getTaxiForAdmin)
+router.get('/driver/:driver_id', headerValidator.nonAuthValidation, taxi.getDriver)
 router.post('/taxi', headerValidator.authValidation, headerValidator.isAdmin, taxi.updateTaxi)
-router.get('/review/:taxi_id', headerValidator.authValidation, taxi.getReviewsForAdmin)
+router.post('/driver', headerValidator.authValidation, headerValidator.isAdmin, taxi.updateDriver)
+router.get('/review/:driver_id', headerValidator.authValidation, taxi.getReviewsForAdmin)
 
 module.exports = router
