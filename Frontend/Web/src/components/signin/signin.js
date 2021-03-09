@@ -62,6 +62,7 @@ class Signin extends Component {
                 cssClass='btn facebook-login-btn'
                 autoLoad={false}
                 fields="first_name,last_name,email"
+                icon="fab fa-facebook-f"
                 callback={this.facebookSuccess}
                 onFailure={this.facebookFailed} />
             </div>

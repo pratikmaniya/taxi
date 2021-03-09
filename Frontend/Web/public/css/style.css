@@ -465,8 +465,12 @@ button.smallBtn.width {
     border-radius: 5px;
     color: white;
     height: 40px;
-    text-align: center;
+    text-align: left;
     width: 250px;
+}
+
+.facebook-login-btn>svg {
+    margin-right: 25px;
 }
 
 .facebook-login-btn:hover {
