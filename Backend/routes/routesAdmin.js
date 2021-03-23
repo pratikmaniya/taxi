@@ -19,6 +19,7 @@ router.post('/user', headerValidator.authValidation, headerValidator.isAdmin, us
 //Taxi
 router.get('/taxis', headerValidator.authValidation, headerValidator.isAdmin, taxi.getTaxis)
 router.get('/taxi/:taxi_id', headerValidator.authValidation, headerValidator.isAdmin, taxi.getTaxiForAdmin)
+router.get('/drivers', headerValidator.authValidation, headerValidator.isAdmin, taxi.getDrivers)
 router.get('/driver/:driver_id', headerValidator.nonAuthValidation, taxi.getDriver)
 router.post('/taxi', headerValidator.authValidation, headerValidator.isAdmin, taxi.updateTaxi)
 router.post('/driver', headerValidator.authValidation, headerValidator.isAdmin, taxi.updateDriver)

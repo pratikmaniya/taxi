@@ -14,6 +14,16 @@ class Taxi {
             responseHelper.error(res, error, req.headers.language)
         }
     }
+    async getDrivers(req, res) {
+        try {
+            await taxiValidator.validateGetAllDriversForm(req.query)
+            const drivers = await taxiHelper.selectDrivers(req.query)
+            responseHelper.success(res, 'GET_DRIVERS_SUCCESS', req.headers.language, { total_drivers: drivers.driversCount, drivers: drivers.drivers })
+        } catch (error) {
+            console.log(error)
+            responseHelper.error(res, error, req.headers.language)
+        }
+    }
     async getTaxi(req, res) {
         try {
             const taxi = await taxiHelper.selectTaxi(req.query.search, req.user_type, true)

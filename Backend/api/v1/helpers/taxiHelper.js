@@ -112,6 +112,25 @@ class TaxiHelper {
             return promise.reject(error)
         }
     }
+    async selectDrivers(body) {
+        try {
+            let selectParams = ` drivers.*, taxis.plate_no,CONCAT('${config.s3uploadURL}/', drivers.license_image_front) AS license_image_front `,
+                joins = ` LEFT JOIN taxis ON taxis.id=drivers.taxi_id `,
+                where = ` 1=1 `,
+                pagination = ` ORDER BY drivers.created_date DESC LIMIT ${Number(config.limit)} OFFSET ${Number(config.limit) * (Number(body.page_no) - 1)}`
+            if (body.query_string && body.query_string.trim().length > 0) {
+                where += ` AND ((REPLACE(LOWER(taxis.plate_no), ' ', '') LIKE REPLACE(LOWER('%${body.query_string.replace(/'/g, "''")}%'), ' ', ''))
+                                OR (LOWER(drivers.driver_permit_number) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%'))
+                                OR (LOWER(drivers.first_name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%'))
+                                OR (LOWER(drivers.last_name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%'))) `
+            }
+            const drivers = await db.select('drivers' + joins, selectParams, where + pagination),
+                driversCount = await db.select('drivers' + joins, `COUNT(*) AS count`, where)
+            return { drivers, driversCount: driversCount.length > 0 ? driversCount[0].count : 0 }
+        } catch (error) {
+            return promise.reject(error)
+        }
+    }
     async updateTaxi(body) {
         try {
             let where = ` id=${body.taxi_id} `,

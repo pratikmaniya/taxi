@@ -9,6 +9,11 @@ export default {
       name: 'Users',
       url: process.env.PUBLIC_URL + '/users',
       icon: 'fa fa-users',
+    },
+    {
+      name: 'Drivers',
+      url: process.env.PUBLIC_URL + '/drivers',
+      icon: 'fa fa-id-card',
     }
   ],
 };
