@@ -206,13 +206,15 @@ class TaxiHelper {
         try {
             let selectParams = ` reviews.id, reviews.rating, reviews.comment, reviews.created_date, reviews.ip,
                                 users.first_name AS user_first_name, users.last_name AS user_last_name, 
-                                drivers.first_name AS driver_first_name, drivers.last_name AS driver_last_name `,
+                                drivers.first_name AS driver_first_name, drivers.last_name AS driver_last_name, taxis.plate_no `,
                 joins = ` LEFT JOIN users ON reviews.user_id=users.id
-                        LEFT JOIN drivers ON reviews.driver_id=drivers.id `,
+                        LEFT JOIN drivers ON reviews.driver_id=drivers.id
+                        LEFT JOIN taxis ON drivers.taxi_id=taxis.id `,
                 where = ` reviews.is_deleted=false `,
                 pagination = ` ORDER BY drivers.created_date DESC LIMIT ${Number(config.limit)} OFFSET ${Number(config.limit) * (Number(body.page_no) - 1)}`
             if (body.query_string && body.query_string.trim().length > 0) {
-                where += ` AND ((LOWER(reviews.ip) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%'))
+                where += ` AND ((REPLACE(LOWER(taxis.plate_no), ' ', '') LIKE REPLACE(LOWER('%${body.query_string.replace(/'/g, "''")}%'), ' ', ''))
+                                OR (LOWER(reviews.ip) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%'))
                                 OR (LOWER(drivers.first_name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%'))
                                 OR (LOWER(drivers.last_name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%'))
                                 OR (LOWER(users.first_name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%'))

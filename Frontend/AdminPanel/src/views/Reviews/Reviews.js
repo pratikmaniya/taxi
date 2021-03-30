@@ -3,7 +3,7 @@ import Pagination from "react-js-pagination";
 import { Card, CardBody, CardHeader, Col, Row, Table, Button, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 
-import { apiCall, getFormatedDateFromTimeStamp, displayLog, confirmBox } from '../../utils/common';
+import { apiCall, displayLog, confirmBox } from '../../utils/common';
 import Messages from '../../utils/messages'
 import store from '../../utils/store';
 import * as actionTypes from '../../store/actionTypes';
@@ -104,7 +104,8 @@ class Reviews extends Component {
                 <td className="align-middle">{review.user_last_name}</td>
                 <td className="align-middle">{review.driver_first_name}</td>
                 <td className="align-middle">{review.driver_last_name}</td>
-                <td className="align-middle">{getFormatedDateFromTimeStamp(review.created_date)}</td>
+                <td className="align-middle">{review.plate_no}</td>
+                <td className="align-middle">{new Date(review.created_date).toLocaleString()}</td>
                 <td className="align-middle text-center">
                     <span className="fa fa-trash action-icon" title="Delete Review" onClick={() => this.deleteReviewClickHandler(review.id)} ></span>
                 </td>
@@ -151,6 +152,7 @@ class Reviews extends Component {
                                             <th scope="col" className="align-middle">User Last Name</th>
                                             <th scope="col" className="align-middle">Driver First Name</th>
                                             <th scope="col" className="align-middle">Driver Last Name</th>
+                                            <th scope="col" className="align-middle">Plate No</th>
                                             <th scope="col" className="align-middle">Created date</th>
                                             <th scope="col" className="align-middle text-center">Delete Review</th>
                                         </tr>
@@ -165,7 +167,7 @@ class Reviews extends Component {
                                             </tbody>
                                             :
                                             <tbody>
-                                                <tr className="text-center"><td colSpan={10}> No Data Found </td></tr>
+                                                <tr className="text-center"><td colSpan={15}> No Data Found </td></tr>
                                             </tbody>
                                     }
                                 </Table>
