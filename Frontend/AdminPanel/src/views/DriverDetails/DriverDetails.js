@@ -4,7 +4,8 @@ import StarRatings from 'react-star-ratings';
 import Img from 'react-image';
 import { connect } from 'react-redux';
 
-import { apiCall, displayLog, getFormatedDateFromTimeStamp } from '../../utils/common';
+import { apiCall, displayLog, getFormatedDateFromTimeStamp, confirmBox } from '../../utils/common';
+import Messages from '../../utils/messages';
 import loading_image from '../../assets/images/loading_img.png'
 import default_img from '../../assets/images/default_img.png'
 
@@ -15,11 +16,14 @@ class Taxis extends Component {
         page_no: 1,
         totalReviews: 0
     }
-    async componentDidMount() {
+    componentDidMount() {
         console.log(this.props.match.params.driver_id)
+        this.getDriverDetails()
+    }
+    getDriverDetails = async () => {
         const response = await apiCall('GET', `driver/${this.props.match.params.driver_id}`);
         if (response && response.code === 1) {
-            this.setState({ driverDetails: response.data });
+            await this.setState({ driverDetails: response.data, reviews: [] });
             this.getReviews()
         } else {
             displayLog(0, response.message)
@@ -36,6 +40,16 @@ class Taxis extends Component {
     loadMoreReview = async () => {
         await this.setState({ page_no: this.state.page_no + 1 })
         await this.getReviews()
+    }
+    deleteReviewHandler = async (review_id) => {
+        const answer = await confirmBox(Messages.EN.CONFIRM_BOX_TITLE, Messages.EN.ASK_TO_DELETE_REVIEW);
+        if (answer) {
+            const response = await apiCall('DELETE', `review/${review_id}`);
+            if (response && response.code === 1) {
+                this.getDriverDetails()
+            }
+            displayLog(response.code, response.message);
+        }
     }
     render() {
         const displayLoadMore = this.state.totalReviews && this.state.totalReviews > this.state.reviews.length
@@ -105,8 +119,9 @@ class Taxis extends Component {
                                                                     name='rating'
                                                                 />
                                                             </div>
-                                                            <CardText style={{ fontSize: '14px', fontWeight: 'bold' }}><span className="text-muted">{new Date(review.created_date).toDateString()} ({review.first_name + ' ' + review.last_name})</span></CardText>
+                                                            <CardText style={{ fontSize: '14px', fontWeight: 'bold' }}><span className="text-muted">{new Date(review.created_date).toLocaleString()} ({review.first_name + ' ' + review.last_name} - {review.ip})</span></CardText>
                                                             <CardText style={{ fontSize: '17px' }}>{review.comment}</CardText>
+                                                            <button style={{ margin: '10px 0' }} type="button" className="btn black-btn" onClick={() => this.deleteReviewHandler(review.id)}>Delete Review</button>
                                                         </div>
                                                     })
                                                 }
@@ -114,7 +129,7 @@ class Taxis extends Component {
                                                     displayLoadMore
                                                         ?
                                                         <div className="text-center">
-                                                            <button style={{ margin: '10px 0' }} type="button" className="smallBtn" onClick={this.loadMoreReview}>Load more reviews</button>
+                                                            <button style={{ margin: '10px 0' }} type="button" className="btn black-btn" onClick={this.loadMoreReview}>Load more reviews</button>
                                                         </div>
                                                         :
                                                         null
