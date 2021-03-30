@@ -114,6 +114,15 @@ class Taxi {
             responseHelper.error(res, error, req.headers.language)
         }
     }
+    async deleteReview(req, res) {
+        try {
+            const reviews = await taxiHelper.deleteReview(req.params.review_id)
+            responseHelper.success(res, 'DELETE_REVIEW_SUCCESS', req.headers.language, { total_reviews: reviews.reviewsCount, reviews: reviews.reviews })
+        } catch (error) {
+            console.log(error)
+            responseHelper.error(res, error, req.headers.language)
+        }
+    }
     async addReview(req, res) {
         try {
             await taxiValidator.validateAddReviewForm(req.body)

@@ -6,6 +6,7 @@ import StarRatings from 'react-star-ratings';
 import queryString from 'query-string'
 import ReactTooltip from 'react-tooltip';
 import Img from 'react-image';
+import publicIp from 'public-ip';
 
 import { searchTaxi, getDriver, getReviews, addReview, isAbleToReview } from '../../store/actions';
 import { displayLog } from "../../utils/functions";
@@ -157,6 +158,7 @@ class Home extends Component {
     }
     submitReviewHandler = async () => {
         const reqData = {
+            ip: await publicIp.v4(),
             driver_id: this.state.selectedDriver.id,
             rating: this.state.ratingForm.rating
         }

@@ -71,6 +71,7 @@ class TaxiValidator {
         try {
             const schema = joi.object().keys({
                 driver_id: joi.number().integer().required(),
+                ip: joi.string().required(),
                 rating: joi.number().required(),
                 comment: joi.string()
             })

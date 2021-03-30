@@ -24,5 +24,6 @@ router.get('/driver/:driver_id', headerValidator.nonAuthValidation, taxi.getDriv
 router.post('/taxi', headerValidator.authValidation, headerValidator.isAdmin, taxi.updateTaxi)
 router.post('/driver', headerValidator.authValidation, headerValidator.isAdmin, taxi.updateDriver)
 router.get('/review/:driver_id', headerValidator.authValidation, taxi.getReviewsForAdmin)
+router.delete('/review/:review_id', headerValidator.authValidation, taxi.deleteReview)
 
 module.exports = router

@@ -177,7 +177,7 @@ class TaxiHelper {
             let selectParams = ` drivers.*, AVG(reviews.rating) AS rating,
                                 CONCAT('${config.s3uploadURL}/', drivers.license_image_front) AS license_image_front,
                                 CONCAT('${config.s3uploadURL}/', drivers.license_image_back) AS license_image_back `,
-                joins = ` LEFT JOIN reviews ON reviews.driver_id=drivers.id `,
+                joins = ` LEFT JOIN reviews ON reviews.driver_id=drivers.id AND reviews.is_deleted=false `,
                 where = ` drivers.id=${driver_id} `,
                 pagination = ` GROUP BY drivers.id `
             const drivers = await db.select('drivers' + joins, selectParams, where + pagination)
@@ -193,7 +193,7 @@ class TaxiHelper {
     async selectReviews(driver_id, page_no) {
         try {
             const selectParams = ` * `,
-                where = ` driver_id=${driver_id} `,
+                where = ` driver_id=${driver_id} AND is_deleted=false `,
                 pagination = ` ORDER BY created_date DESC LIMIT ${Number(config.limit)} OFFSET ${Number(config.limit) * (Number(page_no) - 1)} `,
                 reviews = await db.select('reviews', selectParams, where + pagination),
                 reviewsCount = await db.select('reviews', `COUNT(DISTINCT id) AS count`, where)
@@ -204,9 +204,9 @@ class TaxiHelper {
     }
     async selectReviewsForAdmin(driver_id, page_no) {
         try {
-            const selectParams = ` reviews.rating, reviews.comment, reviews.created_date, users.first_name, users.last_name `,
+            const selectParams = ` reviews.id, reviews.ip, reviews.rating, reviews.comment, reviews.created_date, users.first_name, users.last_name `,
                 joins = ` LEFT JOIN users ON reviews.user_id=users.id `,
-                where = ` driver_id=${driver_id} `,
+                where = ` reviews.driver_id=${driver_id} AND reviews.is_deleted=false`,
                 pagination = ` ORDER BY created_date DESC LIMIT ${Number(config.limit)} OFFSET ${Number(config.limit) * (Number(page_no) - 1)} `,
                 reviews = await db.select('reviews' + joins, selectParams, where + pagination),
                 reviewsCount = await db.select('reviews', `COUNT(DISTINCT id) AS count`, where)
@@ -219,6 +219,7 @@ class TaxiHelper {
         try {
             const data = {
                 user_id: user_id,
+                ip: body.ip,
                 driver_id: body.driver_id,
                 rating: body.rating,
                 comment: body.comment
@@ -240,6 +241,23 @@ class TaxiHelper {
                 return { code: 2, message: 'ALREADY_SUBMITTED_REVIEW_FOR_TODAY' }
             } else {
                 return { code: 1, message: 'ABLE_TO_REVIEW' }
+            }
+        } catch (error) {
+            return promise.reject(error)
+        }
+    }
+    async deleteReview(review_id) {
+        try {
+            const where = ` id=${review_id} `,
+                data = {
+                    is_deleted: true,
+                    modified_date: 'now()'
+                },
+                result = await db.update('reviews', where, data)
+            if (result.affectedRows === 0) {
+                throw 'REVIEW_WITH_ID_NOT_FOUND'
+            } else {
+                return true
             }
         } catch (error) {
             return promise.reject(error)

@@ -24,6 +24,8 @@
         "ALREADY_SUBMITTED_REVIEW_FOR_TODAY": "You already submitted a review for this driver today. Please wait until tomorrow to submit another review for this driver.",
         "ADD_REVIEW_SUCCESS": "Review added successfully",
         "GET_REVIEWS_SUCCESS": "Reviews retrieved successfully",
+        "DELETE_REVIEW_SUCCESS": "Review deleted successfully",
+        "REVIEW_WITH_ID_NOT_FOUND": "Review with specified id not found",
         "GET_ALL_USER_SUCCESS": "Users retrieved successfully",
         "EDIT_USER_SUCCESS": "User updated successfully"
     }
