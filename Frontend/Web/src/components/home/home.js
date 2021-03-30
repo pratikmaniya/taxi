@@ -168,7 +168,8 @@ class Home extends Component {
         await this.props.addReview(reqData)
         if (this.props.addReviewRes && this.props.addReviewRes.code === 1) {
             this.setState({ openReviewModal: false, ratingForm: { rating: 0, comment: "" } })
-            this.getReviews()
+            // this.getReviews()
+            this.selectDriverClickHandler(this.state.selectedDriver.id)
         } else {
             displayLog(0, this.props.addReviewRes.message)
         }
@@ -178,6 +179,7 @@ class Home extends Component {
         await this.getReviews()
     }
     render() {
+        console.log(this.state)
         const loggedIn = localStorage.getItem('RIDESAFETT-TOKEN') ? true : false,
             displayLoadMore = this.state.totalReviews && this.state.totalReviews > this.state.reviews.length
         return (
