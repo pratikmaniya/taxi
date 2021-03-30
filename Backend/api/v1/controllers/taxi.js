@@ -107,7 +107,17 @@ class Taxi {
     }
     async getReviewsForAdmin(req, res) {
         try {
-            const reviews = await taxiHelper.selectReviewsForAdmin(req.params.driver_id, req.query.page_no)
+            await taxiValidator.validateGetAllReviewsForm(req.query)
+            const reviews = await taxiHelper.selectReviewsForAdmin(req.query)
+            responseHelper.success(res, 'GET_REVIEWS_SUCCESS', req.headers.language, { total_reviews: reviews.reviewsCount, reviews: reviews.reviews })
+        } catch (error) {
+            console.log(error)
+            responseHelper.error(res, error, req.headers.language)
+        }
+    }
+    async getReviewsForAdminByDriver(req, res) {
+        try {
+            const reviews = await taxiHelper.selectReviewsForAdminByDriver(req.params.driver_id, req.query.page_no)
             responseHelper.success(res, 'GET_REVIEWS_SUCCESS', req.headers.language, { total_reviews: reviews.reviewsCount, reviews: reviews.reviews })
         } catch (error) {
             console.log(error)

@@ -202,7 +202,30 @@ class TaxiHelper {
             return promise.reject(error)
         }
     }
-    async selectReviewsForAdmin(driver_id, page_no) {
+    async selectReviewsForAdmin(body) {
+        try {
+            let selectParams = ` reviews.id, reviews.rating, reviews.comment, reviews.created_date, reviews.ip,
+                                users.first_name AS user_first_name, users.last_name AS user_last_name, 
+                                drivers.first_name AS driver_first_name, drivers.last_name AS driver_last_name `,
+                joins = ` LEFT JOIN users ON reviews.user_id=users.id
+                        LEFT JOIN drivers ON reviews.driver_id=drivers.id `,
+                where = ` reviews.is_deleted=false `,
+                pagination = ` ORDER BY drivers.created_date DESC LIMIT ${Number(config.limit)} OFFSET ${Number(config.limit) * (Number(body.page_no) - 1)}`
+            if (body.query_string && body.query_string.trim().length > 0) {
+                where += ` AND ((LOWER(reviews.ip) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%'))
+                                OR (LOWER(drivers.first_name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%'))
+                                OR (LOWER(drivers.last_name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%'))
+                                OR (LOWER(users.first_name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%'))
+                                OR (LOWER(users.last_name) LIKE LOWER('%${body.query_string.replace(/'/g, "''")}%'))) `
+            }
+            const reviews = await db.select('reviews' + joins, selectParams, where + pagination),
+                reviewsCount = await db.select('reviews' + joins, `COUNT(DISTINCT reviews.id) AS count`, where)
+            return { reviews, reviewsCount: reviewsCount.length > 0 ? reviewsCount[0].count : 0 }
+        } catch (error) {
+            return promise.reject(error)
+        }
+    }
+    async selectReviewsForAdminByDriver(driver_id, page_no) {
         try {
             const selectParams = ` reviews.id, reviews.ip, reviews.rating, reviews.comment, reviews.created_date, users.first_name, users.last_name `,
                 joins = ` LEFT JOIN users ON reviews.user_id=users.id `,

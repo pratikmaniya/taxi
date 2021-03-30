@@ -14,6 +14,11 @@ export default {
       name: 'Drivers',
       url: process.env.PUBLIC_URL + '/drivers',
       icon: 'fa fa-id-card',
+    },
+    {
+      name: 'Reviews',
+      url: process.env.PUBLIC_URL + '/reviews',
+      icon: 'fa fa-star',
     }
   ],
 };

@@ -67,6 +67,17 @@ class TaxiValidator {
             return promise.reject(error)
         }
     }
+    async validateGetAllReviewsForm(body) {
+        try {
+            const schema = joi.object().keys({
+                query_string: joi.string(),
+                page_no: joi.number().integer().required()
+            })
+            await joiValidator.validateJoiSchema(body, schema);
+        } catch (error) {
+            return promise.reject(error)
+        }
+    }
     async validateAddReviewForm(body) {
         try {
             const schema = joi.object().keys({
