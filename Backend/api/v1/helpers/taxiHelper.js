@@ -16,7 +16,7 @@ class TaxiHelper {
                 vehicle_image: body.vehicle_image
             },
                 taxi = await db.insert('taxis', data)
-            return taxi.insertId
+            return taxi.id
         } catch (error) {
             return promise.reject(error)
         }
