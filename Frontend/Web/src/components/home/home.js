@@ -144,6 +144,9 @@ class Home extends Component {
     changeRatingComment = (event) => {
         this.setState({ ratingForm: { ...this.state.ratingForm, [event.target.name]: event.target.value } })
     }
+    redirectToLogin = () => {
+        this.props.history.push(process.env.PUBLIC_URL + '/signin')
+    }
     giveReviewClickHandler = async () => {
         await this.props.isAbleToReview(this.props.getDriverRes.data.id)
         if (this.props.isAbleToreviewRes && this.props.isAbleToreviewRes.code === 1) {
@@ -259,7 +262,7 @@ class Home extends Component {
                                                                                 <CardText style={{ fontSize: '18px' }}><span className="mb-2 text-muted">No Ratings</span></CardText>
                                                                         }
                                                                     </div>
-                                                                    <button style={loggedIn ? { margin: '10px 0' } : { margin: '10px 0', opacity: 0.5 }} type="button" data-tip={loggedIn ? "" : "Please login to give a review. Click on Register/Sign In at the top of the page."} className="smallBtn" onClick={loggedIn ? this.giveReviewClickHandler : null}>Give Review</button>
+                                                                    <button style={{ margin: '10px 0' }} type="button" data-tip={loggedIn ? "" : "Please login to give a review. Click on Register/Sign In at the top of the page."} className="smallBtn" onClick={loggedIn ? this.giveReviewClickHandler : this.redirectToLogin}>Give Review</button>
                                                                     <ReactTooltip place="top" type="dark" effect="float" />
                                                                     <div style={{ padding: '5px 0' }}>
                                                                         {
