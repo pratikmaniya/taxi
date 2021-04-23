@@ -1,0 +1,10 @@
+ssh taxi@13.57.91.34
+password: qsjWG32UbX2zvFEv
+
+DB
+http://13.57.91.34/adminer.php
+system: PostgreSQL
+server: localhost(default)
+username: postgres
+password: Upwork@taxi2021
+database: taxi
